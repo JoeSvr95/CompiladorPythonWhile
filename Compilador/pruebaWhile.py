@@ -9,7 +9,7 @@ tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
     'LPAREN' ,'RPAREN', 'WHILE', 'EXPONENTE', 'COMPARISON', 'POINTS',
-    'LOGICOS', 'MODULO',
+    'LOGICOS', 'MODULO', 'PRINT', 'STRING',
 )
 
 # Tokens
@@ -23,12 +23,14 @@ t_EQUALS  = r'='
 t_MODULO  = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_NAME    = r'(?!(while|True|False|or|and))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and))'
+t_NAME    = r'(?!(while|True|False|or|and|print))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and|print))'
 t_WHILE   = r'while'
 t_COMPARISON = r'>=|<=|!=|==|>|<'
 t_EXPONENTE = r'\^'
 t_POINTS = r':'
 t_LOGICOS = r'or|and'
+t_PRINT = r'print'
+t_STRING = r='"[a-zA-Z0-9_]*"'
 
 
 def t_NUMBER(t):
@@ -77,6 +79,11 @@ def p_statement_assign(t):
 def p_statement_expr(t):
     'statement : expression'
     print(t[1])
+
+def p_statement_print(t):
+    '''statement : PRINT LPAREN expression RPAREN
+                | PRINT LPAREN STRING RPAREN'''
+    print(t[3].strip("\""))
 
 def p_expression_binop(t):
     '''expression : expression PLUS expression

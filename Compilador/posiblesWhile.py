@@ -1,2 +1,1 @@
-while (2 or 3):
-    print("Hola")
+print("2+3")
