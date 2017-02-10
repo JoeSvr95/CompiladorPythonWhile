@@ -1,10 +1,4 @@
 
-# -----------------------------------------------------------------------------
-# calc.py
-#
-# A simple calculator with variables -- all in one file.
-# -----------------------------------------------------------------------------
-
 tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
@@ -30,7 +24,8 @@ t_EXPONENTE = r'\^'
 t_POINTS = r':'
 t_LOGICOS = r'or|and'
 t_PRINT = r'print'
-t_STRING = r='"[a-zA-Z0-9_]*"'
+t_STRING = r'"[a-zA-Z0-9_]*"'
+#t_TAB = r'\\t'
 
 
 def t_NUMBER(t):
@@ -84,6 +79,10 @@ def p_statement_print(t):
     '''statement : PRINT LPAREN expression RPAREN
                 | PRINT LPAREN STRING RPAREN'''
     print(t[3].strip("\""))
+
+def p_statement_string(t):
+    'expression : STRING'
+    t[0] = t[1].strip("\"")
 
 def p_expression_binop(t):
     '''expression : expression PLUS expression
@@ -148,11 +147,15 @@ def p_error(t):
         print("Error semántico")
 
 import ply.yacc as yacc
+from Console import *
+
 parser = yacc.yacc()
 
 while True:
     try:
-        s = input('>>> ')   # Use raw_input on Python 2
+        window = GUI()
+        s = window.show()
+        #s = input('>>> ')   # Use raw_input on Python 2
     except EOFError:
         break
     parser.parse(s)
