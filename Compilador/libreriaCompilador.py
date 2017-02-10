@@ -24,7 +24,7 @@ t_EXPONENTE = r'\^'
 t_POINTS = r':'
 t_LOGICOS = r'or|and'
 t_PRINT = r'print'
-t_STRING = r'"[a-zA-Z0-9_]*"'
+t_STRING = r'"[a-zA-Z0-9_ +-/*]*"'
 #t_TAB = r'\\t'
 
 
@@ -76,12 +76,11 @@ def p_statement_expr(t):
     print(t[1])
 
 def p_statement_print(t):
-    '''statement : PRINT LPAREN expression RPAREN
-                | PRINT LPAREN STRING RPAREN'''
+    'statement : PRINT LPAREN string RPAREN'
     print(t[3].strip("\""))
 
 def p_statement_string(t):
-    'expression : STRING'
+    'string : STRING'
     t[0] = t[1].strip("\"")
 
 def p_expression_binop(t):
@@ -149,13 +148,15 @@ def p_error(t):
 import ply.yacc as yacc
 from Console import *
 
-parser = yacc.yacc()
+def compilador():
 
-while True:
+    parser = yacc.yacc()
     try:
         window = GUI()
         s = window.show()
         #s = input('>>> ')   # Use raw_input on Python 2
     except EOFError:
-        break
+        print("Algo salio mal")
+
     parser.parse(s)
+    return s

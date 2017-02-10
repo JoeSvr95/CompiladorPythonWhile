@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEleftCOMPARISONleftLOGICOSleftMODULOleftEXPONENTErightUMINUSCONSTANTES NAME NUMBER PLUS MINUS TIMES DIVIDE EQUALS LPAREN RPAREN WHILE EXPONENTE COMPARISON POINTS LOGICOS MODULO PRINT STRING TABstatement : NAME EQUALS expressionstatement : expressionstatement : PRINT LPAREN expression RPAREN\n                | PRINT LPAREN STRING RPARENexpression : STRINGexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression EXPONENTE expression\n                  | expression COMPARISON expression\n                  | expression LOGICOS expression\n                  | expression MODULO expressionexpression : MINUS expression %prec UMINUSexpression : CONSTANTESexpression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEstatement : WHILE expression POINTS expression\n                 | WHILE expression POINTS statement'
+_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEleftCOMPARISONleftLOGICOSleftMODULOleftEXPONENTErightUMINUSCONSTANTES NAME NUMBER PLUS MINUS TIMES DIVIDE EQUALS LPAREN RPAREN WHILE EXPONENTE COMPARISON POINTS LOGICOS MODULO PRINT STRING NEWLINEstatement : NAME EQUALS expressionstatement : expressionstatement : PRINT LPAREN string RPARENstring : STRINGexpression : expression NEWLINE expression\n                  | expression NEWLINE statementexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression EXPONENTE expression\n                  | expression COMPARISON expression\n                  | expression LOGICOS expression\n                  | expression MODULO expressionexpression : MINUS expression %prec UMINUSexpression : CONSTANTESexpression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEstatement : WHILE expression POINTS expression\n                 | WHILE expression POINTS statement'
     
-_lr_action_items = {'COMPARISON':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[15,-17,-18,-5,-15,15,-18,-14,15,15,-5,-16,15,-11,15,-10,-12,15,-13,15,15,15,-18,]),'POINTS':([5,8,10,13,23,24,27,28,29,30,31,32,33,34,35,],[-17,-5,-15,-18,-14,37,-16,-7,-11,-6,-10,-12,-8,-13,-9,]),'PLUS':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[16,-17,-18,-5,-15,16,-18,-14,16,16,-5,-16,-7,-11,-6,-10,-12,-8,-13,-9,16,16,-18,]),'TIMES':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[19,-17,-18,-5,-15,19,-18,-14,19,19,-5,-16,19,-11,19,-10,-12,-8,-13,-9,19,19,-18,]),'PRINT':([0,37,],[2,2,]),'LPAREN':([0,2,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[3,11,3,3,3,3,3,3,3,3,3,3,3,3,3,3,]),'MODULO':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[20,-17,-18,-5,-15,20,-18,-14,20,20,-5,-16,20,20,20,-10,20,20,-13,20,20,20,-18,]),'$end':([1,4,5,6,8,10,13,23,27,28,29,30,31,32,33,34,35,36,38,39,40,41,42,],[0,-2,-17,-18,-5,-15,-18,-14,-16,-7,-11,-6,-10,-12,-8,-13,-9,-1,-3,-4,-20,-2,-18,]),'MINUS':([0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,41,42,],[7,7,14,-17,-18,7,-5,7,-15,7,14,-18,7,7,7,7,7,7,7,7,7,-14,14,14,-5,-16,-7,-11,-6,-10,-12,-8,-13,-9,14,7,14,-18,]),'LOGICOS':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[18,-17,-18,-5,-15,18,-18,-14,18,18,-5,-16,18,18,18,-10,-12,18,-13,18,18,18,-18,]),'RPAREN':([5,8,10,12,13,23,25,26,27,28,29,30,31,32,33,34,35,],[-17,-5,-15,27,-18,-14,38,39,-16,-7,-11,-6,-10,-12,-8,-13,-9,]),'EQUALS':([6,42,],[22,22,]),'EXPONENTE':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[17,-17,-18,-5,-15,17,-18,-14,17,17,-5,-16,17,17,17,-10,17,17,17,17,17,17,-18,]),'STRING':([0,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[8,8,8,8,26,8,8,8,8,8,8,8,8,8,8,]),'CONSTANTES':([0,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'NAME':([0,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[6,13,13,13,13,13,13,13,13,13,13,13,13,13,42,]),'WHILE':([0,37,],[9,9,]),'NUMBER':([0,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'DIVIDE':([4,5,6,8,10,12,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,41,42,],[21,-17,-18,-5,-15,21,-18,-14,21,21,-5,-16,21,-11,21,-10,-12,-8,-13,-9,21,21,-18,]),}
+_lr_action_items = {'$end':([3,4,7,8,9,10,11,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,0,-2,-19,-15,-1,-17,-12,-8,-14,-19,-6,-2,-13,-11,-10,-9,-7,-21,-2,-3,]),'MINUS':([0,1,2,3,4,6,7,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[1,1,1,-16,-19,1,-18,17,-19,-15,17,1,17,1,1,1,1,1,1,1,1,1,1,17,-17,-12,-8,-14,-19,-6,17,-13,-11,-10,-9,-7,-21,17,-3,]),'WHILE':([0,19,25,],[2,2,2,]),'CONSTANTES':([0,1,2,6,13,16,17,18,19,20,21,22,23,24,25,],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,]),'NAME':([0,1,2,6,13,16,17,18,19,20,21,22,23,24,25,],[4,10,10,10,10,10,10,10,33,10,10,10,10,10,33,]),'PRINT':([0,19,25,],[5,5,5,]),'LPAREN':([0,1,2,5,6,13,16,17,18,19,20,21,22,23,24,25,],[6,6,6,14,6,6,6,6,6,6,6,6,6,6,6,6,]),'MODULO':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,18,-19,-15,18,18,18,-17,18,18,-14,-19,-6,18,18,-11,18,18,18,-21,18,-3,]),'NUMBER':([0,1,2,6,13,16,17,18,19,20,21,22,23,24,25,],[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,]),'DIVIDE':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,22,-19,-15,22,22,22,-17,-12,22,-14,-19,-6,22,-13,-11,-10,-9,22,-21,22,-3,]),'POINTS':([3,7,10,11,12,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-18,-19,-15,25,-1,-17,-12,-8,-14,-19,-6,-2,-13,-11,-10,-9,-7,-21,-2,-3,]),'PLUS':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,24,-19,-15,24,24,24,-17,-12,-8,-14,-19,-6,24,-13,-11,-10,-9,-7,-21,24,-3,]),'COMPARISON':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,16,-19,-15,16,16,16,-17,-12,16,-14,-19,-6,16,-13,-11,16,16,16,-21,16,-3,]),'NEWLINE':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,19,-19,-15,19,19,19,-17,-12,-8,-14,-19,-6,19,-13,-11,-10,-9,-7,-21,19,-3,]),'EQUALS':([4,33,],[13,13,]),'STRING':([14,],[28,]),'RPAREN':([3,7,10,11,15,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-18,-19,-15,29,-1,43,-4,-17,-12,-8,-14,-19,-6,-2,-13,-11,-10,-9,-7,-21,-2,-3,]),'LOGICOS':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,20,-19,-15,20,20,20,-17,20,20,-14,-19,-6,20,-13,-11,20,20,20,-21,20,-3,]),'EXPONENTE':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,21,-19,-15,21,21,21,-17,21,21,21,-19,-6,21,21,-11,21,21,21,-21,21,-3,]),'TIMES':([3,4,7,9,10,11,12,15,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,],[-16,-19,-18,23,-19,-15,23,23,23,-17,-12,23,-14,-19,-6,23,-13,-11,-10,-9,23,-21,23,-3,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,37,],[1,40,]),'expression':([0,3,7,9,11,14,15,16,17,18,19,20,21,22,37,],[4,12,23,24,25,28,29,30,31,32,33,34,35,36,41,]),}
+_lr_goto_items = {'string':([14,],[27,]),'expression':([0,1,2,6,13,16,17,18,19,20,21,22,23,24,25,],[9,11,12,15,26,30,31,32,35,36,37,38,39,40,42,]),'statement':([0,19,25,],[8,34,41,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,24 +26,25 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','pruebaWhile.py',77),
-  ('statement -> expression','statement',1,'p_statement_expr','pruebaWhile.py',81),
-  ('statement -> PRINT LPAREN expression RPAREN','statement',4,'p_statement_print','pruebaWhile.py',85),
-  ('statement -> PRINT LPAREN STRING RPAREN','statement',4,'p_statement_print','pruebaWhile.py',86),
-  ('expression -> STRING','expression',1,'p_statement_string','pruebaWhile.py',90),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','pruebaWhile.py',94),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','pruebaWhile.py',95),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','pruebaWhile.py',96),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','pruebaWhile.py',97),
-  ('expression -> expression EXPONENTE expression','expression',3,'p_expression_binop','pruebaWhile.py',98),
-  ('expression -> expression COMPARISON expression','expression',3,'p_expression_binop','pruebaWhile.py',99),
-  ('expression -> expression LOGICOS expression','expression',3,'p_expression_binop','pruebaWhile.py',100),
-  ('expression -> expression MODULO expression','expression',3,'p_expression_binop','pruebaWhile.py',101),
-  ('expression -> MINUS expression','expression',2,'p_expression_uminus','pruebaWhile.py',118),
-  ('expression -> CONSTANTES','expression',1,'p_expression_constant','pruebaWhile.py',122),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','pruebaWhile.py',129),
-  ('expression -> NUMBER','expression',1,'p_expression_number','pruebaWhile.py',133),
-  ('expression -> NAME','expression',1,'p_expression_name','pruebaWhile.py',137),
-  ('statement -> WHILE expression POINTS expression','statement',4,'p_expression_while','pruebaWhile.py',145),
-  ('statement -> WHILE expression POINTS statement','statement',4,'p_expression_while','pruebaWhile.py',146),
+  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','compilador.py',68),
+  ('statement -> expression','statement',1,'p_statement_expr','compilador.py',72),
+  ('statement -> PRINT LPAREN string RPAREN','statement',4,'p_statement_print','compilador.py',76),
+  ('string -> STRING','string',1,'p_statement_string','compilador.py',80),
+  ('expression -> expression NEWLINE expression','expression',3,'p_statement_lines','compilador.py',84),
+  ('expression -> expression NEWLINE statement','expression',3,'p_statement_lines','compilador.py',85),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','compilador.py',89),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','compilador.py',90),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','compilador.py',91),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','compilador.py',92),
+  ('expression -> expression EXPONENTE expression','expression',3,'p_expression_binop','compilador.py',93),
+  ('expression -> expression COMPARISON expression','expression',3,'p_expression_binop','compilador.py',94),
+  ('expression -> expression LOGICOS expression','expression',3,'p_expression_binop','compilador.py',95),
+  ('expression -> expression MODULO expression','expression',3,'p_expression_binop','compilador.py',96),
+  ('expression -> MINUS expression','expression',2,'p_expression_uminus','compilador.py',113),
+  ('expression -> CONSTANTES','expression',1,'p_expression_constant','compilador.py',117),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','compilador.py',124),
+  ('expression -> NUMBER','expression',1,'p_expression_number','compilador.py',128),
+  ('expression -> NAME','expression',1,'p_expression_name','compilador.py',132),
+  ('statement -> WHILE expression POINTS expression','statement',4,'p_expression_while','compilador.py',140),
+  ('statement -> WHILE expression POINTS statement','statement',4,'p_expression_while','compilador.py',141),
 ]

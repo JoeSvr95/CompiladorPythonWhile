@@ -19,10 +19,12 @@ class GUI(Frame):
         self.submitButton.grid()
 
 
+
     def buttonClick(self):
         text=self.t.get("1.0",END)
         self.var=text
         self.master.destroy()
+
 
     def show(self):
         self.wait_window()
