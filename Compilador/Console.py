@@ -21,7 +21,7 @@ class GUI(Frame):
 
 
     def buttonClick(self):
-        text=self.t.get("1.0",END)
+        text=self.t.get("1.0",'end-1c')
         self.var=text
         self.master.destroy()
 
