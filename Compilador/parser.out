@@ -3,131 +3,127 @@ Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> statement
-Rule 1     statement -> NAME EQUALS expression
+Rule 1     statement -> NAME EQUALS expression NEWLINE NAME EQUALS expression
 Rule 2     statement -> expression
-Rule 3     statement -> PRINT LPAREN string RPAREN
-Rule 4     string -> STRING
-Rule 5     expression -> expression PLUS expression
-Rule 6     expression -> expression MINUS expression
-Rule 7     expression -> expression TIMES expression
-Rule 8     expression -> expression DIVIDE expression
-Rule 9     expression -> expression EXPONENTE expression
-Rule 10    expression -> expression COMPARISON expression
-Rule 11    expression -> expression LOGICOS expression
-Rule 12    expression -> expression MODULO expression
-Rule 13    expression -> MINUS expression
-Rule 14    expression -> CONSTANTES
-Rule 15    expression -> LPAREN expression RPAREN
-Rule 16    expression -> NUMBER
-Rule 17    expression -> NAME
-Rule 18    statement -> WHILE expression POINTS expression
+Rule 3     statement -> expression NEWLINE expression
+Rule 4     statement -> PRINT LPAREN string RPAREN
+Rule 5     string -> STRING
+Rule 6     expression -> expression PLUS expression
+Rule 7     expression -> expression MINUS expression
+Rule 8     expression -> expression TIMES expression
+Rule 9     expression -> expression DIVIDE expression
+Rule 10    expression -> expression EXPONENTE expression
+Rule 11    expression -> expression COMPARISON expression
+Rule 12    expression -> expression LOGICOS expression
+Rule 13    expression -> expression MODULO expression
+Rule 14    expression -> MINUS expression
+Rule 15    expression -> CONSTANTES
+Rule 16    expression -> LPAREN expression RPAREN
+Rule 17    expression -> NUMBER
+Rule 18    expression -> NAME
 Rule 19    statement -> WHILE expression POINTS statement
+Rule 20    statement -> WHILE expression POINTS expression ELSE statement
+Rule 21    statement -> WHILE expression POINTS statement BREAK
 
 Terminals, with rules where they appear
 
-COMPARISON           : 10
-CONSTANTES           : 14
-DIVIDE               : 8
-EQUALS               : 1
-EXPONENTE            : 9
-LOGICOS              : 11
-LPAREN               : 3 15
-MINUS                : 6 13
-MODULO               : 12
-NAME                 : 1 17
-NUMBER               : 16
-PLUS                 : 5
-POINTS               : 18 19
-PRINT                : 3
-RPAREN               : 3 15
-STRING               : 4
-TIMES                : 7
-WHILE                : 18 19
+BREAK                : 21
+COMPARISON           : 11
+CONSTANTES           : 15
+DIVIDE               : 9
+ELSE                 : 20
+EQUALS               : 1 1
+EXPONENTE            : 10
+LOGICOS              : 12
+LPAREN               : 4 16
+MINUS                : 7 14
+MODULO               : 13
+NAME                 : 1 1 18
+NEWLINE              : 1 3
+NUMBER               : 17
+PLUS                 : 6
+POINTS               : 19 20 21
+PRINT                : 4
+RPAREN               : 4 16
+STRING               : 5
+TIMES                : 8
+WHILE                : 19 20 21
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 1 2 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 15 18 18 19
-statement            : 19 0
-string               : 3
+expression           : 1 1 2 3 3 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 16 19 20 20 21
+statement            : 19 20 21 0
+string               : 4
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . statement
-    (1) statement -> . NAME EQUALS expression
+    (1) statement -> . NAME EQUALS expression NEWLINE NAME EQUALS expression
     (2) statement -> . expression
-    (3) statement -> . PRINT LPAREN string RPAREN
-    (18) statement -> . WHILE expression POINTS expression
+    (3) statement -> . expression NEWLINE expression
+    (4) statement -> . PRINT LPAREN string RPAREN
     (19) statement -> . WHILE expression POINTS statement
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (20) statement -> . WHILE expression POINTS expression ELSE statement
+    (21) statement -> . WHILE expression POINTS statement BREAK
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    NAME            shift and go to state 5
-    PRINT           shift and go to state 4
-    WHILE           shift and go to state 2
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    NAME            shift and go to state 7
+    PRINT           shift and go to state 1
+    WHILE           shift and go to state 5
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
 
     statement                      shift and go to state 3
-    expression                     shift and go to state 6
+    expression                     shift and go to state 4
 
 state 1
 
-    (16) expression -> NUMBER .
+    (4) statement -> PRINT . LPAREN string RPAREN
 
-    POINTS          reduce using rule 16 (expression -> NUMBER .)
-    PLUS            reduce using rule 16 (expression -> NUMBER .)
-    MINUS           reduce using rule 16 (expression -> NUMBER .)
-    TIMES           reduce using rule 16 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 16 (expression -> NUMBER .)
-    EXPONENTE       reduce using rule 16 (expression -> NUMBER .)
-    COMPARISON      reduce using rule 16 (expression -> NUMBER .)
-    LOGICOS         reduce using rule 16 (expression -> NUMBER .)
-    MODULO          reduce using rule 16 (expression -> NUMBER .)
-    $end            reduce using rule 16 (expression -> NUMBER .)
-    RPAREN          reduce using rule 16 (expression -> NUMBER .)
+    LPAREN          shift and go to state 10
 
 
 state 2
 
-    (18) statement -> WHILE . expression POINTS expression
-    (19) statement -> WHILE . expression POINTS statement
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (14) expression -> MINUS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
-    expression                     shift and go to state 10
+    expression                     shift and go to state 12
 
 state 3
 
@@ -137,870 +133,1082 @@ state 3
 
 state 4
 
-    (3) statement -> PRINT . LPAREN string RPAREN
+    (2) statement -> expression .
+    (3) statement -> expression . NEWLINE expression
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    LPAREN          shift and go to state 12
+    BREAK           reduce using rule 2 (statement -> expression .)
+    $end            reduce using rule 2 (statement -> expression .)
+    NEWLINE         shift and go to state 16
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
 
 state 5
 
-    (1) statement -> NAME . EQUALS expression
-    (17) expression -> NAME .
+    (19) statement -> WHILE . expression POINTS statement
+    (20) statement -> WHILE . expression POINTS expression ELSE statement
+    (21) statement -> WHILE . expression POINTS statement BREAK
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    EQUALS          shift and go to state 13
-    PLUS            reduce using rule 17 (expression -> NAME .)
-    MINUS           reduce using rule 17 (expression -> NAME .)
-    TIMES           reduce using rule 17 (expression -> NAME .)
-    DIVIDE          reduce using rule 17 (expression -> NAME .)
-    EXPONENTE       reduce using rule 17 (expression -> NAME .)
-    COMPARISON      reduce using rule 17 (expression -> NAME .)
-    LOGICOS         reduce using rule 17 (expression -> NAME .)
-    MODULO          reduce using rule 17 (expression -> NAME .)
-    $end            reduce using rule 17 (expression -> NAME .)
-
-
-state 6
-
-    (2) statement -> expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
-
-    $end            reduce using rule 2 (statement -> expression .)
-    PLUS            shift and go to state 21
-    MINUS           shift and go to state 19
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
-
-
-state 7
-
-    (15) expression -> LPAREN . expression RPAREN
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
-
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 22
 
+state 6
+
+    (15) expression -> CONSTANTES .
+
+    ELSE            reduce using rule 15 (expression -> CONSTANTES .)
+    NEWLINE         reduce using rule 15 (expression -> CONSTANTES .)
+    PLUS            reduce using rule 15 (expression -> CONSTANTES .)
+    MINUS           reduce using rule 15 (expression -> CONSTANTES .)
+    TIMES           reduce using rule 15 (expression -> CONSTANTES .)
+    DIVIDE          reduce using rule 15 (expression -> CONSTANTES .)
+    EXPONENTE       reduce using rule 15 (expression -> CONSTANTES .)
+    COMPARISON      reduce using rule 15 (expression -> CONSTANTES .)
+    LOGICOS         reduce using rule 15 (expression -> CONSTANTES .)
+    MODULO          reduce using rule 15 (expression -> CONSTANTES .)
+    BREAK           reduce using rule 15 (expression -> CONSTANTES .)
+    $end            reduce using rule 15 (expression -> CONSTANTES .)
+    POINTS          reduce using rule 15 (expression -> CONSTANTES .)
+    RPAREN          reduce using rule 15 (expression -> CONSTANTES .)
+
+
+state 7
+
+    (1) statement -> NAME . EQUALS expression NEWLINE NAME EQUALS expression
+    (18) expression -> NAME .
+
+    EQUALS          shift and go to state 23
+    ELSE            reduce using rule 18 (expression -> NAME .)
+    NEWLINE         reduce using rule 18 (expression -> NAME .)
+    PLUS            reduce using rule 18 (expression -> NAME .)
+    MINUS           reduce using rule 18 (expression -> NAME .)
+    TIMES           reduce using rule 18 (expression -> NAME .)
+    DIVIDE          reduce using rule 18 (expression -> NAME .)
+    EXPONENTE       reduce using rule 18 (expression -> NAME .)
+    COMPARISON      reduce using rule 18 (expression -> NAME .)
+    LOGICOS         reduce using rule 18 (expression -> NAME .)
+    MODULO          reduce using rule 18 (expression -> NAME .)
+    BREAK           reduce using rule 18 (expression -> NAME .)
+    $end            reduce using rule 18 (expression -> NAME .)
+
+
 state 8
 
-    (14) expression -> CONSTANTES .
+    (16) expression -> LPAREN . expression RPAREN
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    POINTS          reduce using rule 14 (expression -> CONSTANTES .)
-    PLUS            reduce using rule 14 (expression -> CONSTANTES .)
-    MINUS           reduce using rule 14 (expression -> CONSTANTES .)
-    TIMES           reduce using rule 14 (expression -> CONSTANTES .)
-    DIVIDE          reduce using rule 14 (expression -> CONSTANTES .)
-    EXPONENTE       reduce using rule 14 (expression -> CONSTANTES .)
-    COMPARISON      reduce using rule 14 (expression -> CONSTANTES .)
-    LOGICOS         reduce using rule 14 (expression -> CONSTANTES .)
-    MODULO          reduce using rule 14 (expression -> CONSTANTES .)
-    $end            reduce using rule 14 (expression -> CONSTANTES .)
-    RPAREN          reduce using rule 14 (expression -> CONSTANTES .)
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
+    NAME            shift and go to state 11
 
+    expression                     shift and go to state 24
 
 state 9
 
-    (13) expression -> MINUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (17) expression -> NUMBER .
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
-    NAME            shift and go to state 11
+    ELSE            reduce using rule 17 (expression -> NUMBER .)
+    NEWLINE         reduce using rule 17 (expression -> NUMBER .)
+    PLUS            reduce using rule 17 (expression -> NUMBER .)
+    MINUS           reduce using rule 17 (expression -> NUMBER .)
+    TIMES           reduce using rule 17 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 17 (expression -> NUMBER .)
+    EXPONENTE       reduce using rule 17 (expression -> NUMBER .)
+    COMPARISON      reduce using rule 17 (expression -> NUMBER .)
+    LOGICOS         reduce using rule 17 (expression -> NUMBER .)
+    MODULO          reduce using rule 17 (expression -> NUMBER .)
+    BREAK           reduce using rule 17 (expression -> NUMBER .)
+    $end            reduce using rule 17 (expression -> NUMBER .)
+    POINTS          reduce using rule 17 (expression -> NUMBER .)
+    RPAREN          reduce using rule 17 (expression -> NUMBER .)
 
-    expression                     shift and go to state 23
 
 state 10
 
-    (18) statement -> WHILE expression . POINTS expression
-    (19) statement -> WHILE expression . POINTS statement
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (4) statement -> PRINT LPAREN . string RPAREN
+    (5) string -> . STRING
 
-    POINTS          shift and go to state 24
-    PLUS            shift and go to state 21
-    MINUS           shift and go to state 19
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    STRING          shift and go to state 26
 
+    string                         shift and go to state 25
 
 state 11
 
-    (17) expression -> NAME .
+    (18) expression -> NAME .
 
-    POINTS          reduce using rule 17 (expression -> NAME .)
-    PLUS            reduce using rule 17 (expression -> NAME .)
-    MINUS           reduce using rule 17 (expression -> NAME .)
-    TIMES           reduce using rule 17 (expression -> NAME .)
-    DIVIDE          reduce using rule 17 (expression -> NAME .)
-    EXPONENTE       reduce using rule 17 (expression -> NAME .)
-    COMPARISON      reduce using rule 17 (expression -> NAME .)
-    LOGICOS         reduce using rule 17 (expression -> NAME .)
-    MODULO          reduce using rule 17 (expression -> NAME .)
-    $end            reduce using rule 17 (expression -> NAME .)
-    RPAREN          reduce using rule 17 (expression -> NAME .)
+    PLUS            reduce using rule 18 (expression -> NAME .)
+    MINUS           reduce using rule 18 (expression -> NAME .)
+    TIMES           reduce using rule 18 (expression -> NAME .)
+    DIVIDE          reduce using rule 18 (expression -> NAME .)
+    EXPONENTE       reduce using rule 18 (expression -> NAME .)
+    COMPARISON      reduce using rule 18 (expression -> NAME .)
+    LOGICOS         reduce using rule 18 (expression -> NAME .)
+    MODULO          reduce using rule 18 (expression -> NAME .)
+    NEWLINE         reduce using rule 18 (expression -> NAME .)
+    $end            reduce using rule 18 (expression -> NAME .)
+    POINTS          reduce using rule 18 (expression -> NAME .)
+    RPAREN          reduce using rule 18 (expression -> NAME .)
+    BREAK           reduce using rule 18 (expression -> NAME .)
+    ELSE            reduce using rule 18 (expression -> NAME .)
 
 
 state 12
 
-    (3) statement -> PRINT LPAREN . string RPAREN
-    (4) string -> . STRING
+    (14) expression -> MINUS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    STRING          shift and go to state 25
+    ELSE            reduce using rule 14 (expression -> MINUS expression .)
+    NEWLINE         reduce using rule 14 (expression -> MINUS expression .)
+    PLUS            reduce using rule 14 (expression -> MINUS expression .)
+    MINUS           reduce using rule 14 (expression -> MINUS expression .)
+    TIMES           reduce using rule 14 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 14 (expression -> MINUS expression .)
+    EXPONENTE       reduce using rule 14 (expression -> MINUS expression .)
+    COMPARISON      reduce using rule 14 (expression -> MINUS expression .)
+    LOGICOS         reduce using rule 14 (expression -> MINUS expression .)
+    MODULO          reduce using rule 14 (expression -> MINUS expression .)
+    BREAK           reduce using rule 14 (expression -> MINUS expression .)
+    $end            reduce using rule 14 (expression -> MINUS expression .)
+    POINTS          reduce using rule 14 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 14 (expression -> MINUS expression .)
 
-    string                         shift and go to state 26
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! EXPONENTE       [ shift and go to state 13 ]
+  ! COMPARISON      [ shift and go to state 15 ]
+  ! LOGICOS         [ shift and go to state 14 ]
+  ! MODULO          [ shift and go to state 18 ]
+
 
 state 13
 
-    (1) statement -> NAME EQUALS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (10) expression -> expression EXPONENTE . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 27
 
 state 14
 
-    (9) expression -> expression EXPONENTE . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (12) expression -> expression LOGICOS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 28
 
 state 15
 
-    (8) expression -> expression DIVIDE . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (11) expression -> expression COMPARISON . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 29
 
 state 16
 
-    (12) expression -> expression MODULO . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (3) statement -> expression NEWLINE . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 30
 
 state 17
 
-    (11) expression -> expression LOGICOS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (7) expression -> expression MINUS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 31
 
 state 18
 
-    (7) expression -> expression TIMES . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (13) expression -> expression MODULO . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 32
 
 state 19
 
-    (6) expression -> expression MINUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (8) expression -> expression TIMES . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 33
 
 state 20
 
-    (10) expression -> expression COMPARISON . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (9) expression -> expression DIVIDE . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 34
 
 state 21
 
-    (5) expression -> expression PLUS . expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
+    (6) expression -> expression PLUS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
     NAME            shift and go to state 11
 
     expression                     shift and go to state 35
 
 state 22
 
-    (15) expression -> LPAREN expression . RPAREN
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (19) statement -> WHILE expression . POINTS statement
+    (20) statement -> WHILE expression . POINTS expression ELSE statement
+    (21) statement -> WHILE expression . POINTS statement BREAK
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    RPAREN          shift and go to state 36
+    POINTS          shift and go to state 36
     PLUS            shift and go to state 21
-    MINUS           shift and go to state 19
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
 
 state 23
 
-    (13) expression -> MINUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (1) statement -> NAME EQUALS . expression NEWLINE NAME EQUALS expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    POINTS          reduce using rule 13 (expression -> MINUS expression .)
-    PLUS            reduce using rule 13 (expression -> MINUS expression .)
-    MINUS           reduce using rule 13 (expression -> MINUS expression .)
-    TIMES           reduce using rule 13 (expression -> MINUS expression .)
-    DIVIDE          reduce using rule 13 (expression -> MINUS expression .)
-    EXPONENTE       reduce using rule 13 (expression -> MINUS expression .)
-    COMPARISON      reduce using rule 13 (expression -> MINUS expression .)
-    LOGICOS         reduce using rule 13 (expression -> MINUS expression .)
-    MODULO          reduce using rule 13 (expression -> MINUS expression .)
-    $end            reduce using rule 13 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 13 (expression -> MINUS expression .)
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
+    NAME            shift and go to state 11
 
-  ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
-  ! EXPONENTE       [ shift and go to state 14 ]
-  ! COMPARISON      [ shift and go to state 20 ]
-  ! LOGICOS         [ shift and go to state 17 ]
-  ! MODULO          [ shift and go to state 16 ]
-
+    expression                     shift and go to state 37
 
 state 24
 
-    (18) statement -> WHILE expression POINTS . expression
-    (19) statement -> WHILE expression POINTS . statement
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . expression EXPONENTE expression
-    (10) expression -> . expression COMPARISON expression
-    (11) expression -> . expression LOGICOS expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . MINUS expression
-    (14) expression -> . CONSTANTES
-    (15) expression -> . LPAREN expression RPAREN
-    (16) expression -> . NUMBER
-    (17) expression -> . NAME
-    (1) statement -> . NAME EQUALS expression
-    (2) statement -> . expression
-    (3) statement -> . PRINT LPAREN string RPAREN
-    (18) statement -> . WHILE expression POINTS expression
-    (19) statement -> . WHILE expression POINTS statement
+    (16) expression -> LPAREN expression . RPAREN
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    MINUS           shift and go to state 9
-    CONSTANTES      shift and go to state 8
-    LPAREN          shift and go to state 7
-    NUMBER          shift and go to state 1
-    NAME            shift and go to state 39
-    PRINT           shift and go to state 4
-    WHILE           shift and go to state 2
+    RPAREN          shift and go to state 38
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-    expression                     shift and go to state 38
-    statement                      shift and go to state 37
 
 state 25
 
-    (4) string -> STRING .
+    (4) statement -> PRINT LPAREN string . RPAREN
 
-    RPAREN          reduce using rule 4 (string -> STRING .)
+    RPAREN          shift and go to state 39
 
 
 state 26
 
-    (3) statement -> PRINT LPAREN string . RPAREN
+    (5) string -> STRING .
 
-    RPAREN          shift and go to state 40
+    RPAREN          reduce using rule 5 (string -> STRING .)
 
 
 state 27
 
-    (1) statement -> NAME EQUALS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (10) expression -> expression EXPONENTE expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    $end            reduce using rule 1 (statement -> NAME EQUALS expression .)
-    PLUS            shift and go to state 21
-    MINUS           shift and go to state 19
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    NEWLINE         reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    PLUS            reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    MINUS           reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    TIMES           reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    DIVIDE          reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    EXPONENTE       reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    COMPARISON      reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    LOGICOS         reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    MODULO          reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    BREAK           reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    $end            reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    POINTS          reduce using rule 10 (expression -> expression EXPONENTE expression .)
+    RPAREN          reduce using rule 10 (expression -> expression EXPONENTE expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! EXPONENTE       [ shift and go to state 13 ]
+  ! COMPARISON      [ shift and go to state 15 ]
+  ! LOGICOS         [ shift and go to state 14 ]
+  ! MODULO          [ shift and go to state 18 ]
 
 
 state 28
 
-    (9) expression -> expression EXPONENTE expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (12) expression -> expression LOGICOS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    PLUS            reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    MINUS           reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    TIMES           reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    DIVIDE          reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    EXPONENTE       reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    COMPARISON      reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    LOGICOS         reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    MODULO          reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    $end            reduce using rule 9 (expression -> expression EXPONENTE expression .)
-    RPAREN          reduce using rule 9 (expression -> expression EXPONENTE expression .)
+    ELSE            reduce using rule 12 (expression -> expression LOGICOS expression .)
+    NEWLINE         reduce using rule 12 (expression -> expression LOGICOS expression .)
+    PLUS            reduce using rule 12 (expression -> expression LOGICOS expression .)
+    MINUS           reduce using rule 12 (expression -> expression LOGICOS expression .)
+    TIMES           reduce using rule 12 (expression -> expression LOGICOS expression .)
+    DIVIDE          reduce using rule 12 (expression -> expression LOGICOS expression .)
+    COMPARISON      reduce using rule 12 (expression -> expression LOGICOS expression .)
+    LOGICOS         reduce using rule 12 (expression -> expression LOGICOS expression .)
+    BREAK           reduce using rule 12 (expression -> expression LOGICOS expression .)
+    $end            reduce using rule 12 (expression -> expression LOGICOS expression .)
+    POINTS          reduce using rule 12 (expression -> expression LOGICOS expression .)
+    RPAREN          reduce using rule 12 (expression -> expression LOGICOS expression .)
+    EXPONENTE       shift and go to state 13
+    MODULO          shift and go to state 18
 
+  ! EXPONENTE       [ reduce using rule 12 (expression -> expression LOGICOS expression .) ]
+  ! MODULO          [ reduce using rule 12 (expression -> expression LOGICOS expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
-  ! EXPONENTE       [ shift and go to state 14 ]
-  ! COMPARISON      [ shift and go to state 20 ]
-  ! LOGICOS         [ shift and go to state 17 ]
-  ! MODULO          [ shift and go to state 16 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! COMPARISON      [ shift and go to state 15 ]
+  ! LOGICOS         [ shift and go to state 14 ]
 
 
 state 29
 
-    (8) expression -> expression DIVIDE expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (11) expression -> expression COMPARISON expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 8 (expression -> expression DIVIDE expression .)
-    PLUS            reduce using rule 8 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 8 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 8 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 8 (expression -> expression DIVIDE expression .)
-    $end            reduce using rule 8 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 8 (expression -> expression DIVIDE expression .)
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 11 (expression -> expression COMPARISON expression .)
+    NEWLINE         reduce using rule 11 (expression -> expression COMPARISON expression .)
+    PLUS            reduce using rule 11 (expression -> expression COMPARISON expression .)
+    MINUS           reduce using rule 11 (expression -> expression COMPARISON expression .)
+    TIMES           reduce using rule 11 (expression -> expression COMPARISON expression .)
+    DIVIDE          reduce using rule 11 (expression -> expression COMPARISON expression .)
+    COMPARISON      reduce using rule 11 (expression -> expression COMPARISON expression .)
+    BREAK           reduce using rule 11 (expression -> expression COMPARISON expression .)
+    $end            reduce using rule 11 (expression -> expression COMPARISON expression .)
+    POINTS          reduce using rule 11 (expression -> expression COMPARISON expression .)
+    RPAREN          reduce using rule 11 (expression -> expression COMPARISON expression .)
+    EXPONENTE       shift and go to state 13
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-  ! EXPONENTE       [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! COMPARISON      [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! LOGICOS         [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! MODULO          [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
+  ! EXPONENTE       [ reduce using rule 11 (expression -> expression COMPARISON expression .) ]
+  ! LOGICOS         [ reduce using rule 11 (expression -> expression COMPARISON expression .) ]
+  ! MODULO          [ reduce using rule 11 (expression -> expression COMPARISON expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! COMPARISON      [ shift and go to state 15 ]
 
 
 state 30
 
-    (12) expression -> expression MODULO expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (3) statement -> expression NEWLINE expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 12 (expression -> expression MODULO expression .)
-    PLUS            reduce using rule 12 (expression -> expression MODULO expression .)
-    MINUS           reduce using rule 12 (expression -> expression MODULO expression .)
-    TIMES           reduce using rule 12 (expression -> expression MODULO expression .)
-    DIVIDE          reduce using rule 12 (expression -> expression MODULO expression .)
-    COMPARISON      reduce using rule 12 (expression -> expression MODULO expression .)
-    LOGICOS         reduce using rule 12 (expression -> expression MODULO expression .)
-    MODULO          reduce using rule 12 (expression -> expression MODULO expression .)
-    $end            reduce using rule 12 (expression -> expression MODULO expression .)
-    RPAREN          reduce using rule 12 (expression -> expression MODULO expression .)
-    EXPONENTE       shift and go to state 14
-
-  ! EXPONENTE       [ reduce using rule 12 (expression -> expression MODULO expression .) ]
-  ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
-  ! COMPARISON      [ shift and go to state 20 ]
-  ! LOGICOS         [ shift and go to state 17 ]
-  ! MODULO          [ shift and go to state 16 ]
+    BREAK           reduce using rule 3 (statement -> expression NEWLINE expression .)
+    $end            reduce using rule 3 (statement -> expression NEWLINE expression .)
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
 
 state 31
 
-    (11) expression -> expression LOGICOS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (7) expression -> expression MINUS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 11 (expression -> expression LOGICOS expression .)
-    PLUS            reduce using rule 11 (expression -> expression LOGICOS expression .)
-    MINUS           reduce using rule 11 (expression -> expression LOGICOS expression .)
-    TIMES           reduce using rule 11 (expression -> expression LOGICOS expression .)
-    DIVIDE          reduce using rule 11 (expression -> expression LOGICOS expression .)
-    COMPARISON      reduce using rule 11 (expression -> expression LOGICOS expression .)
-    LOGICOS         reduce using rule 11 (expression -> expression LOGICOS expression .)
-    $end            reduce using rule 11 (expression -> expression LOGICOS expression .)
-    RPAREN          reduce using rule 11 (expression -> expression LOGICOS expression .)
-    EXPONENTE       shift and go to state 14
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 7 (expression -> expression MINUS expression .)
+    NEWLINE         reduce using rule 7 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 7 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 7 (expression -> expression MINUS expression .)
+    BREAK           reduce using rule 7 (expression -> expression MINUS expression .)
+    $end            reduce using rule 7 (expression -> expression MINUS expression .)
+    POINTS          reduce using rule 7 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 7 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-  ! EXPONENTE       [ reduce using rule 11 (expression -> expression LOGICOS expression .) ]
-  ! MODULO          [ reduce using rule 11 (expression -> expression LOGICOS expression .) ]
+  ! TIMES           [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! EXPONENTE       [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! COMPARISON      [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! LOGICOS         [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 7 (expression -> expression MINUS expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
-  ! COMPARISON      [ shift and go to state 20 ]
-  ! LOGICOS         [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 17 ]
 
 
 state 32
 
-    (7) expression -> expression TIMES expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (13) expression -> expression MODULO expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 7 (expression -> expression TIMES expression .)
-    PLUS            reduce using rule 7 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 7 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 7 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 7 (expression -> expression TIMES expression .)
-    $end            reduce using rule 7 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 7 (expression -> expression TIMES expression .)
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 13 (expression -> expression MODULO expression .)
+    NEWLINE         reduce using rule 13 (expression -> expression MODULO expression .)
+    PLUS            reduce using rule 13 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 13 (expression -> expression MODULO expression .)
+    TIMES           reduce using rule 13 (expression -> expression MODULO expression .)
+    DIVIDE          reduce using rule 13 (expression -> expression MODULO expression .)
+    COMPARISON      reduce using rule 13 (expression -> expression MODULO expression .)
+    LOGICOS         reduce using rule 13 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 13 (expression -> expression MODULO expression .)
+    BREAK           reduce using rule 13 (expression -> expression MODULO expression .)
+    $end            reduce using rule 13 (expression -> expression MODULO expression .)
+    POINTS          reduce using rule 13 (expression -> expression MODULO expression .)
+    RPAREN          reduce using rule 13 (expression -> expression MODULO expression .)
+    EXPONENTE       shift and go to state 13
 
-  ! EXPONENTE       [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! COMPARISON      [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! LOGICOS         [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! MODULO          [ reduce using rule 7 (expression -> expression TIMES expression .) ]
+  ! EXPONENTE       [ reduce using rule 13 (expression -> expression MODULO expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! COMPARISON      [ shift and go to state 15 ]
+  ! LOGICOS         [ shift and go to state 14 ]
+  ! MODULO          [ shift and go to state 18 ]
 
 
 state 33
 
-    (6) expression -> expression MINUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (8) expression -> expression TIMES expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 6 (expression -> expression MINUS expression .)
-    PLUS            reduce using rule 6 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 6 (expression -> expression MINUS expression .)
-    $end            reduce using rule 6 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 6 (expression -> expression MINUS expression .)
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 8 (expression -> expression TIMES expression .)
+    NEWLINE         reduce using rule 8 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 8 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 8 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 8 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 8 (expression -> expression TIMES expression .)
+    BREAK           reduce using rule 8 (expression -> expression TIMES expression .)
+    $end            reduce using rule 8 (expression -> expression TIMES expression .)
+    POINTS          reduce using rule 8 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 8 (expression -> expression TIMES expression .)
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-  ! TIMES           [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! EXPONENTE       [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! COMPARISON      [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! LOGICOS         [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! MODULO          [ reduce using rule 6 (expression -> expression MINUS expression .) ]
+  ! EXPONENTE       [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! COMPARISON      [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! LOGICOS         [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! MODULO          [ reduce using rule 8 (expression -> expression TIMES expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
 
 
 state 34
 
-    (10) expression -> expression COMPARISON expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (9) expression -> expression DIVIDE expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 10 (expression -> expression COMPARISON expression .)
-    PLUS            reduce using rule 10 (expression -> expression COMPARISON expression .)
-    MINUS           reduce using rule 10 (expression -> expression COMPARISON expression .)
-    TIMES           reduce using rule 10 (expression -> expression COMPARISON expression .)
-    DIVIDE          reduce using rule 10 (expression -> expression COMPARISON expression .)
-    COMPARISON      reduce using rule 10 (expression -> expression COMPARISON expression .)
-    $end            reduce using rule 10 (expression -> expression COMPARISON expression .)
-    RPAREN          reduce using rule 10 (expression -> expression COMPARISON expression .)
-    EXPONENTE       shift and go to state 14
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 9 (expression -> expression DIVIDE expression .)
+    NEWLINE         reduce using rule 9 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 9 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 9 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 9 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 9 (expression -> expression DIVIDE expression .)
+    BREAK           reduce using rule 9 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 9 (expression -> expression DIVIDE expression .)
+    POINTS          reduce using rule 9 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 9 (expression -> expression DIVIDE expression .)
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-  ! EXPONENTE       [ reduce using rule 10 (expression -> expression COMPARISON expression .) ]
-  ! LOGICOS         [ reduce using rule 10 (expression -> expression COMPARISON expression .) ]
-  ! MODULO          [ reduce using rule 10 (expression -> expression COMPARISON expression .) ]
+  ! EXPONENTE       [ reduce using rule 9 (expression -> expression DIVIDE expression .) ]
+  ! COMPARISON      [ reduce using rule 9 (expression -> expression DIVIDE expression .) ]
+  ! LOGICOS         [ reduce using rule 9 (expression -> expression DIVIDE expression .) ]
+  ! MODULO          [ reduce using rule 9 (expression -> expression DIVIDE expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
-  ! TIMES           [ shift and go to state 18 ]
-  ! DIVIDE          [ shift and go to state 15 ]
-  ! COMPARISON      [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 17 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
 
 
 state 35
 
-    (5) expression -> expression PLUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
+    (6) expression -> expression PLUS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    POINTS          reduce using rule 5 (expression -> expression PLUS expression .)
-    PLUS            reduce using rule 5 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 5 (expression -> expression PLUS expression .)
-    $end            reduce using rule 5 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 5 (expression -> expression PLUS expression .)
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
+    ELSE            reduce using rule 6 (expression -> expression PLUS expression .)
+    NEWLINE         reduce using rule 6 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 6 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 6 (expression -> expression PLUS expression .)
+    BREAK           reduce using rule 6 (expression -> expression PLUS expression .)
+    $end            reduce using rule 6 (expression -> expression PLUS expression .)
+    POINTS          reduce using rule 6 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 6 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
-  ! TIMES           [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! EXPONENTE       [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! COMPARISON      [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! LOGICOS         [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! MODULO          [ reduce using rule 5 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! EXPONENTE       [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! COMPARISON      [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! LOGICOS         [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 6 (expression -> expression PLUS expression .) ]
   ! PLUS            [ shift and go to state 21 ]
-  ! MINUS           [ shift and go to state 19 ]
+  ! MINUS           [ shift and go to state 17 ]
 
 
 state 36
 
-    (15) expression -> LPAREN expression RPAREN .
+    (19) statement -> WHILE expression POINTS . statement
+    (20) statement -> WHILE expression POINTS . expression ELSE statement
+    (21) statement -> WHILE expression POINTS . statement BREAK
+    (1) statement -> . NAME EQUALS expression NEWLINE NAME EQUALS expression
+    (2) statement -> . expression
+    (3) statement -> . expression NEWLINE expression
+    (4) statement -> . PRINT LPAREN string RPAREN
+    (19) statement -> . WHILE expression POINTS statement
+    (20) statement -> . WHILE expression POINTS expression ELSE statement
+    (21) statement -> . WHILE expression POINTS statement BREAK
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
 
-    POINTS          reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    EXPONENTE       reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    COMPARISON      reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    LOGICOS         reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    MODULO          reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 15 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 15 (expression -> LPAREN expression RPAREN .)
+    NAME            shift and go to state 7
+    PRINT           shift and go to state 1
+    WHILE           shift and go to state 5
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
 
+    statement                      shift and go to state 40
+    expression                     shift and go to state 41
 
 state 37
 
-    (19) statement -> WHILE expression POINTS statement .
+    (1) statement -> NAME EQUALS expression . NEWLINE NAME EQUALS expression
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
 
-    $end            reduce using rule 19 (statement -> WHILE expression POINTS statement .)
+    NEWLINE         shift and go to state 42
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
 
 state 38
 
-    (18) statement -> WHILE expression POINTS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
-    (9) expression -> expression . EXPONENTE expression
-    (10) expression -> expression . COMPARISON expression
-    (11) expression -> expression . LOGICOS expression
-    (12) expression -> expression . MODULO expression
-    (2) statement -> expression .
+    (16) expression -> LPAREN expression RPAREN .
 
-  ! reduce/reduce conflict for $end resolved using rule 2 (statement -> expression .)
-    PLUS            shift and go to state 21
-    MINUS           shift and go to state 19
-    TIMES           shift and go to state 18
-    DIVIDE          shift and go to state 15
-    EXPONENTE       shift and go to state 14
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 17
-    MODULO          shift and go to state 16
-    $end            reduce using rule 2 (statement -> expression .)
-
-  ! $end            [ reduce using rule 18 (statement -> WHILE expression POINTS expression .) ]
+    ELSE            reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    NEWLINE         reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    EXPONENTE       reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    COMPARISON      reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    LOGICOS         reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    BREAK           reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    POINTS          reduce using rule 16 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 16 (expression -> LPAREN expression RPAREN .)
 
 
 state 39
 
-    (17) expression -> NAME .
-    (1) statement -> NAME . EQUALS expression
+    (4) statement -> PRINT LPAREN string RPAREN .
 
-    PLUS            reduce using rule 17 (expression -> NAME .)
-    MINUS           reduce using rule 17 (expression -> NAME .)
-    TIMES           reduce using rule 17 (expression -> NAME .)
-    DIVIDE          reduce using rule 17 (expression -> NAME .)
-    EXPONENTE       reduce using rule 17 (expression -> NAME .)
-    COMPARISON      reduce using rule 17 (expression -> NAME .)
-    LOGICOS         reduce using rule 17 (expression -> NAME .)
-    MODULO          reduce using rule 17 (expression -> NAME .)
-    $end            reduce using rule 17 (expression -> NAME .)
-    EQUALS          shift and go to state 13
+    BREAK           reduce using rule 4 (statement -> PRINT LPAREN string RPAREN .)
+    $end            reduce using rule 4 (statement -> PRINT LPAREN string RPAREN .)
 
 
 state 40
 
-    (3) statement -> PRINT LPAREN string RPAREN .
+    (19) statement -> WHILE expression POINTS statement .
+    (21) statement -> WHILE expression POINTS statement . BREAK
 
-    $end            reduce using rule 3 (statement -> PRINT LPAREN string RPAREN .)
+  ! shift/reduce conflict for BREAK resolved as shift
+    $end            reduce using rule 19 (statement -> WHILE expression POINTS statement .)
+    BREAK           shift and go to state 43
+
+  ! BREAK           [ reduce using rule 19 (statement -> WHILE expression POINTS statement .) ]
+
+
+state 41
+
+    (20) statement -> WHILE expression POINTS expression . ELSE statement
+    (2) statement -> expression .
+    (3) statement -> expression . NEWLINE expression
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
+
+    ELSE            shift and go to state 44
+    BREAK           reduce using rule 2 (statement -> expression .)
+    $end            reduce using rule 2 (statement -> expression .)
+    NEWLINE         shift and go to state 16
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
+
+
+state 42
+
+    (1) statement -> NAME EQUALS expression NEWLINE . NAME EQUALS expression
+
+    NAME            shift and go to state 45
+
+
+state 43
+
+    (21) statement -> WHILE expression POINTS statement BREAK .
+
+    BREAK           reduce using rule 21 (statement -> WHILE expression POINTS statement BREAK .)
+    $end            reduce using rule 21 (statement -> WHILE expression POINTS statement BREAK .)
+
+
+state 44
+
+    (20) statement -> WHILE expression POINTS expression ELSE . statement
+    (1) statement -> . NAME EQUALS expression NEWLINE NAME EQUALS expression
+    (2) statement -> . expression
+    (3) statement -> . expression NEWLINE expression
+    (4) statement -> . PRINT LPAREN string RPAREN
+    (19) statement -> . WHILE expression POINTS statement
+    (20) statement -> . WHILE expression POINTS expression ELSE statement
+    (21) statement -> . WHILE expression POINTS statement BREAK
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
+
+    NAME            shift and go to state 7
+    PRINT           shift and go to state 1
+    WHILE           shift and go to state 5
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
+
+    statement                      shift and go to state 46
+    expression                     shift and go to state 4
+
+state 45
+
+    (1) statement -> NAME EQUALS expression NEWLINE NAME . EQUALS expression
+
+    EQUALS          shift and go to state 47
+
+
+state 46
+
+    (20) statement -> WHILE expression POINTS expression ELSE statement .
+
+    BREAK           reduce using rule 20 (statement -> WHILE expression POINTS expression ELSE statement .)
+    $end            reduce using rule 20 (statement -> WHILE expression POINTS expression ELSE statement .)
+
+
+state 47
+
+    (1) statement -> NAME EQUALS expression NEWLINE NAME EQUALS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . expression DIVIDE expression
+    (10) expression -> . expression EXPONENTE expression
+    (11) expression -> . expression COMPARISON expression
+    (12) expression -> . expression LOGICOS expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . MINUS expression
+    (15) expression -> . CONSTANTES
+    (16) expression -> . LPAREN expression RPAREN
+    (17) expression -> . NUMBER
+    (18) expression -> . NAME
+
+    MINUS           shift and go to state 2
+    CONSTANTES      shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 9
+    NAME            shift and go to state 11
+
+    expression                     shift and go to state 48
+
+state 48
+
+    (1) statement -> NAME EQUALS expression NEWLINE NAME EQUALS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (9) expression -> expression . DIVIDE expression
+    (10) expression -> expression . EXPONENTE expression
+    (11) expression -> expression . COMPARISON expression
+    (12) expression -> expression . LOGICOS expression
+    (13) expression -> expression . MODULO expression
+
+    BREAK           reduce using rule 1 (statement -> NAME EQUALS expression NEWLINE NAME EQUALS expression .)
+    $end            reduce using rule 1 (statement -> NAME EQUALS expression NEWLINE NAME EQUALS expression .)
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    EXPONENTE       shift and go to state 13
+    COMPARISON      shift and go to state 15
+    LOGICOS         shift and go to state 14
+    MODULO          shift and go to state 18
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 38 resolved using rule (statement -> expression)
-WARNING: rejected rule (statement -> WHILE expression POINTS expression) in state 38
-WARNING: Rule (statement -> WHILE expression POINTS expression) is never reduced
+WARNING: shift/reduce conflict for BREAK in state 40 resolved as shift

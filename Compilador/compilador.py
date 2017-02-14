@@ -1,9 +1,8 @@
-
 tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
     'LPAREN' ,'RPAREN', 'WHILE', 'EXPONENTE', 'COMPARISON', 'POINTS',
-    'LOGICOS', 'MODULO', 'PRINT', 'STRING','NEWLINE'
+    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE','NEWLINE'
 )
 
 # Tokens
@@ -17,7 +16,7 @@ t_EQUALS  = r'='
 t_MODULO  = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_NAME    = r'(?!(while|True|False|or|and|print))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and|print))'
+t_NAME    = r'(?!(while|True|False|or|and|print|break|else))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and|print|break|else))'
 t_WHILE   = r'while'
 t_COMPARISON = r'>=|<=|!=|==|>|<'
 t_EXPONENTE = r'\^'
@@ -25,8 +24,9 @@ t_POINTS = r':'
 t_LOGICOS = r'or|and'
 t_PRINT = r'print'
 t_STRING = r'"[a-zA-Z0-9_ +-/*]*"'
-#t_NEWLINE=r'\n+'
-#t_TAB = r'\\t'
+t_BREAK = r'break'
+t_ELSE = r'else'
+t_NEWLINE=r'&'
 
 
 def t_NUMBER(t):
@@ -72,8 +72,15 @@ def p_statement_assign(t):
     'statement : NAME EQUALS expression'
     names[t[1]] = t[3]
 
+def p_statement_assign(t):
+    'statement : NAME EQUALS expression NEWLINE NAME EQUALS expression'
+    names[t[1]] = t[3]
+    names[t[5]] = t[7]
+
+
 def p_statement_expr(t):
-    'statement : expression'
+    '''statement : expression
+                 | expression NEWLINE expression'''
     print(t[1])
 
 def p_statement_print(t):
@@ -83,11 +90,6 @@ def p_statement_print(t):
 def p_statement_string(t):
     'string : STRING'
     t[0] = t[1].strip("\"")
-
-def p_statement_lines(t):
-    '''expression : expression NEWLINE expression
-                  | expression NEWLINE statement'''
-    t[0]= t[1]
 
 def p_expression_binop(t):
     '''expression : expression PLUS expression
@@ -140,9 +142,13 @@ def p_expression_name(t):
         print("Error léxico '%s'" % t[1])
         t[0] = 0
 
+#def p_expression_line(t):
+#   'expression : NEWLINE expression'
+
 def p_expression_while(t):
-    '''statement : WHILE expression POINTS expression
-                 | WHILE expression POINTS statement'''
+    '''statement : WHILE expression POINTS statement
+                 | WHILE expression POINTS expression ELSE statement
+                 | WHILE expression POINTS statement BREAK'''
     print("While válido ☺")
 
 def p_error(t):
@@ -154,11 +160,22 @@ def p_error(t):
 import ply.yacc as yacc
 from Console import *
 
+def trampita_Salto_de_linea(texto):
+    texto2 = texto
+    texto = ""
+    for i in range(0, len(texto2)):
+        if texto2[i] == "\n":
+            texto += "&"
+        else:
+            texto += texto2[i]
+    return texto
+
 while True:
     parser = yacc.yacc()
     try:
         window = GUI()
         s = window.show()
+        s=trampita_Salto_de_linea(s)
         #s = input('>>> ')   # Use raw_input on Python 2
     except EOFError:
         break

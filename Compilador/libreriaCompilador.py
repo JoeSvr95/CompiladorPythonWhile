@@ -3,7 +3,7 @@ tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
     'LPAREN' ,'RPAREN', 'WHILE', 'EXPONENTE', 'COMPARISON', 'POINTS',
-    'LOGICOS', 'MODULO', 'PRINT', 'STRING',
+    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE',
 )
 
 # Tokens
@@ -17,7 +17,7 @@ t_EQUALS  = r'='
 t_MODULO  = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_NAME    = r'(?!(while|True|False|or|and|print))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and|print))'
+t_NAME    = r'(?!(while|True|False|or|and|print|break|else))[a-zA-Z_][a-zA-Z0-9_]*(?!(while|True|False|or|and|print|break|else))'
 t_WHILE   = r'while'
 t_COMPARISON = r'>=|<=|!=|==|>|<'
 t_EXPONENTE = r'\^'
@@ -25,7 +25,8 @@ t_POINTS = r':'
 t_LOGICOS = r'or|and'
 t_PRINT = r'print'
 t_STRING = r'"[a-zA-Z0-9_ +-/*]*"'
-#t_TAB = r'\\t'
+t_BREAK = r'break'
+t_ELSE = r'else'
 
 
 def t_NUMBER(t):
@@ -135,8 +136,9 @@ def p_expression_name(t):
         t[0] = 0
 
 def p_expression_while(t):
-    '''statement : WHILE expression POINTS expression
-                 | WHILE expression POINTS statement'''
+    '''statement : WHILE expression POINTS statement
+                 | WHILE expression POINTS expression ELSE statement
+                 | WHILE expression POINTS statement BREAK'''
     print("While válido ☺")
 
 def p_error(t):
