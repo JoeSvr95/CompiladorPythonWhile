@@ -8,7 +8,7 @@ while opciones!="3":
     libreria.menu_Juego()
     opciones=input("☺→")
     if opciones=="1":
-        niveles=6
+        niveles=1
         print("PD: Escriba Salir como escape")
         while niveles<11:
             print("Presione enter para empezar el Nivel : "+str(niveles)+" .")

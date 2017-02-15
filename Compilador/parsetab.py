@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEleftCOMPARISONleftLOGICOSleftMODULOleftEXPONENTErightUMINUSCONSTANTES NAME NUMBER PLUS MINUS TIMES DIVIDE EQUALS LPAREN RPAREN WHILE EXPONENTE COMPARISON POINTS LOGICOS MODULO PRINT STRING BREAK ELSE NEWLINEstatement : NAME EQUALS expression NEWLINE NAME EQUALS expressionstatement : expression\n                 | expression NEWLINE expressionstatement : PRINT LPAREN string RPARENstring : STRINGexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression EXPONENTE expression\n                  | expression COMPARISON expression\n                  | expression LOGICOS expression\n                  | expression MODULO expressionexpression : MINUS expression %prec UMINUSexpression : CONSTANTESexpression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEstatement : WHILE expression POINTS statement\n                 | WHILE expression POINTS expression ELSE statement\n                 | WHILE expression POINTS statement BREAK'
+_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEleftCOMPARISONleftLOGICOSleftMODULOleftEXPONENTErightUMINUSCONSTANTES NAME NUMBER PLUS MINUS TIMES DIVIDE EQUALS LPAREN RPAREN WHILE EXPONENTE COMPARISON POINTS LOGICOS MODULO PRINT STRING BREAK ELSE NEWLN TABstatement : expressionassign : NAME EQUALS expNormalexpression : expWhile\n                  | expLineal\n                  | expNormalexpLineal : PRINT LPAREN string RPARENstring : STRINGoperacion : expNormal PLUS expNormal\n                 | expNormal MINUS expNormal\n                 | expNormal TIMES expNormal\n                 | expNormal DIVIDE expNormal\n                 | expNormal EXPONENTE expNormal\n                 | expNormal COMPARISON expNormal\n                 | expNormal LOGICOS expNormal\n                 | expNormal MODULO expNormalexpression : MINUS expression %prec UMINUSboolean : CONSTANTESexpLineal : LPAREN expLineal RPARENenterTab : NEWLN TAB statement enterTab\n                | NEWLN TAB statement enterNormal\n                | NEWLN TAB statement\n                | NEWLN TAB expWhileAexpBooleana : expNormal COMPARISON expNormal\n                   | expBooleana LOGICOS expBooleana\n                   | booleanexpBooleana : LPAREN expBooleana RPARENenterTabTab : NEWLN TAB TAB statement enterNormal\n                   | NEWLN TAB TAB statement enterTabTab\n                   | NEWLN TAB TAB statemententerNormal : NEWLN statement enterNormal\n                   | NEWLN statementexpLineal : operacion\n                 | assign\n                 | operacion enterNormal\n                 | assign enterNormalexpLinealT : TAB operacion\n                 | TAB assign\n                 | TAB operacion enterTab\n                 | assign enterTabexpNormal : NUMBER\n                 | STRING\n                 | booleanexpNormal : NAMEexpWhileA : WHILE expBooleana POINTS enterTabTabexpWhile : WHILE expBooleana POINTS enterTab'
     
-_lr_action_items = {'COMPARISON':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[15,-15,-18,-17,-18,-14,15,15,-10,-12,-11,15,15,-13,15,15,15,15,-16,15,15,]),'PRINT':([0,36,44,],[1,1,1,]),'EQUALS':([7,45,],[23,47,]),'EXPONENTE':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[13,-15,-18,-17,-18,-14,13,13,-10,13,13,13,13,13,13,13,13,13,-16,13,13,]),'MINUS':([0,2,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,28,29,30,31,32,33,34,35,36,37,38,41,44,47,48,],[2,2,17,2,-15,-18,2,-17,-18,-14,2,2,2,2,2,2,2,2,2,17,2,17,-10,-12,-11,17,-7,-13,-8,-9,-6,2,17,-16,17,2,2,17,]),'TIMES':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[19,-15,-18,-17,-18,-14,19,19,-10,-12,-11,19,19,-13,-8,-9,19,19,-16,19,19,]),'MODULO':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[18,-15,-18,-17,-18,-14,18,18,-10,18,18,18,18,-13,18,18,18,18,-16,18,18,]),'NUMBER':([0,2,5,8,13,14,15,16,17,18,19,20,21,23,36,44,47,],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,]),'$end':([3,4,6,7,9,11,12,27,28,29,30,31,32,33,34,35,38,39,40,41,43,46,48,],[0,-2,-15,-18,-17,-18,-14,-10,-12,-11,-3,-7,-13,-8,-9,-6,-16,-4,-19,-2,-21,-20,-1,]),'LOGICOS':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[14,-15,-18,-17,-18,-14,14,14,-10,-12,14,14,14,-13,14,14,14,14,-16,14,14,]),'NEWLINE':([4,6,7,9,11,12,27,28,29,31,32,33,34,35,37,38,41,],[16,-15,-18,-17,-18,-14,-10,-12,-11,-7,-13,-8,-9,-6,42,-16,16,]),'ELSE':([6,7,9,11,12,27,28,29,31,32,33,34,35,38,41,],[-15,-18,-17,-18,-14,-10,-12,-11,-7,-13,-8,-9,-6,-16,44,]),'LPAREN':([0,1,2,5,8,13,14,15,16,17,18,19,20,21,23,36,44,47,],[8,10,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,]),'POINTS':([6,9,11,12,22,27,28,29,31,32,33,34,35,38,],[-15,-17,-18,-14,36,-10,-12,-11,-7,-13,-8,-9,-6,-16,]),'WHILE':([0,36,44,],[5,5,5,]),'BREAK':([4,6,7,9,11,12,27,28,29,30,31,32,33,34,35,38,39,40,41,43,46,48,],[-2,-15,-18,-17,-18,-14,-10,-12,-11,-3,-7,-13,-8,-9,-6,-16,-4,43,-2,-21,-20,-1,]),'CONSTANTES':([0,2,5,8,13,14,15,16,17,18,19,20,21,23,36,44,47,],[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'NAME':([0,2,5,8,13,14,15,16,17,18,19,20,21,23,36,42,44,47,],[7,11,11,11,11,11,11,11,11,11,11,11,11,11,7,45,7,11,]),'RPAREN':([6,9,11,12,24,25,26,27,28,29,31,32,33,34,35,38,],[-15,-17,-18,-14,38,39,-5,-10,-12,-11,-7,-13,-8,-9,-6,-16,]),'DIVIDE':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[20,-15,-18,-17,-18,-14,20,20,-10,-12,-11,20,20,-13,-8,-9,20,20,-16,20,20,]),'STRING':([10,],[26,]),'PLUS':([4,6,7,9,11,12,22,24,27,28,29,30,31,32,33,34,35,37,38,41,48,],[21,-15,-18,-17,-18,-14,21,21,-10,-12,-11,21,-7,-13,-8,-9,-6,21,-16,21,21,]),}
+_lr_action_items = {'PRINT':([0,3,14,20,63,69,74,75,79,],[2,2,2,2,2,2,2,2,2,]),'STRING':([0,3,9,14,17,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[8,8,8,8,39,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,]),'MINUS':([0,3,5,8,11,12,13,16,20,36,37,63,69,74,75,79,],[3,3,-40,-41,27,-43,-17,-42,3,27,-43,3,3,3,3,3,]),'PLUS':([5,8,11,12,13,16,36,37,],[-40,-41,28,-43,-17,-42,28,-43,]),'RPAREN':([1,4,5,7,8,10,11,12,13,15,16,18,19,21,25,35,38,39,40,41,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,61,62,64,65,67,68,72,76,77,78,],[-4,-1,-40,-32,-41,-3,-5,-43,-17,-33,-42,-16,-34,-43,-25,55,-35,-7,56,-31,62,-12,-9,-8,-15,-10,-14,-13,-11,-2,-18,-6,-30,-24,-45,-23,-26,-22,-21,-20,-19,-44,-29,-27,-28,]),'POINTS':([5,8,13,16,21,22,25,58,61,62,70,],[-40,-41,-17,-42,-43,43,-25,-24,-23,-26,71,]),'WHILE':([0,3,20,63,69,74,75,79,],[9,9,9,66,9,66,9,9,]),'NUMBER':([0,3,9,14,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'$end':([1,4,5,6,7,8,10,11,12,13,15,16,18,19,21,38,41,46,47,48,49,50,51,52,53,54,55,56,57,59,64,65,67,68,72,76,77,78,],[-4,-1,-40,0,-32,-41,-3,-5,-43,-17,-33,-42,-16,-34,-43,-35,-31,-12,-9,-8,-15,-10,-14,-13,-11,-2,-18,-6,-30,-45,-22,-21,-20,-19,-44,-29,-27,-28,]),'COMPARISON':([5,8,11,12,13,16,21,23,25,36,37,],[-40,-41,32,-43,-17,-42,-43,44,-42,32,-43,]),'NAME':([0,3,9,14,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[12,12,21,37,12,21,21,21,21,21,21,21,21,21,21,21,21,12,21,12,12,12,12,]),'DIVIDE':([5,8,11,12,13,16,36,37,],[-40,-41,33,-43,-17,-42,33,-43,]),'NEWLN':([1,4,5,7,8,10,11,12,13,15,16,18,19,21,38,41,43,46,47,48,49,50,51,52,53,54,55,56,57,59,64,65,67,68,71,72,76,77,78,],[-4,-1,-40,20,-41,-3,-5,-43,-17,20,-42,-16,-34,-43,-35,20,60,-12,-9,-8,-15,-10,-14,-13,-11,-2,-18,-6,-30,-45,-22,69,-20,-19,73,-44,79,-27,-28,]),'MODULO':([5,8,11,12,13,16,36,37,],[-40,-41,29,-43,-17,-42,29,-43,]),'CONSTANTES':([0,3,9,14,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,]),'LPAREN':([0,2,3,9,14,20,24,42,63,66,69,74,75,79,],[14,17,14,24,14,14,24,24,14,24,14,14,14,14,]),'TIMES':([5,8,11,12,13,16,36,37,],[-40,-41,30,-43,-17,-42,30,-43,]),'LOGICOS':([5,8,11,12,13,16,21,22,25,36,37,45,58,61,62,70,],[-40,-41,31,-43,-17,-42,-43,42,-25,31,-43,42,-24,-23,-26,42,]),'EQUALS':([12,37,],[34,34,]),'TAB':([60,69,73,74,79,80,],[63,63,74,75,80,75,]),'EXPONENTE':([5,8,11,12,13,16,36,37,],[-40,-41,26,-43,-17,-42,26,-43,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'string':([10,],[25,]),'statement':([0,36,44,],[3,40,46,]),'expression':([0,2,5,8,13,14,15,16,17,18,19,20,21,23,36,44,47,],[4,12,22,24,27,28,29,30,31,32,33,34,35,37,41,4,48,]),}
+_lr_goto_items = {'expLineal':([0,3,14,20,63,69,74,75,79,],[1,1,35,1,1,1,1,1,1,]),'enterNormal':([7,15,41,65,76,],[19,38,57,67,77,]),'enterTab':([43,65,71,],[59,68,59,]),'expression':([0,3,20,63,69,74,75,79,],[4,18,4,4,4,4,4,4,]),'expWhileA':([63,74,],[64,64,]),'expWhile':([0,3,20,63,69,74,75,79,],[10,10,10,10,10,10,10,10,]),'expBooleana':([9,24,42,66,],[22,45,58,70,]),'statement':([0,20,63,69,74,75,79,],[6,41,65,41,65,76,41,]),'string':([17,],[40,]),'operacion':([0,3,14,20,63,69,74,75,79,],[7,7,7,7,7,7,7,7,7,]),'assign':([0,3,14,20,63,69,74,75,79,],[15,15,15,15,15,15,15,15,15,]),'expNormal':([0,3,9,14,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[11,11,23,36,11,23,46,47,48,49,50,51,52,53,54,23,61,11,23,11,11,11,11,]),'boolean':([0,3,9,14,20,24,26,27,28,29,30,31,32,33,34,42,44,63,66,69,74,75,79,],[16,16,25,16,16,25,16,16,16,16,16,16,16,16,16,25,16,16,25,16,16,16,16,]),'enterTabTab':([71,76,],[72,78,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,25 +26,49 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> NAME EQUALS expression NEWLINE NAME EQUALS expression','statement',7,'p_statement_assign','compilador.py',76),
-  ('statement -> expression','statement',1,'p_statement_expr','compilador.py',82),
-  ('statement -> expression NEWLINE expression','statement',3,'p_statement_expr','compilador.py',83),
-  ('statement -> PRINT LPAREN string RPAREN','statement',4,'p_statement_print','compilador.py',87),
-  ('string -> STRING','string',1,'p_statement_string','compilador.py',91),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','compilador.py',95),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','compilador.py',96),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','compilador.py',97),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','compilador.py',98),
-  ('expression -> expression EXPONENTE expression','expression',3,'p_expression_binop','compilador.py',99),
-  ('expression -> expression COMPARISON expression','expression',3,'p_expression_binop','compilador.py',100),
-  ('expression -> expression LOGICOS expression','expression',3,'p_expression_binop','compilador.py',101),
-  ('expression -> expression MODULO expression','expression',3,'p_expression_binop','compilador.py',102),
-  ('expression -> MINUS expression','expression',2,'p_expression_uminus','compilador.py',119),
-  ('expression -> CONSTANTES','expression',1,'p_expression_constant','compilador.py',123),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','compilador.py',130),
-  ('expression -> NUMBER','expression',1,'p_expression_number','compilador.py',134),
-  ('expression -> NAME','expression',1,'p_expression_name','compilador.py',138),
-  ('statement -> WHILE expression POINTS statement','statement',4,'p_expression_while','compilador.py',149),
-  ('statement -> WHILE expression POINTS expression ELSE statement','statement',6,'p_expression_while','compilador.py',150),
-  ('statement -> WHILE expression POINTS statement BREAK','statement',5,'p_expression_while','compilador.py',151),
+  ('statement -> expression','statement',1,'p_statement_expr','pruebaIF.py',76),
+  ('assign -> NAME EQUALS expNormal','assign',3,'p_statement_assign','pruebaIF.py',82),
+  ('expression -> expWhile','expression',1,'p_statement_expresion','pruebaIF.py',88),
+  ('expression -> expLineal','expression',1,'p_statement_expresion','pruebaIF.py',89),
+  ('expression -> expNormal','expression',1,'p_statement_expresion','pruebaIF.py',90),
+  ('expLineal -> PRINT LPAREN string RPAREN','expLineal',4,'p_statement_print','pruebaIF.py',95),
+  ('string -> STRING','string',1,'p_statement_string','pruebaIF.py',100),
+  ('operacion -> expNormal PLUS expNormal','operacion',3,'p_expression_binop','pruebaIF.py',105),
+  ('operacion -> expNormal MINUS expNormal','operacion',3,'p_expression_binop','pruebaIF.py',106),
+  ('operacion -> expNormal TIMES expNormal','operacion',3,'p_expression_binop','pruebaIF.py',107),
+  ('operacion -> expNormal DIVIDE expNormal','operacion',3,'p_expression_binop','pruebaIF.py',108),
+  ('operacion -> expNormal EXPONENTE expNormal','operacion',3,'p_expression_binop','pruebaIF.py',109),
+  ('operacion -> expNormal COMPARISON expNormal','operacion',3,'p_expression_binop','pruebaIF.py',110),
+  ('operacion -> expNormal LOGICOS expNormal','operacion',3,'p_expression_binop','pruebaIF.py',111),
+  ('operacion -> expNormal MODULO expNormal','operacion',3,'p_expression_binop','pruebaIF.py',112),
+  ('expression -> MINUS expression','expression',2,'p_expression_uminus','pruebaIF.py',129),
+  ('boolean -> CONSTANTES','boolean',1,'p_expression_constant','pruebaIF.py',134),
+  ('expLineal -> LPAREN expLineal RPAREN','expLineal',3,'p_expression_group','pruebaIF.py',141),
+  ('enterTab -> NEWLN TAB statement enterTab','enterTab',4,'p_expression_enter_tab','pruebaIF.py',147),
+  ('enterTab -> NEWLN TAB statement enterNormal','enterTab',4,'p_expression_enter_tab','pruebaIF.py',148),
+  ('enterTab -> NEWLN TAB statement','enterTab',3,'p_expression_enter_tab','pruebaIF.py',149),
+  ('enterTab -> NEWLN TAB expWhileA','enterTab',3,'p_expression_enter_tab','pruebaIF.py',150),
+  ('expBooleana -> expNormal COMPARISON expNormal','expBooleana',3,'p_expression_booleana','pruebaIF.py',156),
+  ('expBooleana -> expBooleana LOGICOS expBooleana','expBooleana',3,'p_expression_booleana','pruebaIF.py',157),
+  ('expBooleana -> boolean','expBooleana',1,'p_expression_booleana','pruebaIF.py',158),
+  ('expBooleana -> LPAREN expBooleana RPAREN','expBooleana',3,'p_expression_booleana_par','pruebaIF.py',162),
+  ('enterTabTab -> NEWLN TAB TAB statement enterNormal','enterTabTab',5,'p_expression_enter_tab_tab','pruebaIF.py',166),
+  ('enterTabTab -> NEWLN TAB TAB statement enterTabTab','enterTabTab',5,'p_expression_enter_tab_tab','pruebaIF.py',167),
+  ('enterTabTab -> NEWLN TAB TAB statement','enterTabTab',4,'p_expression_enter_tab_tab','pruebaIF.py',168),
+  ('enterNormal -> NEWLN statement enterNormal','enterNormal',3,'p_expression_enter_normal','pruebaIF.py',172),
+  ('enterNormal -> NEWLN statement','enterNormal',2,'p_expression_enter_normal','pruebaIF.py',173),
+  ('expLineal -> operacion','expLineal',1,'p_expression_lineal','pruebaIF.py',177),
+  ('expLineal -> assign','expLineal',1,'p_expression_lineal','pruebaIF.py',178),
+  ('expLineal -> operacion enterNormal','expLineal',2,'p_expression_lineal','pruebaIF.py',179),
+  ('expLineal -> assign enterNormal','expLineal',2,'p_expression_lineal','pruebaIF.py',180),
+  ('expLinealT -> TAB operacion','expLinealT',2,'p_expression_linealT','pruebaIF.py',184),
+  ('expLinealT -> TAB assign','expLinealT',2,'p_expression_linealT','pruebaIF.py',185),
+  ('expLinealT -> TAB operacion enterTab','expLinealT',3,'p_expression_linealT','pruebaIF.py',186),
+  ('expLinealT -> assign enterTab','expLinealT',2,'p_expression_linealT','pruebaIF.py',187),
+  ('expNormal -> NUMBER','expNormal',1,'p_expression_normal','pruebaIF.py',191),
+  ('expNormal -> STRING','expNormal',1,'p_expression_normal','pruebaIF.py',192),
+  ('expNormal -> boolean','expNormal',1,'p_expression_normal','pruebaIF.py',193),
+  ('expNormal -> NAME','expNormal',1,'p_expression_name','pruebaIF.py',197),
+  ('expWhileA -> WHILE expBooleana POINTS enterTabTab','expWhileA',4,'p_expression_whileA','pruebaIF.py',205),
+  ('expWhile -> WHILE expBooleana POINTS enterTab','expWhile',4,'p_expression_while','pruebaIF.py',208),
 ]

@@ -22,7 +22,7 @@ def trampita_Salto_de_linea(texto):
     texto = ""
     for i in range(0, len(texto2)):
         if texto2[i] == "\n":
-            texto += "1"
+            texto += "@"
         else:
             texto += texto2[i]
     return texto
@@ -36,7 +36,7 @@ def trampita_Tabulacion(texto):
     texto = ""
     for i in range(0, len(texto2)):
         if texto2[i] == "\t":
-            texto += "2"
+            texto += "&"
         else:
             texto += texto2[i]
     return texto
@@ -155,18 +155,19 @@ def regularExpresion(niveles,texto):
         match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*):\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
         return match
     elif niveles == 6:
-        #PENDIENTE NO SALE!!!!!
-        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)(\d*|[a-zA-Z_][a-zA-Z0-9_]*))( (and|or) ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*))*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while ([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*)))*))+:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
     elif niveles == 7:
-        match = re.match(r'while True:\nprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|\(*[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
     elif niveles == 8:
-        match = re.match(r'while True:\nprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|\(*[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
     elif niveles == 9:
-        match = re.match(r'while True:\nprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'def [a-zA-Z0-9_ +-/*]*\(\):\n\treturn (True|False)\n+(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)*while [a-zA-Z0-9_ +-/*]*\(\)+:\n\tcounter *= *\d+\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
         return match
     elif niveles == 10:
-        match = re.match(r'while True:\nprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(
+            r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|\(*[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\t(while \(*([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|\(*[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\t+counter *= *\d+\n\t+print\("[a-zA-Z0-9_ +-/*]*"\)\n\t+counter *= *\d+)+\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',
+            texto)
         return match

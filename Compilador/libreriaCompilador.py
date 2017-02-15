@@ -29,6 +29,7 @@ t_BREAK = r'break'
 t_ELSE = r'else'
 
 
+
 def t_NUMBER(t):
     r'\d+'
     try:
@@ -139,7 +140,7 @@ def p_expression_while(t):
     '''statement : WHILE expression POINTS statement
                  | WHILE expression POINTS expression ELSE statement
                  | WHILE expression POINTS statement BREAK'''
-    print("While válido ☺")
+    print("♣")
 
 def p_error(t):
     if t != None:

@@ -1,8 +1,9 @@
+
 tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
     'LPAREN' ,'RPAREN', 'WHILE', 'EXPONENTE', 'COMPARISON', 'POINTS',
-    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE','NEWLINE'
+    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE', 'NEWLN','TAB',
 )
 
 # Tokens
@@ -26,7 +27,9 @@ t_PRINT = r'print'
 t_STRING = r'"[a-zA-Z0-9_ +-/*]*"'
 t_BREAK = r'break'
 t_ELSE = r'else'
-t_NEWLINE=r'&'
+t_NEWLN= r'@'
+t_TAB= r'&'
+
 
 
 def t_NUMBER(t):
@@ -72,15 +75,8 @@ def p_statement_assign(t):
     'statement : NAME EQUALS expression'
     names[t[1]] = t[3]
 
-def p_statement_assign(t):
-    'statement : NAME EQUALS expression NEWLINE NAME EQUALS expression'
-    names[t[1]] = t[3]
-    names[t[5]] = t[7]
-
-
 def p_statement_expr(t):
-    '''statement : expression
-                 | expression NEWLINE expression'''
+    'statement : expression'
     print(t[1])
 
 def p_statement_print(t):
@@ -130,6 +126,14 @@ def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
     t[0] = t[2]
 
+
+def p_expression_enter(t):
+    '''enter : NEWLN TAB statement enter
+             | NEWLN TAB statement'''
+
+    t[0] = t[3]
+
+
 def p_expression_number(t):
     'expression : NUMBER'
     t[0] = t[1]
@@ -142,41 +146,31 @@ def p_expression_name(t):
         print("Error léxico '%s'" % t[1])
         t[0] = 0
 
-#def p_expression_line(t):
-#   'expression : NEWLINE expression'
-
 def p_expression_while(t):
-    '''statement : WHILE expression POINTS statement
+    '''statement : WHILE expression POINTS enter
                  | WHILE expression POINTS expression ELSE statement
                  | WHILE expression POINTS statement BREAK'''
-    print("While válido ☺")
+    print("♣")
 
 def p_error(t):
     if t != None:
         print("Error sintáctico en '%s'" % t.value)
     else:
         print("Error semántico")
-
+import libreriaFunciones as lib
 import ply.yacc as yacc
 from Console import *
-
-def trampita_Salto_de_linea(texto):
-    texto2 = texto
-    texto = ""
-    for i in range(0, len(texto2)):
-        if texto2[i] == "\n":
-            texto += "&"
-        else:
-            texto += texto2[i]
-    return texto
 
 while True:
     parser = yacc.yacc()
     try:
         window = GUI()
         s = window.show()
-        s=trampita_Salto_de_linea(s)
+        print(s)
+        s=lib.trampita_Salto_de_linea(s)
+        s=lib.trampita_Tabulacion(s)
         #s = input('>>> ')   # Use raw_input on Python 2
     except EOFError:
         break
+    print(s)
     parser.parse(s)
