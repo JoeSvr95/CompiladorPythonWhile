@@ -90,7 +90,7 @@ while a>b:
         print('''Ademas podemos hacer mas de una operacion para controlar el while Usando logica matematica con operadores logicos como ("and" y el "or") Ejemplo:
 a=3
 b=2
-while a>b and a!=0 or b%2==0:
+while a>b and a!=0 or b==0:
     print("hello")''')
 
 
@@ -99,7 +99,7 @@ while a>b and a!=0 or b%2==0:
         print('''Tambien podemos hacer agrupaciones para definir prioridad de evaluaciones como en Matematicas Ejemplo:
 a=3
 b=2
-while ((a>b or a==b) and (a!=0 or b%2==0)) or a%b!=0:
+while ((a>b or a==b) and (a!=0 or b%2==0)) or a==2:
     print("hello")''')
 
 
@@ -155,7 +155,7 @@ def regularExpresion(niveles,texto):
         match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*):\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
         return match
     elif niveles == 6:
-        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while ([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*)))*))+:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
+        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while ([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+|[a-zA-Z_][a-zA-Z0-9_]*( *(and|or)* *([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+|[a-zA-Z_][a-zA-Z0-9_]*)))*))+:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
     elif niveles == 7:
         match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|\(*[a-zA-Z_][a-zA-Z0-9_]*( ?(and|or) ?([a-zA-Z_][a-zA-Z0-9_]* ?(>|<|==|!=|>=|<=) ?(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)

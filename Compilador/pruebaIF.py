@@ -202,10 +202,12 @@ def p_expression_name(t):
         t[0] = 0
 
 def p_expression_whileA(t):
-    'expWhileA : WHILE expBooleana POINTS enterTabTab'
+    '''expWhileA : WHILE expBooleana POINTS enterTabTab
+                 | WHILE expBooleana POINTS expLineal'''
 
 def p_expression_while(t):
-    'expWhile : WHILE expBooleana POINTS enterTab'
+    '''expWhile : WHILE expBooleana POINTS enterTab
+                | WHILE expBooleana POINTS expLineal'''
     t[0] = "♣"
 
 def p_error(t):

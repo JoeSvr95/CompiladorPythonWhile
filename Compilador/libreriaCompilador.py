@@ -1,9 +1,8 @@
-
 tokens = ('CONSTANTES',
     'NAME' ,'NUMBER',
     'PLUS' ,'MINUS' ,'TIMES' ,'DIVIDE' ,'EQUALS',
     'LPAREN' ,'RPAREN', 'WHILE', 'EXPONENTE', 'COMPARISON', 'POINTS',
-    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE',
+    'LOGICOS', 'MODULO', 'PRINT', 'STRING', 'BREAK', 'ELSE', 'NEWLN','TAB',
 )
 
 # Tokens
@@ -27,6 +26,8 @@ t_PRINT = r'print'
 t_STRING = r'"[a-zA-Z0-9_ +-/*]*"'
 t_BREAK = r'break'
 t_ELSE = r'else'
+t_NEWLN= r'@'
+t_TAB= r'&'
 
 
 
@@ -69,31 +70,45 @@ precedence = (
 # dictionary of names
 names = { }
 
-def p_statement_assign(t):
-    'statement : NAME EQUALS expression'
-    names[t[1]] = t[3]
 
 def p_statement_expr(t):
     'statement : expression'
     print(t[1])
 
+
+
+def p_statement_assign(t):
+    'assign : NAME EQUALS expNormal'
+    names[t[1]] = t[3]
+    t[0]=t[3]
+
+
+def p_statement_expresion(t):
+    '''expression : expWhile
+                  | expLineal
+                  | expNormal'''
+    t[0]=t[1]
+
+
 def p_statement_print(t):
-    'statement : PRINT LPAREN string RPAREN'
-    print(t[3].strip("\""))
+    'expLineal : PRINT LPAREN string RPAREN'
+    t[0]=t[3]
+
 
 def p_statement_string(t):
     'string : STRING'
     t[0] = t[1].strip("\"")
 
+
 def p_expression_binop(t):
-    '''expression : expression PLUS expression
-                  | expression MINUS expression
-                  | expression TIMES expression
-                  | expression DIVIDE expression
-                  | expression EXPONENTE expression
-                  | expression COMPARISON expression
-                  | expression LOGICOS expression
-                  | expression MODULO expression'''
+    '''operacion : expNormal PLUS expNormal
+                 | expNormal MINUS expNormal
+                 | expNormal TIMES expNormal
+                 | expNormal DIVIDE expNormal
+                 | expNormal EXPONENTE expNormal
+                 | expNormal COMPARISON expNormal
+                 | expNormal LOGICOS expNormal
+                 | expNormal MODULO expNormal'''
     if t[2] == '+'  : t[0] = t[1] + t[3]
     elif t[2] == '-': t[0] = t[1] - t[3]
     elif t[2] == '*': t[0] = t[1] * t[3]
@@ -113,53 +128,109 @@ def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
     t[0] = -t[2]
 
+
 def p_expression_constant(t):
-    'expression : CONSTANTES'
+    '''boolean : CONSTANTES'''
     if t[1] == "True":
         t[0] = True
     else:
         t[0] = False
 
 def p_expression_group(t):
-    'expression : LPAREN expression RPAREN'
+    'expLineal : LPAREN expLineal RPAREN'
     t[0] = t[2]
 
-def p_expression_number(t):
-    'expression : NUMBER'
+
+
+def p_expression_enter_tab(t):
+    '''enterTab : NEWLN TAB statement enterTab
+                | NEWLN TAB statement enterNormal
+                | NEWLN TAB statement
+                | NEWLN TAB expWhileA
+                | NEWLN TAB expWhileA ELSE POINTS enterTab
+                | NEWLN TAB BREAK'''
+    if t[3] == "POINTS":
+        t[0] = t[3]
+    else:
+        t[0] = t[3]
+
+
+
+def p_expression_booleana(t):
+    '''expBooleana : expNormal COMPARISON expNormal
+                   | expBooleana LOGICOS expBooleana
+                   | boolean'''
+    t[0] = t[1]
+
+def p_expression_booleana_par(t):
+    '''expBooleana : LPAREN expBooleana RPAREN'''
+    t[0] = t[2]
+
+def p_expression_enter_tab_tab(t):
+    '''enterTabTab : NEWLN TAB TAB statement enterNormal
+                   | NEWLN TAB TAB statement enterTabTab
+                   | NEWLN TAB TAB statement
+                   | NEWLN TAB TAB BREAK'''
+    t[0] = t[4]
+
+def p_expression_enter_normal(t):
+    '''enterNormal : NEWLN statement enterNormal
+                   | NEWLN statement'''
+    t[0] = t[2]
+
+def p_expression_lineal(t):
+    '''expLineal : operacion
+                 | assign
+                 | operacion enterNormal
+                 | assign enterNormal'''
+    t[0] = t[1]
+
+def p_expression_normal(t):
+    '''expNormal : NUMBER
+                 | STRING
+                 | boolean'''
     t[0] = t[1]
 
 def p_expression_name(t):
-    'expression : NAME'
+    'expNormal : NAME'
     try:
         t[0] = names[t[1]]
     except LookupError:
         print("Error léxico '%s'" % t[1])
         t[0] = 0
 
+def p_expression_whileA(t):
+    '''expWhileA : WHILE expBooleana POINTS enterTabTab
+                 | WHILE expBooleana POINTS expLineal
+                 | WHILE NAME POINTS enterTabTab
+                 | WHILE NAME POINTS expLineal'''
+
 def p_expression_while(t):
-    '''statement : WHILE expression POINTS statement
-                 | WHILE expression POINTS expression ELSE statement
-                 | WHILE expression POINTS statement BREAK'''
-    print("♣")
+    '''expWhile : WHILE expBooleana POINTS enterTab
+                | WHILE expBooleana POINTS expLineal
+                | WHILE NAME POINTS enterTab
+                | WHILE NAME POINTS expLineal'''
+    t[0] = "♣"
 
 def p_error(t):
     if t != None:
         print("Error sintáctico en '%s'" % t.value)
     else:
         print("Error semántico")
-
+import libreriaFunciones as lib
 import ply.yacc as yacc
 from Console import *
 
 def compilador():
-
     parser = yacc.yacc()
     try:
         window = GUI()
         s = window.show()
-        #s = input('>>> ')   # Use raw_input on Python 2
+        t = s
+        s = lib.trampita_Salto_de_linea(s)
+        s = lib.trampita_Tabulacion(s)
     except EOFError:
         print("Algo salio mal")
 
     parser.parse(s)
-    return s
+    return t
