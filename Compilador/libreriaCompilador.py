@@ -214,9 +214,9 @@ def p_expression_while(t):
 
 def p_error(t):
     if t != None:
-        print("Error sintáctico en '%s'" % t.value)
+        print("Error sintáctico en '%s'" % t.value, "TOKEN: " + t.type)
     else:
-        print("Error semántico")
+        print("Error semántico", "TOKEN: " + t.type)
 import libreriaFunciones as lib
 import ply.yacc as yacc
 from Console import *
