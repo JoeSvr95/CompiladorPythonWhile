@@ -21,8 +21,6 @@ while opciones!="3":
             libreria.Descripcion_Nivel(niveles)
             libreria.requerimiento(niveles)
             texto = compiler.compilador()
-            #texto = libreria.trampita_Salto_de_linea(texto)
-            #texto= libreria.trampita_Tabulacion(texto)
             aprobo = libreria.regularExpresion(niveles, texto)
             if aprobo:
                 print("Nivel " + str(niveles) + " logrado")
@@ -37,6 +35,3 @@ while opciones!="3":
         break
     else:
         print("Ingrese una opcion correcta")
-
-#texto= compiler.compilador()
-#print(texto)

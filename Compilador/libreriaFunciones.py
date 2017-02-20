@@ -140,10 +140,10 @@ else:
 
 def regularExpresion(niveles,texto):
     if niveles == 1:
-        match = re.match(r'while True:(\n\t)print\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'while True:(\n\t)print\("?[a-zA-Z0-9_ +-/*]*"?\)', texto)
         return match
     elif niveles == 2:
-        match = re.match(r'while True: print\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'while True: print\("?[a-zA-Z0-9_ +-/*]*"?\)', texto)
         return match
     elif niveles == 3:
         match = re.match(r'while True:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\n\tbreak', texto)

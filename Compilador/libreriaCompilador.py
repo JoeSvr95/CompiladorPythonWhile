@@ -78,7 +78,8 @@ def p_statement_expr(t):
 
 
 def p_statement_assign(t):
-    'assign : NAME EQUALS expNormal'
+    '''assign : NAME EQUALS expNormal
+              | NAME EQUALS operacion'''
     names[t[1]] = t[3]
     t[0]=t[3]
 
@@ -91,7 +92,14 @@ def p_statement_expresion(t):
 
 
 def p_statement_print(t):
-    'expLineal : PRINT LPAREN string RPAREN'
+    '''expLineal : PRINT LPAREN expNormal RPAREN
+                 | PRINT LPAREN operacion RPAREN
+                 | PRINT LPAREN expNormal RPAREN enterNormal
+                 | PRINT LPAREN operacion RPAREN enterNormal
+                 | PRINT LPAREN expNormal RPAREN enterTab
+                 | PRINT LPAREN operacion RPAREN enterTab
+                 | PRINT LPAREN expNormal RPAREN enterTabTab
+                 | PRINT LPAREN operacion RPAREN enterTabTab'''
     t[0]=t[3]
 
 
@@ -147,12 +155,9 @@ def p_expression_enter_tab(t):
                 | NEWLN TAB statement enterNormal
                 | NEWLN TAB statement
                 | NEWLN TAB expWhileA
-                | NEWLN TAB expWhileA ELSE POINTS enterTab
+                | NEWLN TAB expWhileA ELSE POINTS enterTabTab
                 | NEWLN TAB BREAK'''
-    if t[3] == "POINTS":
-        t[0] = t[3]
-    else:
-        t[0] = t[3]
+    t[0] = t[3]
 
 
 
@@ -175,19 +180,24 @@ def p_expression_enter_tab_tab(t):
 
 def p_expression_enter_normal(t):
     '''enterNormal : NEWLN statement enterNormal
-                   | NEWLN statement'''
+                   | NEWLN statement
+                   | NEWLN ELSE POINTS enterTab'''
     t[0] = t[2]
 
 def p_expression_lineal(t):
     '''expLineal : operacion
-                 | assign
                  | operacion enterNormal
+                 | operacion enterTab
+                 | operacion enterTabTab
+                 | assign
+                 | assign enterTab
+                 | assign enterTabTab
                  | assign enterNormal'''
     t[0] = t[1]
 
 def p_expression_normal(t):
     '''expNormal : NUMBER
-                 | STRING
+                 | string
                  | boolean'''
     t[0] = t[1]
 
@@ -209,14 +219,16 @@ def p_expression_while(t):
     '''expWhile : WHILE expBooleana POINTS enterTab
                 | WHILE expBooleana POINTS expLineal
                 | WHILE NAME POINTS enterTab
-                | WHILE NAME POINTS expLineal'''
+                | WHILE NAME POINTS expLineal
+                | WHILE NAME LPAREN RPAREN POINTS enterTab
+                | WHILE NAME LPAREN RPAREN POINTS expLineal'''
     t[0] = "♣"
 
 def p_error(t):
     if t != None:
         print("Error sintáctico en '%s'" % t.value, "TOKEN: " + t.type)
     else:
-        print("Error semántico", "TOKEN: " + t.type)
+        print("Error semántico")
 import libreriaFunciones as lib
 import ply.yacc as yacc
 from Console import *
