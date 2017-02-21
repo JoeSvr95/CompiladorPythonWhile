@@ -99,7 +99,7 @@ while a>b and a!=0 or b==0:
         print('''Tambien podemos hacer agrupaciones para definir prioridad de evaluaciones como en Matematicas Ejemplo:
 a=3
 b=2
-while ((a>b or a==b) and (a!=0 or b%2==0)) or a==2:
+while ((a>b or a==b) and (a!=0 or b==0)) or a==2:
     print("hello")''')
 
 
@@ -108,7 +108,7 @@ while ((a>b or a==b) and (a!=0 or b%2==0)) or a==2:
         print('''En caso de que la variable controladora sea False podemos controlar que hacer en ese caso con la expresion ("else") Ejeplo:
 a=3
 b=2
-while ((a>b or a==b) and (a!=0 or b%2==0)) or a%b!=0:
+while ((a>b or a==b) and (a!=0 or b==0)) or a!=0:
     print("hello")
 else:
     print("Chao")''')
@@ -134,7 +134,7 @@ while (a>b or a==b):
     counter=0
     while(counter<10):
         print("hello")
-        counter-=1
+        counter=counter-1
 else:
     print("Chao")''')
 
@@ -149,7 +149,7 @@ def regularExpresion(niveles,texto):
         match = re.match(r'while True:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\n\tbreak', texto)
         return match
     elif niveles == 4:
-        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(True|False)\nwhile [a-zA-Z_][a-zA-Z0-9_]*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\n\t[a-zA-Z_][a-zA-Z0-9_]*=(True|False)', texto)
+        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(True|False)\nwhile [a-zA-Z_][a-zA-Z0-9_]*:(\n\t(print\("[a-zA-Z0-9_ +-/*]*"\)|[a-zA-Z_][a-zA-Z0-9_]* *= *(True|False)))*',texto)
         return match
     elif niveles == 5:
         match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*):\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
@@ -167,6 +167,5 @@ def regularExpresion(niveles,texto):
         match = re.match(r'def [a-zA-Z0-9_ +-/*]*\(\):\n\treturn (True|False)\n+(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)*while [a-zA-Z0-9_ +-/*]*\(\)+:\n\tcounter *= *\d+\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
         return match
     elif niveles == 10:
-        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\t[a-zA-Z_][a-zA-Z0-9_]* *= *\d+\n\twhile \(?([a-zA-Z_][a-zA-Z0-9_]*) *(>|<|==|!=|>=|<=) *(\d+)\)?:\n\t+([a-zA-Z_][a-zA-Z0-9_]*) *= *\d+\n\t+print\("[a-zA-Z0-9_ +-/*]*"\)\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',
-            texto)
+        match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\t[a-zA-Z_][a-zA-Z0-9_]* *= *\d+\n\twhile \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:(\n\t+(([a-zA-Z_][a-zA-Z0-9_]*) *= *([a-zA-Z_][a-zA-Z0-9_]* *(-|\+|/|\*) *\d+)|print\("[a-zA-Z0-9_ +-/*]*"\)))*\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
