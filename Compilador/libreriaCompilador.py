@@ -233,10 +233,11 @@ import libreriaFunciones as lib
 import ply.yacc as yacc
 from Console import *
 
-def compilador():
+def compilador(textoNivel=""):
     parser = yacc.yacc()
     try:
         window = GUI()
+        window.loadSample(textoNivel)
         s = window.show()
         t = s
         s = lib.trampita_Salto_de_linea(s)

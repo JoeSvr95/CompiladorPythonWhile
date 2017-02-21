@@ -7,11 +7,18 @@ class GUI(Frame):
         Frame.__init__(self, master)
         self.grid()
 
-        self.lnameLabel = Label(master, text="Consola")
+        self.lnameLabel = Label(master, text="Descripcion")
         self.lnameLabel.grid()
-        self.var =StringVar()
 
-        self.t = Text(master, height=20, width=40)
+        self.sampleBox= Text(master,height=15, width=70)
+        self.sampleBox.grid()
+
+        self.lconsoleLabel = Label(master, text="Consola")
+        self.lconsoleLabel.grid()
+        self.var = StringVar()
+
+        self.t = Text(master, height=20, width=70)
+        self.t.config(background="Gray",fg="White")
         self.t.grid()
 
 
@@ -29,3 +36,7 @@ class GUI(Frame):
     def show(self):
         self.wait_window()
         return self.var
+
+    def loadSample(self,texto):
+        self.sampleBox.insert(END,texto)
+        self.sampleBox.config(state=DISABLED)

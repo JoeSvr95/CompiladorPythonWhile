@@ -8,7 +8,7 @@ while opciones!="3":
     libreria.menu_Juego()
     opciones=input("☺→")
     if opciones=="1":
-        niveles=1
+        niveles=9
         print("PD: Escriba Salir como escape")
         while niveles<11:
             print("Presione enter para empezar el Nivel : "+str(niveles)+" .")
@@ -18,9 +18,9 @@ while opciones!="3":
                 break
             # Niveles ---------------------------------------------------------------------------------------------
             print('Nivel ' + str(niveles))
-            libreria.Descripcion_Nivel(niveles)
+            textoNivel= libreria.Descripcion_Nivel(niveles)
             libreria.requerimiento(niveles)
-            texto = compiler.compilador()
+            texto = compiler.compilador(textoNivel)
             aprobo = libreria.regularExpresion(niveles, texto)
             if aprobo:
                 print("Nivel " + str(niveles) + " logrado")

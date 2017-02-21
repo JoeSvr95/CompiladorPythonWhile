@@ -52,82 +52,82 @@ def requerimiento(i):
 
 def Descripcion_Nivel(niveles):
     if niveles==1:
-        print('''Podemos generar lazos While con valores booleanos True/False acontinuacion vemos un Ejemplo:
+        return '''Podemos generar lazos While con valores booleanos True/False acontinuacion vemos un Ejemplo:
 while True:
-    print("hello")''')
+    print("hello")'''
 
 
     elif niveles==2:
-        print('''Como en el nivel anterior podemos hacer lo mismo solo que cuando tenemos 1 instruccion podemos hacerlo todo en 1 linea.
-while True: print("hello")''')
+       return '''Como en el nivel anterior podemos hacer lo mismo solo que cuando tenemos 1 instruccion podemos hacerlo todo en 1 linea.
+while True: print("hello")'''
 
 
     elif niveles==3:
-        print('''Podemos usar instrucciones para detener la ejecucion de un lazo While mediante el comando break Ejemplo:
+        return '''Podemos usar instrucciones para detener la ejecucion de un lazo While mediante el comando break Ejemplo:
 while True:
     print("hello")
-    break''')
+    break'''
 
 
     elif niveles==4:
-        print('''Podemos usar variables con valores booleanos(Nivel 1) para controlar un while Ejemplo:
+        return '''Podemos usar variables con valores booleanos(Nivel 1) para controlar un while Ejemplo:
 flag= True
 while flag:
     print("hello")
-    flag=False''')
+    flag=False'''
 
 
     elif niveles==5:
-        print('''Tambien podemos hacer operaciones que devuelvan valores booleanos para controlar un while Ejemplo:
+        return '''Tambien podemos hacer operaciones que devuelvan valores booleanos para controlar un while Ejemplo:
 a=3
 b=2
 while a>b:
-    print("hello")''')
+    print("hello")'''
 
 
 
     elif niveles==6:
-        print('''Ademas podemos hacer mas de una operacion para controlar el while Usando logica matematica con operadores logicos como ("and" y el "or") Ejemplo:
+        return '''Ademas podemos hacer mas de una operacion para controlar el while Usando logica matematica con operadores logicos como ("and" y el "or") Ejemplo:
 a=3
 b=2
 while a>b and a!=0 or b==0:
-    print("hello")''')
+    print("hello")'''
 
 
 
     elif niveles==7:
-        print('''Tambien podemos hacer agrupaciones para definir prioridad de evaluaciones como en Matematicas Ejemplo:
+        return '''Tambien podemos hacer agrupaciones para definir prioridad de evaluaciones como en Matematicas Ejemplo:
 a=3
 b=2
 while ((a>b or a==b) and (a!=0 or b==0)) or a==2:
-    print("hello")''')
+    print("hello")'''
 
 
 
     elif niveles==8:
-        print('''En caso de que la variable controladora sea False podemos controlar que hacer en ese caso con la expresion ("else") Ejeplo:
+        return '''En caso de que la variable controladora sea False podemos controlar que hacer en ese caso con la expresion ("else") Ejeplo:
 a=3
 b=2
 while ((a>b or a==b) and (a!=0 or b==0)) or a!=0:
     print("hello")
 else:
-    print("Chao")''')
+    print("Chao")'''
 
 
 
     elif niveles==9:
-        print('''Puede tambien usar funciones que devuelvan valores booleanos para controlar un while Ejemplo:
+        return '''Puede tambien usar funciones que devuelvan valores booleanos para controlar un while Ejemplo:
 a=3
 b=2
 while funcion():
     counter=0
 else:
-    print("Chao")''')
+    print("Chao")'''
 
 
 
     elif niveles==10:
-        print('''Se conoco como while anidado cuando tienes un while dentro de otro while y asi sucesivamente Ejemplo:
+        return '''Se conoco como while anidado cuando tienes un while dentro de otro while y asi sucesivamente Ejemplo:
 a=3
 b=2
 while (a>b or a==b):
@@ -136,7 +136,7 @@ while (a>b or a==b):
         print("hello")
         counter=counter-1
 else:
-    print("Chao")''')
+    print("Chao")'''
 
 def regularExpresion(niveles,texto):
     if texto == None:
@@ -166,7 +166,9 @@ def regularExpresion(niveles,texto):
         match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
         return match
     elif niveles == 9:
-        match = re.match(r'def [a-zA-Z0-9_ +-/*]*\(\):\n\treturn (True|False)\n+(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)*while [a-zA-Z0-9_ +-/*]*\(\)+:\n\tcounter *= *\d+\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(
+            r'(([a-zA-Z_][a-zA-Z0-9_]*) ?= ?(\d+)\n)*while [a-zA-Z0-9_ +-/*]*\(\)+:(\n\t(print\("[a-zA-Z0-9_ +-/*]*"\)|[a-zA-Z_][a-zA-Z0-9_]* *= *\d+))*\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',
+            texto)
         return match
     elif niveles == 10:
         match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:\n\t[a-zA-Z_][a-zA-Z0-9_]* *= *\d+\n\twhile \(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*|[a-zA-Z_][a-zA-Z0-9_]*\)*( *(and|or) *\(*([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d*|[a-zA-Z_][a-zA-Z0-9_]*))\)*)*))+\)*:(\n\t+(([a-zA-Z_][a-zA-Z0-9_]*) *= *([a-zA-Z_][a-zA-Z0-9_]* *(-|\+|/|\*) *\d+)|print\("[a-zA-Z0-9_ +-/*]*"\)))*\nelse:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
