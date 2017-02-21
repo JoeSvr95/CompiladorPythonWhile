@@ -243,6 +243,9 @@ def compilador():
         s = lib.trampita_Tabulacion(s)
     except EOFError:
         print("Algo salio mal")
+    except TypeError:
+        print("Cerro la ventana")
+        return None
 
     parser.parse(s)
     return t

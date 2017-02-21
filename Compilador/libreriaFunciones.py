@@ -139,6 +139,8 @@ else:
     print("Chao")''')
 
 def regularExpresion(niveles,texto):
+    if texto == None:
+        return False
     if niveles == 1:
         match = re.match(r'while True:(\n\t)print\("?[a-zA-Z0-9_ +-/*]*"?\)', texto)
         return match
