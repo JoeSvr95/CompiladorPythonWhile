@@ -162,26 +162,136 @@ state 0
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 9
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expNormal                      shift and go to state 8
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expression                     shift and go to state 12
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 17
+    expression                     shift and go to state 8
 
 state 1
+
+    (44) expLineal -> operacion .
+    (45) expLineal -> operacion . enterNormal
+    (46) expLineal -> operacion . enterTab
+    (47) expLineal -> operacion . enterTabTab
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
+    (27) enterTab -> . NEWLN TAB statement enterTab
+    (28) enterTab -> . NEWLN TAB statement enterNormal
+    (29) enterTab -> . NEWLN TAB statement
+    (30) enterTab -> . NEWLN TAB expWhileA
+    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> . NEWLN TAB BREAK
+    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
+    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
+    (39) enterTabTab -> . NEWLN TAB TAB statement
+    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+
+  ! shift/reduce conflict for NEWLN resolved as shift
+    $end            reduce using rule 44 (expLineal -> operacion .)
+    RPAREN          reduce using rule 44 (expLineal -> operacion .)
+    ELSE            reduce using rule 44 (expLineal -> operacion .)
+    NEWLN           shift and go to state 18
+
+  ! NEWLN           [ reduce using rule 44 (expLineal -> operacion .) ]
+
+    enterTab                       shift and go to state 19
+    enterTabTab                    shift and go to state 20
+    enterNormal                    shift and go to state 21
+
+state 2
+
+    (15) string -> STRING .
+
+    PLUS            reduce using rule 15 (string -> STRING .)
+    MINUS           reduce using rule 15 (string -> STRING .)
+    TIMES           reduce using rule 15 (string -> STRING .)
+    DIVIDE          reduce using rule 15 (string -> STRING .)
+    EXPONENTE       reduce using rule 15 (string -> STRING .)
+    COMPARISON      reduce using rule 15 (string -> STRING .)
+    LOGICOS         reduce using rule 15 (string -> STRING .)
+    MODULO          reduce using rule 15 (string -> STRING .)
+    $end            reduce using rule 15 (string -> STRING .)
+    RPAREN          reduce using rule 15 (string -> STRING .)
+    NEWLN           reduce using rule 15 (string -> STRING .)
+    ELSE            reduce using rule 15 (string -> STRING .)
+    POINTS          reduce using rule 15 (string -> STRING .)
+
+
+state 3
+
+    (54) expNormal -> boolean .
+
+    PLUS            reduce using rule 54 (expNormal -> boolean .)
+    MINUS           reduce using rule 54 (expNormal -> boolean .)
+    TIMES           reduce using rule 54 (expNormal -> boolean .)
+    DIVIDE          reduce using rule 54 (expNormal -> boolean .)
+    EXPONENTE       reduce using rule 54 (expNormal -> boolean .)
+    COMPARISON      reduce using rule 54 (expNormal -> boolean .)
+    LOGICOS         reduce using rule 54 (expNormal -> boolean .)
+    MODULO          reduce using rule 54 (expNormal -> boolean .)
+    $end            reduce using rule 54 (expNormal -> boolean .)
+    RPAREN          reduce using rule 54 (expNormal -> boolean .)
+    NEWLN           reduce using rule 54 (expNormal -> boolean .)
+    ELSE            reduce using rule 54 (expNormal -> boolean .)
+    POINTS          reduce using rule 54 (expNormal -> boolean .)
+
+
+state 4
+
+    (6) expression -> expNormal .
+    (16) operacion -> expNormal . PLUS expNormal
+    (17) operacion -> expNormal . MINUS expNormal
+    (18) operacion -> expNormal . TIMES expNormal
+    (19) operacion -> expNormal . DIVIDE expNormal
+    (20) operacion -> expNormal . EXPONENTE expNormal
+    (21) operacion -> expNormal . COMPARISON expNormal
+    (22) operacion -> expNormal . LOGICOS expNormal
+    (23) operacion -> expNormal . MODULO expNormal
+
+    $end            reduce using rule 6 (expression -> expNormal .)
+    RPAREN          reduce using rule 6 (expression -> expNormal .)
+    NEWLN           reduce using rule 6 (expression -> expNormal .)
+    ELSE            reduce using rule 6 (expression -> expNormal .)
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 28
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 25
+    EXPONENTE       shift and go to state 29
+    COMPARISON      shift and go to state 23
+    LOGICOS         shift and go to state 27
+    MODULO          shift and go to state 22
+
+
+state 5
+
+    (7) expLineal -> PRINT . LPAREN expNormal RPAREN
+    (8) expLineal -> PRINT . LPAREN operacion RPAREN
+    (9) expLineal -> PRINT . LPAREN expNormal RPAREN enterNormal
+    (10) expLineal -> PRINT . LPAREN operacion RPAREN enterNormal
+    (11) expLineal -> PRINT . LPAREN expNormal RPAREN enterTab
+    (12) expLineal -> PRINT . LPAREN operacion RPAREN enterTab
+    (13) expLineal -> PRINT . LPAREN expNormal RPAREN enterTabTab
+    (14) expLineal -> PRINT . LPAREN operacion RPAREN enterTabTab
+
+    LPAREN          shift and go to state 30
+
+
+state 6
 
     (55) expNormal -> NAME .
     (2) assign -> NAME . EQUALS expNormal
@@ -196,23 +306,93 @@ state 1
     LOGICOS         reduce using rule 55 (expNormal -> NAME .)
     MODULO          reduce using rule 55 (expNormal -> NAME .)
     $end            reduce using rule 55 (expNormal -> NAME .)
-    NEWLN           reduce using rule 55 (expNormal -> NAME .)
     RPAREN          reduce using rule 55 (expNormal -> NAME .)
+    NEWLN           reduce using rule 55 (expNormal -> NAME .)
     ELSE            reduce using rule 55 (expNormal -> NAME .)
-    EQUALS          shift and go to state 18
+    EQUALS          shift and go to state 31
 
 
-state 2
+state 7
 
-    (5) expression -> expLineal .
+    (26) expLineal -> LPAREN . expLineal RPAREN
+    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
+    (8) expLineal -> . PRINT LPAREN operacion RPAREN
+    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
+    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
+    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
+    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
+    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
+    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
+    (26) expLineal -> . LPAREN expLineal RPAREN
+    (44) expLineal -> . operacion
+    (45) expLineal -> . operacion enterNormal
+    (46) expLineal -> . operacion enterTab
+    (47) expLineal -> . operacion enterTabTab
+    (48) expLineal -> . assign
+    (49) expLineal -> . assign enterTab
+    (50) expLineal -> . assign enterTabTab
+    (51) expLineal -> . assign enterNormal
+    (16) operacion -> . expNormal PLUS expNormal
+    (17) operacion -> . expNormal MINUS expNormal
+    (18) operacion -> . expNormal TIMES expNormal
+    (19) operacion -> . expNormal DIVIDE expNormal
+    (20) operacion -> . expNormal EXPONENTE expNormal
+    (21) operacion -> . expNormal COMPARISON expNormal
+    (22) operacion -> . expNormal LOGICOS expNormal
+    (23) operacion -> . expNormal MODULO expNormal
+    (2) assign -> . NAME EQUALS expNormal
+    (3) assign -> . NAME EQUALS operacion
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
 
-    $end            reduce using rule 5 (expression -> expLineal .)
-    NEWLN           reduce using rule 5 (expression -> expLineal .)
-    RPAREN          reduce using rule 5 (expression -> expLineal .)
-    ELSE            reduce using rule 5 (expression -> expLineal .)
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    expLineal                      shift and go to state 33
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 34
+    boolean                        shift and go to state 3
+
+state 8
+
+    (1) statement -> expression .
+
+    $end            reduce using rule 1 (statement -> expression .)
+    RPAREN          reduce using rule 1 (statement -> expression .)
+    NEWLN           reduce using rule 1 (statement -> expression .)
+    ELSE            reduce using rule 1 (statement -> expression .)
 
 
-state 3
+state 9
+
+    (25) boolean -> CONSTANTES .
+
+    POINTS          reduce using rule 25 (boolean -> CONSTANTES .)
+    LOGICOS         reduce using rule 25 (boolean -> CONSTANTES .)
+    RPAREN          reduce using rule 25 (boolean -> CONSTANTES .)
+    PLUS            reduce using rule 25 (boolean -> CONSTANTES .)
+    MINUS           reduce using rule 25 (boolean -> CONSTANTES .)
+    TIMES           reduce using rule 25 (boolean -> CONSTANTES .)
+    DIVIDE          reduce using rule 25 (boolean -> CONSTANTES .)
+    EXPONENTE       reduce using rule 25 (boolean -> CONSTANTES .)
+    COMPARISON      reduce using rule 25 (boolean -> CONSTANTES .)
+    MODULO          reduce using rule 25 (boolean -> CONSTANTES .)
+    $end            reduce using rule 25 (boolean -> CONSTANTES .)
+    NEWLN           reduce using rule 25 (boolean -> CONSTANTES .)
+    ELSE            reduce using rule 25 (boolean -> CONSTANTES .)
+
+
+state 10
 
     (53) expNormal -> string .
 
@@ -225,32 +405,114 @@ state 3
     LOGICOS         reduce using rule 53 (expNormal -> string .)
     MODULO          reduce using rule 53 (expNormal -> string .)
     $end            reduce using rule 53 (expNormal -> string .)
-    NEWLN           reduce using rule 53 (expNormal -> string .)
     RPAREN          reduce using rule 53 (expNormal -> string .)
+    NEWLN           reduce using rule 53 (expNormal -> string .)
     ELSE            reduce using rule 53 (expNormal -> string .)
     POINTS          reduce using rule 53 (expNormal -> string .)
 
 
-state 4
+state 11
 
-    (25) boolean -> CONSTANTES .
+    (60) expWhile -> WHILE . expBooleana POINTS enterTab
+    (61) expWhile -> WHILE . expBooleana POINTS expLineal
+    (62) expWhile -> WHILE . NAME POINTS enterTab
+    (63) expWhile -> WHILE . NAME POINTS expLineal
+    (64) expWhile -> WHILE . NAME LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> WHILE . NAME LPAREN RPAREN POINTS expLineal
+    (33) expBooleana -> . expNormal COMPARISON expNormal
+    (34) expBooleana -> . expBooleana LOGICOS expBooleana
+    (35) expBooleana -> . boolean
+    (36) expBooleana -> . LPAREN expBooleana RPAREN
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (25) boolean -> . CONSTANTES
+    (15) string -> . STRING
 
-    NEWLN           reduce using rule 25 (boolean -> CONSTANTES .)
-    $end            reduce using rule 25 (boolean -> CONSTANTES .)
-    RPAREN          reduce using rule 25 (boolean -> CONSTANTES .)
-    ELSE            reduce using rule 25 (boolean -> CONSTANTES .)
-    PLUS            reduce using rule 25 (boolean -> CONSTANTES .)
-    MINUS           reduce using rule 25 (boolean -> CONSTANTES .)
-    TIMES           reduce using rule 25 (boolean -> CONSTANTES .)
-    DIVIDE          reduce using rule 25 (boolean -> CONSTANTES .)
-    EXPONENTE       reduce using rule 25 (boolean -> CONSTANTES .)
-    COMPARISON      reduce using rule 25 (boolean -> CONSTANTES .)
-    LOGICOS         reduce using rule 25 (boolean -> CONSTANTES .)
-    MODULO          reduce using rule 25 (boolean -> CONSTANTES .)
-    POINTS          reduce using rule 25 (boolean -> CONSTANTES .)
+    NAME            shift and go to state 38
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 13
+    CONSTANTES      shift and go to state 9
+    STRING          shift and go to state 2
+
+    string                         shift and go to state 10
+    boolean                        shift and go to state 36
+    expNormal                      shift and go to state 37
+    expBooleana                    shift and go to state 39
+
+state 12
+
+    (4) expression -> expWhile .
+
+    $end            reduce using rule 4 (expression -> expWhile .)
+    RPAREN          reduce using rule 4 (expression -> expWhile .)
+    NEWLN           reduce using rule 4 (expression -> expWhile .)
+    ELSE            reduce using rule 4 (expression -> expWhile .)
 
 
-state 5
+state 13
+
+    (52) expNormal -> NUMBER .
+
+    PLUS            reduce using rule 52 (expNormal -> NUMBER .)
+    MINUS           reduce using rule 52 (expNormal -> NUMBER .)
+    TIMES           reduce using rule 52 (expNormal -> NUMBER .)
+    DIVIDE          reduce using rule 52 (expNormal -> NUMBER .)
+    EXPONENTE       reduce using rule 52 (expNormal -> NUMBER .)
+    COMPARISON      reduce using rule 52 (expNormal -> NUMBER .)
+    LOGICOS         reduce using rule 52 (expNormal -> NUMBER .)
+    MODULO          reduce using rule 52 (expNormal -> NUMBER .)
+    $end            reduce using rule 52 (expNormal -> NUMBER .)
+    RPAREN          reduce using rule 52 (expNormal -> NUMBER .)
+    NEWLN           reduce using rule 52 (expNormal -> NUMBER .)
+    ELSE            reduce using rule 52 (expNormal -> NUMBER .)
+    POINTS          reduce using rule 52 (expNormal -> NUMBER .)
+
+
+state 14
+
+    (5) expression -> expLineal .
+
+    $end            reduce using rule 5 (expression -> expLineal .)
+    RPAREN          reduce using rule 5 (expression -> expLineal .)
+    NEWLN           reduce using rule 5 (expression -> expLineal .)
+    ELSE            reduce using rule 5 (expression -> expLineal .)
+
+
+state 15
+
+    (48) expLineal -> assign .
+    (49) expLineal -> assign . enterTab
+    (50) expLineal -> assign . enterTabTab
+    (51) expLineal -> assign . enterNormal
+    (27) enterTab -> . NEWLN TAB statement enterTab
+    (28) enterTab -> . NEWLN TAB statement enterNormal
+    (29) enterTab -> . NEWLN TAB statement
+    (30) enterTab -> . NEWLN TAB expWhileA
+    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> . NEWLN TAB BREAK
+    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
+    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
+    (39) enterTabTab -> . NEWLN TAB TAB statement
+    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
+
+  ! shift/reduce conflict for NEWLN resolved as shift
+    $end            reduce using rule 48 (expLineal -> assign .)
+    RPAREN          reduce using rule 48 (expLineal -> assign .)
+    ELSE            reduce using rule 48 (expLineal -> assign .)
+    NEWLN           shift and go to state 41
+
+  ! NEWLN           [ reduce using rule 48 (expLineal -> assign .) ]
+
+    enterTab                       shift and go to state 40
+    enterTabTab                    shift and go to state 42
+    enterNormal                    shift and go to state 43
+
+state 16
 
     (24) expression -> MINUS . expression
     (4) expression -> . expWhile
@@ -297,120 +559,56 @@ state 5
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    assign                         shift and go to state 10
-    string                         shift and go to state 3
-    operacion                      shift and go to state 13
-    expNormal                      shift and go to state 8
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expression                     shift and go to state 19
+    operacion                      shift and go to state 1
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    string                         shift and go to state 10
+    expression                     shift and go to state 44
 
-state 6
-
-    (4) expression -> expWhile .
-
-    $end            reduce using rule 4 (expression -> expWhile .)
-    NEWLN           reduce using rule 4 (expression -> expWhile .)
-    RPAREN          reduce using rule 4 (expression -> expWhile .)
-    ELSE            reduce using rule 4 (expression -> expWhile .)
-
-
-state 7
-
-    (52) expNormal -> NUMBER .
-
-    PLUS            reduce using rule 52 (expNormal -> NUMBER .)
-    MINUS           reduce using rule 52 (expNormal -> NUMBER .)
-    TIMES           reduce using rule 52 (expNormal -> NUMBER .)
-    DIVIDE          reduce using rule 52 (expNormal -> NUMBER .)
-    EXPONENTE       reduce using rule 52 (expNormal -> NUMBER .)
-    COMPARISON      reduce using rule 52 (expNormal -> NUMBER .)
-    LOGICOS         reduce using rule 52 (expNormal -> NUMBER .)
-    MODULO          reduce using rule 52 (expNormal -> NUMBER .)
-    $end            reduce using rule 52 (expNormal -> NUMBER .)
-    NEWLN           reduce using rule 52 (expNormal -> NUMBER .)
-    RPAREN          reduce using rule 52 (expNormal -> NUMBER .)
-    ELSE            reduce using rule 52 (expNormal -> NUMBER .)
-    POINTS          reduce using rule 52 (expNormal -> NUMBER .)
-
-
-state 8
-
-    (6) expression -> expNormal .
-    (16) operacion -> expNormal . PLUS expNormal
-    (17) operacion -> expNormal . MINUS expNormal
-    (18) operacion -> expNormal . TIMES expNormal
-    (19) operacion -> expNormal . DIVIDE expNormal
-    (20) operacion -> expNormal . EXPONENTE expNormal
-    (21) operacion -> expNormal . COMPARISON expNormal
-    (22) operacion -> expNormal . LOGICOS expNormal
-    (23) operacion -> expNormal . MODULO expNormal
-
-    $end            reduce using rule 6 (expression -> expNormal .)
-    NEWLN           reduce using rule 6 (expression -> expNormal .)
-    RPAREN          reduce using rule 6 (expression -> expNormal .)
-    ELSE            reduce using rule 6 (expression -> expNormal .)
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 24
-    TIMES           shift and go to state 21
-    DIVIDE          shift and go to state 26
-    EXPONENTE       shift and go to state 23
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 27
-    MODULO          shift and go to state 22
-
-
-state 9
+state 17
 
     (0) S' -> statement .
 
 
 
-state 10
+state 18
 
-    (48) expLineal -> assign .
-    (49) expLineal -> assign . enterTab
-    (50) expLineal -> assign . enterTabTab
-    (51) expLineal -> assign . enterNormal
-    (27) enterTab -> . NEWLN TAB statement enterTab
-    (28) enterTab -> . NEWLN TAB statement enterNormal
-    (29) enterTab -> . NEWLN TAB statement
-    (30) enterTab -> . NEWLN TAB expWhileA
-    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> . NEWLN TAB BREAK
-    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
-    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
-    (39) enterTabTab -> . NEWLN TAB TAB statement
-    (40) enterTabTab -> . NEWLN TAB TAB BREAK
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
-
-  ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 48 (expLineal -> assign .)
-    RPAREN          reduce using rule 48 (expLineal -> assign .)
-    ELSE            reduce using rule 48 (expLineal -> assign .)
-    NEWLN           shift and go to state 31
-
-  ! NEWLN           [ reduce using rule 48 (expLineal -> assign .) ]
-
-    enterTab                       shift and go to state 28
-    enterNormal                    shift and go to state 29
-    enterTabTab                    shift and go to state 30
-
-state 11
-
-    (26) expLineal -> LPAREN . expLineal RPAREN
+    (41) enterNormal -> NEWLN . statement enterNormal
+    (42) enterNormal -> NEWLN . statement
+    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
+    (27) enterTab -> NEWLN . TAB statement enterTab
+    (28) enterTab -> NEWLN . TAB statement enterNormal
+    (29) enterTab -> NEWLN . TAB statement
+    (30) enterTab -> NEWLN . TAB expWhileA
+    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> NEWLN . TAB BREAK
+    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
+    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
+    (39) enterTabTab -> NEWLN . TAB TAB statement
+    (40) enterTabTab -> NEWLN . TAB TAB BREAK
+    (1) statement -> . expression
+    (4) expression -> . expWhile
+    (5) expression -> . expLineal
+    (6) expression -> . expNormal
+    (24) expression -> . MINUS expression
+    (60) expWhile -> . WHILE expBooleana POINTS enterTab
+    (61) expWhile -> . WHILE expBooleana POINTS expLineal
+    (62) expWhile -> . WHILE NAME POINTS enterTab
+    (63) expWhile -> . WHILE NAME POINTS expLineal
+    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
     (7) expLineal -> . PRINT LPAREN expNormal RPAREN
     (8) expLineal -> . PRINT LPAREN operacion RPAREN
     (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
@@ -428,6 +626,10 @@ state 11
     (49) expLineal -> . assign enterTab
     (50) expLineal -> . assign enterTabTab
     (51) expLineal -> . assign enterNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
     (16) operacion -> . expNormal PLUS expNormal
     (17) operacion -> . expNormal MINUS expNormal
     (18) operacion -> . expNormal TIMES expNormal
@@ -438,227 +640,59 @@ state 11
     (23) operacion -> . expNormal MODULO expNormal
     (2) assign -> . NAME EQUALS expNormal
     (3) assign -> . NAME EQUALS operacion
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    ELSE            shift and go to state 45
+    TAB             shift and go to state 46
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    operacion                      shift and go to state 13
-    string                         shift and go to state 3
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 33
-    expNormal                      shift and go to state 34
-    assign                         shift and go to state 10
-
-state 12
-
-    (1) statement -> expression .
-
-    $end            reduce using rule 1 (statement -> expression .)
-    NEWLN           reduce using rule 1 (statement -> expression .)
-    RPAREN          reduce using rule 1 (statement -> expression .)
-    ELSE            reduce using rule 1 (statement -> expression .)
-
-
-state 13
-
-    (44) expLineal -> operacion .
-    (45) expLineal -> operacion . enterNormal
-    (46) expLineal -> operacion . enterTab
-    (47) expLineal -> operacion . enterTabTab
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
-    (27) enterTab -> . NEWLN TAB statement enterTab
-    (28) enterTab -> . NEWLN TAB statement enterNormal
-    (29) enterTab -> . NEWLN TAB statement
-    (30) enterTab -> . NEWLN TAB expWhileA
-    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> . NEWLN TAB BREAK
-    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
-    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
-    (39) enterTabTab -> . NEWLN TAB TAB statement
-    (40) enterTabTab -> . NEWLN TAB TAB BREAK
-
-  ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 44 (expLineal -> operacion .)
-    RPAREN          reduce using rule 44 (expLineal -> operacion .)
-    ELSE            reduce using rule 44 (expLineal -> operacion .)
-    NEWLN           shift and go to state 37
-
-  ! NEWLN           [ reduce using rule 44 (expLineal -> operacion .) ]
-
-    enterTab                       shift and go to state 35
-    enterTabTab                    shift and go to state 36
-    enterNormal                    shift and go to state 38
-
-state 14
-
-    (60) expWhile -> WHILE . expBooleana POINTS enterTab
-    (61) expWhile -> WHILE . expBooleana POINTS expLineal
-    (62) expWhile -> WHILE . NAME POINTS enterTab
-    (63) expWhile -> WHILE . NAME POINTS expLineal
-    (64) expWhile -> WHILE . NAME LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> WHILE . NAME LPAREN RPAREN POINTS expLineal
-    (33) expBooleana -> . expNormal COMPARISON expNormal
-    (34) expBooleana -> . expBooleana LOGICOS expBooleana
-    (35) expBooleana -> . boolean
-    (36) expBooleana -> . LPAREN expBooleana RPAREN
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (25) boolean -> . CONSTANTES
-    (15) string -> . STRING
-
-    NAME            shift and go to state 39
-    LPAREN          shift and go to state 40
-    NUMBER          shift and go to state 7
-    CONSTANTES      shift and go to state 4
-    STRING          shift and go to state 17
-
-    string                         shift and go to state 3
-    boolean                        shift and go to state 41
-    expBooleana                    shift and go to state 42
-    expNormal                      shift and go to state 43
-
-state 15
-
-    (54) expNormal -> boolean .
-
-    PLUS            reduce using rule 54 (expNormal -> boolean .)
-    MINUS           reduce using rule 54 (expNormal -> boolean .)
-    TIMES           reduce using rule 54 (expNormal -> boolean .)
-    DIVIDE          reduce using rule 54 (expNormal -> boolean .)
-    EXPONENTE       reduce using rule 54 (expNormal -> boolean .)
-    COMPARISON      reduce using rule 54 (expNormal -> boolean .)
-    LOGICOS         reduce using rule 54 (expNormal -> boolean .)
-    MODULO          reduce using rule 54 (expNormal -> boolean .)
-    $end            reduce using rule 54 (expNormal -> boolean .)
-    NEWLN           reduce using rule 54 (expNormal -> boolean .)
-    RPAREN          reduce using rule 54 (expNormal -> boolean .)
-    ELSE            reduce using rule 54 (expNormal -> boolean .)
-    POINTS          reduce using rule 54 (expNormal -> boolean .)
-
-
-state 16
-
-    (7) expLineal -> PRINT . LPAREN expNormal RPAREN
-    (8) expLineal -> PRINT . LPAREN operacion RPAREN
-    (9) expLineal -> PRINT . LPAREN expNormal RPAREN enterNormal
-    (10) expLineal -> PRINT . LPAREN operacion RPAREN enterNormal
-    (11) expLineal -> PRINT . LPAREN expNormal RPAREN enterTab
-    (12) expLineal -> PRINT . LPAREN operacion RPAREN enterTab
-    (13) expLineal -> PRINT . LPAREN expNormal RPAREN enterTabTab
-    (14) expLineal -> PRINT . LPAREN operacion RPAREN enterTabTab
-
-    LPAREN          shift and go to state 44
-
-
-state 17
-
-    (15) string -> STRING .
-
-    PLUS            reduce using rule 15 (string -> STRING .)
-    MINUS           reduce using rule 15 (string -> STRING .)
-    TIMES           reduce using rule 15 (string -> STRING .)
-    DIVIDE          reduce using rule 15 (string -> STRING .)
-    EXPONENTE       reduce using rule 15 (string -> STRING .)
-    COMPARISON      reduce using rule 15 (string -> STRING .)
-    LOGICOS         reduce using rule 15 (string -> STRING .)
-    MODULO          reduce using rule 15 (string -> STRING .)
-    NEWLN           reduce using rule 15 (string -> STRING .)
-    $end            reduce using rule 15 (string -> STRING .)
-    RPAREN          reduce using rule 15 (string -> STRING .)
-    ELSE            reduce using rule 15 (string -> STRING .)
-    POINTS          reduce using rule 15 (string -> STRING .)
-
-
-state 18
-
-    (2) assign -> NAME EQUALS . expNormal
-    (3) assign -> NAME EQUALS . operacion
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (16) operacion -> . expNormal PLUS expNormal
-    (17) operacion -> . expNormal MINUS expNormal
-    (18) operacion -> . expNormal TIMES expNormal
-    (19) operacion -> . expNormal DIVIDE expNormal
-    (20) operacion -> . expNormal EXPONENTE expNormal
-    (21) operacion -> . expNormal COMPARISON expNormal
-    (22) operacion -> . expNormal LOGICOS expNormal
-    (23) operacion -> . expNormal MODULO expNormal
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
-
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
-
-    operacion                      shift and go to state 46
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 47
-    boolean                        shift and go to state 15
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 47
+    expression                     shift and go to state 8
 
 state 19
 
-    (24) expression -> MINUS expression .
+    (46) expLineal -> operacion enterTab .
 
-    $end            reduce using rule 24 (expression -> MINUS expression .)
-    NEWLN           reduce using rule 24 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 24 (expression -> MINUS expression .)
-    ELSE            reduce using rule 24 (expression -> MINUS expression .)
+    $end            reduce using rule 46 (expLineal -> operacion enterTab .)
+    RPAREN          reduce using rule 46 (expLineal -> operacion enterTab .)
+    NEWLN           reduce using rule 46 (expLineal -> operacion enterTab .)
+    ELSE            reduce using rule 46 (expLineal -> operacion enterTab .)
 
 
 state 20
 
-    (21) operacion -> expNormal COMPARISON . expNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
+    (47) expLineal -> operacion enterTabTab .
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    $end            reduce using rule 47 (expLineal -> operacion enterTabTab .)
+    RPAREN          reduce using rule 47 (expLineal -> operacion enterTabTab .)
+    NEWLN           reduce using rule 47 (expLineal -> operacion enterTabTab .)
+    ELSE            reduce using rule 47 (expLineal -> operacion enterTabTab .)
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 48
-    boolean                        shift and go to state 15
 
 state 21
 
-    (18) operacion -> expNormal TIMES . expNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
+    (45) expLineal -> operacion enterNormal .
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    $end            reduce using rule 45 (expLineal -> operacion enterNormal .)
+    RPAREN          reduce using rule 45 (expLineal -> operacion enterNormal .)
+    NEWLN           reduce using rule 45 (expLineal -> operacion enterNormal .)
+    ELSE            reduce using rule 45 (expLineal -> operacion enterNormal .)
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 49
-    boolean                        shift and go to state 15
 
 state 22
 
@@ -670,18 +704,18 @@ state 22
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 50
-    boolean                        shift and go to state 15
+    expNormal                      shift and go to state 48
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 23
 
-    (20) operacion -> expNormal EXPONENTE . expNormal
+    (21) operacion -> expNormal COMPARISON . expNormal
     (52) expNormal -> . NUMBER
     (53) expNormal -> . string
     (54) expNormal -> . boolean
@@ -689,35 +723,16 @@ state 23
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 51
-    boolean                        shift and go to state 15
+    expNormal                      shift and go to state 50
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 24
-
-    (17) operacion -> expNormal MINUS . expNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
-
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
-
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 52
-    boolean                        shift and go to state 15
-
-state 25
 
     (16) operacion -> expNormal PLUS . expNormal
     (52) expNormal -> . NUMBER
@@ -727,16 +742,16 @@ state 25
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 53
-    boolean                        shift and go to state 15
+    expNormal                      shift and go to state 51
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
-state 26
+state 25
 
     (19) operacion -> expNormal DIVIDE . expNormal
     (52) expNormal -> . NUMBER
@@ -746,14 +761,33 @@ state 26
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 54
-    boolean                        shift and go to state 15
+    expNormal                      shift and go to state 52
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+
+state 26
+
+    (18) operacion -> expNormal TIMES . expNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
+
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    expNormal                      shift and go to state 53
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 27
 
@@ -765,349 +799,54 @@ state 27
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 55
-    boolean                        shift and go to state 15
+    expNormal                      shift and go to state 54
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 28
 
-    (49) expLineal -> assign enterTab .
+    (17) operacion -> expNormal MINUS . expNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
 
-    $end            reduce using rule 49 (expLineal -> assign enterTab .)
-    NEWLN           reduce using rule 49 (expLineal -> assign enterTab .)
-    RPAREN          reduce using rule 49 (expLineal -> assign enterTab .)
-    ELSE            reduce using rule 49 (expLineal -> assign enterTab .)
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
+    expNormal                      shift and go to state 55
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 29
 
-    (51) expLineal -> assign enterNormal .
+    (20) operacion -> expNormal EXPONENTE . expNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
 
-    $end            reduce using rule 51 (expLineal -> assign enterNormal .)
-    NEWLN           reduce using rule 51 (expLineal -> assign enterNormal .)
-    RPAREN          reduce using rule 51 (expLineal -> assign enterNormal .)
-    ELSE            reduce using rule 51 (expLineal -> assign enterNormal .)
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
+    expNormal                      shift and go to state 56
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
 
 state 30
-
-    (50) expLineal -> assign enterTabTab .
-
-    $end            reduce using rule 50 (expLineal -> assign enterTabTab .)
-    NEWLN           reduce using rule 50 (expLineal -> assign enterTabTab .)
-    RPAREN          reduce using rule 50 (expLineal -> assign enterTabTab .)
-    ELSE            reduce using rule 50 (expLineal -> assign enterTabTab .)
-
-
-state 31
-
-    (27) enterTab -> NEWLN . TAB statement enterTab
-    (28) enterTab -> NEWLN . TAB statement enterNormal
-    (29) enterTab -> NEWLN . TAB statement
-    (30) enterTab -> NEWLN . TAB expWhileA
-    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> NEWLN . TAB BREAK
-    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
-    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
-    (39) enterTabTab -> NEWLN . TAB TAB statement
-    (40) enterTabTab -> NEWLN . TAB TAB BREAK
-    (41) enterNormal -> NEWLN . statement enterNormal
-    (42) enterNormal -> NEWLN . statement
-    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
-    (1) statement -> . expression
-    (4) expression -> . expWhile
-    (5) expression -> . expLineal
-    (6) expression -> . expNormal
-    (24) expression -> . MINUS expression
-    (60) expWhile -> . WHILE expBooleana POINTS enterTab
-    (61) expWhile -> . WHILE expBooleana POINTS expLineal
-    (62) expWhile -> . WHILE NAME POINTS enterTab
-    (63) expWhile -> . WHILE NAME POINTS expLineal
-    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
-    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
-    (8) expLineal -> . PRINT LPAREN operacion RPAREN
-    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
-    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
-    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
-    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
-    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
-    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
-    (26) expLineal -> . LPAREN expLineal RPAREN
-    (44) expLineal -> . operacion
-    (45) expLineal -> . operacion enterNormal
-    (46) expLineal -> . operacion enterTab
-    (47) expLineal -> . operacion enterTabTab
-    (48) expLineal -> . assign
-    (49) expLineal -> . assign enterTab
-    (50) expLineal -> . assign enterTabTab
-    (51) expLineal -> . assign enterNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (16) operacion -> . expNormal PLUS expNormal
-    (17) operacion -> . expNormal MINUS expNormal
-    (18) operacion -> . expNormal TIMES expNormal
-    (19) operacion -> . expNormal DIVIDE expNormal
-    (20) operacion -> . expNormal EXPONENTE expNormal
-    (21) operacion -> . expNormal COMPARISON expNormal
-    (22) operacion -> . expNormal LOGICOS expNormal
-    (23) operacion -> . expNormal MODULO expNormal
-    (2) assign -> . NAME EQUALS expNormal
-    (3) assign -> . NAME EQUALS operacion
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
-
-    TAB             shift and go to state 58
-    ELSE            shift and go to state 56
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
-
-    statement                      shift and go to state 57
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
-
-state 32
-
-    (2) assign -> NAME . EQUALS expNormal
-    (3) assign -> NAME . EQUALS operacion
-    (55) expNormal -> NAME .
-
-    EQUALS          shift and go to state 18
-    PLUS            reduce using rule 55 (expNormal -> NAME .)
-    MINUS           reduce using rule 55 (expNormal -> NAME .)
-    TIMES           reduce using rule 55 (expNormal -> NAME .)
-    DIVIDE          reduce using rule 55 (expNormal -> NAME .)
-    EXPONENTE       reduce using rule 55 (expNormal -> NAME .)
-    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
-    LOGICOS         reduce using rule 55 (expNormal -> NAME .)
-    MODULO          reduce using rule 55 (expNormal -> NAME .)
-
-
-state 33
-
-    (26) expLineal -> LPAREN expLineal . RPAREN
-
-    RPAREN          shift and go to state 59
-
-
-state 34
-
-    (16) operacion -> expNormal . PLUS expNormal
-    (17) operacion -> expNormal . MINUS expNormal
-    (18) operacion -> expNormal . TIMES expNormal
-    (19) operacion -> expNormal . DIVIDE expNormal
-    (20) operacion -> expNormal . EXPONENTE expNormal
-    (21) operacion -> expNormal . COMPARISON expNormal
-    (22) operacion -> expNormal . LOGICOS expNormal
-    (23) operacion -> expNormal . MODULO expNormal
-
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 24
-    TIMES           shift and go to state 21
-    DIVIDE          shift and go to state 26
-    EXPONENTE       shift and go to state 23
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 27
-    MODULO          shift and go to state 22
-
-
-state 35
-
-    (46) expLineal -> operacion enterTab .
-
-    $end            reduce using rule 46 (expLineal -> operacion enterTab .)
-    NEWLN           reduce using rule 46 (expLineal -> operacion enterTab .)
-    RPAREN          reduce using rule 46 (expLineal -> operacion enterTab .)
-    ELSE            reduce using rule 46 (expLineal -> operacion enterTab .)
-
-
-state 36
-
-    (47) expLineal -> operacion enterTabTab .
-
-    $end            reduce using rule 47 (expLineal -> operacion enterTabTab .)
-    NEWLN           reduce using rule 47 (expLineal -> operacion enterTabTab .)
-    RPAREN          reduce using rule 47 (expLineal -> operacion enterTabTab .)
-    ELSE            reduce using rule 47 (expLineal -> operacion enterTabTab .)
-
-
-state 37
-
-    (41) enterNormal -> NEWLN . statement enterNormal
-    (42) enterNormal -> NEWLN . statement
-    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
-    (27) enterTab -> NEWLN . TAB statement enterTab
-    (28) enterTab -> NEWLN . TAB statement enterNormal
-    (29) enterTab -> NEWLN . TAB statement
-    (30) enterTab -> NEWLN . TAB expWhileA
-    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> NEWLN . TAB BREAK
-    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
-    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
-    (39) enterTabTab -> NEWLN . TAB TAB statement
-    (40) enterTabTab -> NEWLN . TAB TAB BREAK
-    (1) statement -> . expression
-    (4) expression -> . expWhile
-    (5) expression -> . expLineal
-    (6) expression -> . expNormal
-    (24) expression -> . MINUS expression
-    (60) expWhile -> . WHILE expBooleana POINTS enterTab
-    (61) expWhile -> . WHILE expBooleana POINTS expLineal
-    (62) expWhile -> . WHILE NAME POINTS enterTab
-    (63) expWhile -> . WHILE NAME POINTS expLineal
-    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
-    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
-    (8) expLineal -> . PRINT LPAREN operacion RPAREN
-    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
-    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
-    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
-    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
-    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
-    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
-    (26) expLineal -> . LPAREN expLineal RPAREN
-    (44) expLineal -> . operacion
-    (45) expLineal -> . operacion enterNormal
-    (46) expLineal -> . operacion enterTab
-    (47) expLineal -> . operacion enterTabTab
-    (48) expLineal -> . assign
-    (49) expLineal -> . assign enterTab
-    (50) expLineal -> . assign enterTabTab
-    (51) expLineal -> . assign enterNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (16) operacion -> . expNormal PLUS expNormal
-    (17) operacion -> . expNormal MINUS expNormal
-    (18) operacion -> . expNormal TIMES expNormal
-    (19) operacion -> . expNormal DIVIDE expNormal
-    (20) operacion -> . expNormal EXPONENTE expNormal
-    (21) operacion -> . expNormal COMPARISON expNormal
-    (22) operacion -> . expNormal LOGICOS expNormal
-    (23) operacion -> . expNormal MODULO expNormal
-    (2) assign -> . NAME EQUALS expNormal
-    (3) assign -> . NAME EQUALS operacion
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
-
-    ELSE            shift and go to state 56
-    TAB             shift and go to state 58
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
-
-    statement                      shift and go to state 57
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
-
-state 38
-
-    (45) expLineal -> operacion enterNormal .
-
-    $end            reduce using rule 45 (expLineal -> operacion enterNormal .)
-    NEWLN           reduce using rule 45 (expLineal -> operacion enterNormal .)
-    RPAREN          reduce using rule 45 (expLineal -> operacion enterNormal .)
-    ELSE            reduce using rule 45 (expLineal -> operacion enterNormal .)
-
-
-state 39
-
-    (62) expWhile -> WHILE NAME . POINTS enterTab
-    (63) expWhile -> WHILE NAME . POINTS expLineal
-    (64) expWhile -> WHILE NAME . LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> WHILE NAME . LPAREN RPAREN POINTS expLineal
-    (55) expNormal -> NAME .
-
-    POINTS          shift and go to state 61
-    LPAREN          shift and go to state 60
-    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
-
-
-state 40
-
-    (36) expBooleana -> LPAREN . expBooleana RPAREN
-    (33) expBooleana -> . expNormal COMPARISON expNormal
-    (34) expBooleana -> . expBooleana LOGICOS expBooleana
-    (35) expBooleana -> . boolean
-    (36) expBooleana -> . LPAREN expBooleana RPAREN
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (25) boolean -> . CONSTANTES
-    (15) string -> . STRING
-
-    LPAREN          shift and go to state 40
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    CONSTANTES      shift and go to state 4
-    STRING          shift and go to state 17
-
-    string                         shift and go to state 3
-    expBooleana                    shift and go to state 62
-    expNormal                      shift and go to state 43
-    boolean                        shift and go to state 41
-
-state 41
-
-    (35) expBooleana -> boolean .
-    (54) expNormal -> boolean .
-
-    LOGICOS         reduce using rule 35 (expBooleana -> boolean .)
-    POINTS          reduce using rule 35 (expBooleana -> boolean .)
-    RPAREN          reduce using rule 35 (expBooleana -> boolean .)
-    COMPARISON      reduce using rule 54 (expNormal -> boolean .)
-
-
-state 42
-
-    (60) expWhile -> WHILE expBooleana . POINTS enterTab
-    (61) expWhile -> WHILE expBooleana . POINTS expLineal
-    (34) expBooleana -> expBooleana . LOGICOS expBooleana
-
-    POINTS          shift and go to state 64
-    LOGICOS         shift and go to state 63
-
-
-state 43
-
-    (33) expBooleana -> expNormal . COMPARISON expNormal
-
-    COMPARISON      shift and go to state 65
-
-
-state 44
 
     (7) expLineal -> PRINT LPAREN . expNormal RPAREN
     (8) expLineal -> PRINT LPAREN . operacion RPAREN
@@ -1132,48 +871,71 @@ state 44
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    operacion                      shift and go to state 67
-    string                         shift and go to state 3
-    boolean                        shift and go to state 15
-    expNormal                      shift and go to state 66
+    operacion                      shift and go to state 57
+    boolean                        shift and go to state 3
+    expNormal                      shift and go to state 58
+    string                         shift and go to state 10
 
-state 45
+state 31
 
+    (2) assign -> NAME EQUALS . expNormal
+    (3) assign -> NAME EQUALS . operacion
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (16) operacion -> . expNormal PLUS expNormal
+    (17) operacion -> . expNormal MINUS expNormal
+    (18) operacion -> . expNormal TIMES expNormal
+    (19) operacion -> . expNormal DIVIDE expNormal
+    (20) operacion -> . expNormal EXPONENTE expNormal
+    (21) operacion -> . expNormal COMPARISON expNormal
+    (22) operacion -> . expNormal LOGICOS expNormal
+    (23) operacion -> . expNormal MODULO expNormal
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
+
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    operacion                      shift and go to state 59
+    expNormal                      shift and go to state 60
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+
+state 32
+
+    (2) assign -> NAME . EQUALS expNormal
+    (3) assign -> NAME . EQUALS operacion
     (55) expNormal -> NAME .
 
-    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
-    NEWLN           reduce using rule 55 (expNormal -> NAME .)
-    $end            reduce using rule 55 (expNormal -> NAME .)
-    RPAREN          reduce using rule 55 (expNormal -> NAME .)
-    ELSE            reduce using rule 55 (expNormal -> NAME .)
-    POINTS          reduce using rule 55 (expNormal -> NAME .)
-    LOGICOS         reduce using rule 55 (expNormal -> NAME .)
+    EQUALS          shift and go to state 31
     PLUS            reduce using rule 55 (expNormal -> NAME .)
     MINUS           reduce using rule 55 (expNormal -> NAME .)
     TIMES           reduce using rule 55 (expNormal -> NAME .)
     DIVIDE          reduce using rule 55 (expNormal -> NAME .)
     EXPONENTE       reduce using rule 55 (expNormal -> NAME .)
+    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
+    LOGICOS         reduce using rule 55 (expNormal -> NAME .)
     MODULO          reduce using rule 55 (expNormal -> NAME .)
 
 
-state 46
+state 33
 
-    (3) assign -> NAME EQUALS operacion .
+    (26) expLineal -> LPAREN expLineal . RPAREN
 
-    NEWLN           reduce using rule 3 (assign -> NAME EQUALS operacion .)
-    $end            reduce using rule 3 (assign -> NAME EQUALS operacion .)
-    RPAREN          reduce using rule 3 (assign -> NAME EQUALS operacion .)
-    ELSE            reduce using rule 3 (assign -> NAME EQUALS operacion .)
+    RPAREN          shift and go to state 61
 
 
-state 47
+state 34
 
-    (2) assign -> NAME EQUALS expNormal .
     (16) operacion -> expNormal . PLUS expNormal
     (17) operacion -> expNormal . MINUS expNormal
     (18) operacion -> expNormal . TIMES expNormal
@@ -1183,126 +945,211 @@ state 47
     (22) operacion -> expNormal . LOGICOS expNormal
     (23) operacion -> expNormal . MODULO expNormal
 
-    NEWLN           reduce using rule 2 (assign -> NAME EQUALS expNormal .)
-    $end            reduce using rule 2 (assign -> NAME EQUALS expNormal .)
-    RPAREN          reduce using rule 2 (assign -> NAME EQUALS expNormal .)
-    ELSE            reduce using rule 2 (assign -> NAME EQUALS expNormal .)
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 24
-    TIMES           shift and go to state 21
-    DIVIDE          shift and go to state 26
-    EXPONENTE       shift and go to state 23
-    COMPARISON      shift and go to state 20
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 28
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 25
+    EXPONENTE       shift and go to state 29
+    COMPARISON      shift and go to state 23
     LOGICOS         shift and go to state 27
     MODULO          shift and go to state 22
 
 
-state 48
+state 35
 
-    (21) operacion -> expNormal COMPARISON expNormal .
+    (36) expBooleana -> LPAREN . expBooleana RPAREN
+    (33) expBooleana -> . expNormal COMPARISON expNormal
+    (34) expBooleana -> . expBooleana LOGICOS expBooleana
+    (35) expBooleana -> . boolean
+    (36) expBooleana -> . LPAREN expBooleana RPAREN
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (25) boolean -> . CONSTANTES
+    (15) string -> . STRING
 
-    NEWLN           reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
-    $end            reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
-    RPAREN          reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
-    ELSE            reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    CONSTANTES      shift and go to state 9
+    STRING          shift and go to state 2
 
+    expNormal                      shift and go to state 37
+    string                         shift and go to state 10
+    boolean                        shift and go to state 36
+    expBooleana                    shift and go to state 62
 
-state 49
+state 36
 
-    (18) operacion -> expNormal TIMES expNormal .
+    (35) expBooleana -> boolean .
+    (54) expNormal -> boolean .
 
-    NEWLN           reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
-    $end            reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
-    RPAREN          reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
-    ELSE            reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
-
-
-state 50
-
-    (23) operacion -> expNormal MODULO expNormal .
-
-    NEWLN           reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
-    $end            reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
-    RPAREN          reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
-    ELSE            reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
-
-
-state 51
-
-    (20) operacion -> expNormal EXPONENTE expNormal .
-
-    NEWLN           reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
-    $end            reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
-    RPAREN          reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
-    ELSE            reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
+    RPAREN          reduce using rule 35 (expBooleana -> boolean .)
+    LOGICOS         reduce using rule 35 (expBooleana -> boolean .)
+    POINTS          reduce using rule 35 (expBooleana -> boolean .)
+    COMPARISON      reduce using rule 54 (expNormal -> boolean .)
 
 
-state 52
+state 37
 
-    (17) operacion -> expNormal MINUS expNormal .
+    (33) expBooleana -> expNormal . COMPARISON expNormal
 
-    NEWLN           reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
-    $end            reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
-    RPAREN          reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
-    ELSE            reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
+    COMPARISON      shift and go to state 63
 
 
-state 53
+state 38
 
-    (16) operacion -> expNormal PLUS expNormal .
+    (62) expWhile -> WHILE NAME . POINTS enterTab
+    (63) expWhile -> WHILE NAME . POINTS expLineal
+    (64) expWhile -> WHILE NAME . LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> WHILE NAME . LPAREN RPAREN POINTS expLineal
+    (55) expNormal -> NAME .
 
-    NEWLN           reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
-    $end            reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
-    RPAREN          reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
-    ELSE            reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
-
-
-state 54
-
-    (19) operacion -> expNormal DIVIDE expNormal .
-
-    NEWLN           reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
-    $end            reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
-    RPAREN          reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
-    ELSE            reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
+    POINTS          shift and go to state 64
+    LPAREN          shift and go to state 65
+    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
 
 
-state 55
+state 39
 
-    (22) operacion -> expNormal LOGICOS expNormal .
+    (60) expWhile -> WHILE expBooleana . POINTS enterTab
+    (61) expWhile -> WHILE expBooleana . POINTS expLineal
+    (34) expBooleana -> expBooleana . LOGICOS expBooleana
 
-    NEWLN           reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
-    $end            reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
-    RPAREN          reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
-    ELSE            reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
+    POINTS          shift and go to state 66
+    LOGICOS         shift and go to state 67
 
 
-state 56
+state 40
+
+    (49) expLineal -> assign enterTab .
+
+    $end            reduce using rule 49 (expLineal -> assign enterTab .)
+    RPAREN          reduce using rule 49 (expLineal -> assign enterTab .)
+    NEWLN           reduce using rule 49 (expLineal -> assign enterTab .)
+    ELSE            reduce using rule 49 (expLineal -> assign enterTab .)
+
+
+state 41
+
+    (27) enterTab -> NEWLN . TAB statement enterTab
+    (28) enterTab -> NEWLN . TAB statement enterNormal
+    (29) enterTab -> NEWLN . TAB statement
+    (30) enterTab -> NEWLN . TAB expWhileA
+    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> NEWLN . TAB BREAK
+    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
+    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
+    (39) enterTabTab -> NEWLN . TAB TAB statement
+    (40) enterTabTab -> NEWLN . TAB TAB BREAK
+    (41) enterNormal -> NEWLN . statement enterNormal
+    (42) enterNormal -> NEWLN . statement
+    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
+    (1) statement -> . expression
+    (4) expression -> . expWhile
+    (5) expression -> . expLineal
+    (6) expression -> . expNormal
+    (24) expression -> . MINUS expression
+    (60) expWhile -> . WHILE expBooleana POINTS enterTab
+    (61) expWhile -> . WHILE expBooleana POINTS expLineal
+    (62) expWhile -> . WHILE NAME POINTS enterTab
+    (63) expWhile -> . WHILE NAME POINTS expLineal
+    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
+    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
+    (8) expLineal -> . PRINT LPAREN operacion RPAREN
+    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
+    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
+    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
+    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
+    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
+    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
+    (26) expLineal -> . LPAREN expLineal RPAREN
+    (44) expLineal -> . operacion
+    (45) expLineal -> . operacion enterNormal
+    (46) expLineal -> . operacion enterTab
+    (47) expLineal -> . operacion enterTabTab
+    (48) expLineal -> . assign
+    (49) expLineal -> . assign enterTab
+    (50) expLineal -> . assign enterTabTab
+    (51) expLineal -> . assign enterNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (16) operacion -> . expNormal PLUS expNormal
+    (17) operacion -> . expNormal MINUS expNormal
+    (18) operacion -> . expNormal TIMES expNormal
+    (19) operacion -> . expNormal DIVIDE expNormal
+    (20) operacion -> . expNormal EXPONENTE expNormal
+    (21) operacion -> . expNormal COMPARISON expNormal
+    (22) operacion -> . expNormal LOGICOS expNormal
+    (23) operacion -> . expNormal MODULO expNormal
+    (2) assign -> . NAME EQUALS expNormal
+    (3) assign -> . NAME EQUALS operacion
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
+
+    TAB             shift and go to state 46
+    ELSE            shift and go to state 45
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 47
+    expression                     shift and go to state 8
+
+state 42
+
+    (50) expLineal -> assign enterTabTab .
+
+    $end            reduce using rule 50 (expLineal -> assign enterTabTab .)
+    RPAREN          reduce using rule 50 (expLineal -> assign enterTabTab .)
+    NEWLN           reduce using rule 50 (expLineal -> assign enterTabTab .)
+    ELSE            reduce using rule 50 (expLineal -> assign enterTabTab .)
+
+
+state 43
+
+    (51) expLineal -> assign enterNormal .
+
+    $end            reduce using rule 51 (expLineal -> assign enterNormal .)
+    RPAREN          reduce using rule 51 (expLineal -> assign enterNormal .)
+    NEWLN           reduce using rule 51 (expLineal -> assign enterNormal .)
+    ELSE            reduce using rule 51 (expLineal -> assign enterNormal .)
+
+
+state 44
+
+    (24) expression -> MINUS expression .
+
+    $end            reduce using rule 24 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 24 (expression -> MINUS expression .)
+    NEWLN           reduce using rule 24 (expression -> MINUS expression .)
+    ELSE            reduce using rule 24 (expression -> MINUS expression .)
+
+
+state 45
 
     (43) enterNormal -> NEWLN ELSE . POINTS enterTab
 
     POINTS          shift and go to state 68
 
 
-state 57
-
-    (41) enterNormal -> NEWLN statement . enterNormal
-    (42) enterNormal -> NEWLN statement .
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
-
-  ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 42 (enterNormal -> NEWLN statement .)
-    RPAREN          reduce using rule 42 (enterNormal -> NEWLN statement .)
-    ELSE            reduce using rule 42 (enterNormal -> NEWLN statement .)
-    NEWLN           shift and go to state 70
-
-  ! NEWLN           [ reduce using rule 42 (enterNormal -> NEWLN statement .) ]
-
-    enterNormal                    shift and go to state 69
-
-state 58
+state 46
 
     (27) enterTab -> NEWLN TAB . statement enterTab
     (28) enterTab -> NEWLN TAB . statement enterNormal
@@ -1363,47 +1210,256 @@ state 58
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    BREAK           shift and go to state 75
-    TAB             shift and go to state 73
-    WHILE           shift and go to state 74
-    MINUS           shift and go to state 5
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    BREAK           shift and go to state 69
+    TAB             shift and go to state 70
+    WHILE           shift and go to state 71
+    MINUS           shift and go to state 16
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 72
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    expWhileA                      shift and go to state 71
-    operacion                      shift and go to state 13
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    expWhileA                      shift and go to state 72
+    statement                      shift and go to state 73
+    expression                     shift and go to state 8
 
-state 59
+state 47
 
-    (26) expLineal -> LPAREN expLineal RPAREN .
+    (41) enterNormal -> NEWLN statement . enterNormal
+    (42) enterNormal -> NEWLN statement .
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
 
-    $end            reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
-    NEWLN           reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
-    RPAREN          reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
-    ELSE            reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
+  ! shift/reduce conflict for NEWLN resolved as shift
+    $end            reduce using rule 42 (enterNormal -> NEWLN statement .)
+    RPAREN          reduce using rule 42 (enterNormal -> NEWLN statement .)
+    ELSE            reduce using rule 42 (enterNormal -> NEWLN statement .)
+    NEWLN           shift and go to state 74
+
+  ! NEWLN           [ reduce using rule 42 (enterNormal -> NEWLN statement .) ]
+
+    enterNormal                    shift and go to state 75
+
+state 48
+
+    (23) operacion -> expNormal MODULO expNormal .
+
+    NEWLN           reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
+    $end            reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
+    RPAREN          reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
+    ELSE            reduce using rule 23 (operacion -> expNormal MODULO expNormal .)
 
 
-state 60
+state 49
 
-    (64) expWhile -> WHILE NAME LPAREN . RPAREN POINTS enterTab
-    (65) expWhile -> WHILE NAME LPAREN . RPAREN POINTS expLineal
+    (55) expNormal -> NAME .
+
+    NEWLN           reduce using rule 55 (expNormal -> NAME .)
+    $end            reduce using rule 55 (expNormal -> NAME .)
+    RPAREN          reduce using rule 55 (expNormal -> NAME .)
+    ELSE            reduce using rule 55 (expNormal -> NAME .)
+    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
+    PLUS            reduce using rule 55 (expNormal -> NAME .)
+    MINUS           reduce using rule 55 (expNormal -> NAME .)
+    TIMES           reduce using rule 55 (expNormal -> NAME .)
+    DIVIDE          reduce using rule 55 (expNormal -> NAME .)
+    EXPONENTE       reduce using rule 55 (expNormal -> NAME .)
+    LOGICOS         reduce using rule 55 (expNormal -> NAME .)
+    MODULO          reduce using rule 55 (expNormal -> NAME .)
+    POINTS          reduce using rule 55 (expNormal -> NAME .)
+
+
+state 50
+
+    (21) operacion -> expNormal COMPARISON expNormal .
+
+    NEWLN           reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
+    $end            reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
+    RPAREN          reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
+    ELSE            reduce using rule 21 (operacion -> expNormal COMPARISON expNormal .)
+
+
+state 51
+
+    (16) operacion -> expNormal PLUS expNormal .
+
+    NEWLN           reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
+    $end            reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
+    RPAREN          reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
+    ELSE            reduce using rule 16 (operacion -> expNormal PLUS expNormal .)
+
+
+state 52
+
+    (19) operacion -> expNormal DIVIDE expNormal .
+
+    NEWLN           reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
+    $end            reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
+    RPAREN          reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
+    ELSE            reduce using rule 19 (operacion -> expNormal DIVIDE expNormal .)
+
+
+state 53
+
+    (18) operacion -> expNormal TIMES expNormal .
+
+    NEWLN           reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
+    $end            reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
+    RPAREN          reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
+    ELSE            reduce using rule 18 (operacion -> expNormal TIMES expNormal .)
+
+
+state 54
+
+    (22) operacion -> expNormal LOGICOS expNormal .
+
+    NEWLN           reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
+    $end            reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
+    RPAREN          reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
+    ELSE            reduce using rule 22 (operacion -> expNormal LOGICOS expNormal .)
+
+
+state 55
+
+    (17) operacion -> expNormal MINUS expNormal .
+
+    NEWLN           reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
+    $end            reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
+    RPAREN          reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
+    ELSE            reduce using rule 17 (operacion -> expNormal MINUS expNormal .)
+
+
+state 56
+
+    (20) operacion -> expNormal EXPONENTE expNormal .
+
+    NEWLN           reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
+    $end            reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
+    RPAREN          reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
+    ELSE            reduce using rule 20 (operacion -> expNormal EXPONENTE expNormal .)
+
+
+state 57
+
+    (8) expLineal -> PRINT LPAREN operacion . RPAREN
+    (10) expLineal -> PRINT LPAREN operacion . RPAREN enterNormal
+    (12) expLineal -> PRINT LPAREN operacion . RPAREN enterTab
+    (14) expLineal -> PRINT LPAREN operacion . RPAREN enterTabTab
 
     RPAREN          shift and go to state 76
 
 
+state 58
+
+    (7) expLineal -> PRINT LPAREN expNormal . RPAREN
+    (9) expLineal -> PRINT LPAREN expNormal . RPAREN enterNormal
+    (11) expLineal -> PRINT LPAREN expNormal . RPAREN enterTab
+    (13) expLineal -> PRINT LPAREN expNormal . RPAREN enterTabTab
+    (16) operacion -> expNormal . PLUS expNormal
+    (17) operacion -> expNormal . MINUS expNormal
+    (18) operacion -> expNormal . TIMES expNormal
+    (19) operacion -> expNormal . DIVIDE expNormal
+    (20) operacion -> expNormal . EXPONENTE expNormal
+    (21) operacion -> expNormal . COMPARISON expNormal
+    (22) operacion -> expNormal . LOGICOS expNormal
+    (23) operacion -> expNormal . MODULO expNormal
+
+    RPAREN          shift and go to state 77
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 28
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 25
+    EXPONENTE       shift and go to state 29
+    COMPARISON      shift and go to state 23
+    LOGICOS         shift and go to state 27
+    MODULO          shift and go to state 22
+
+
+state 59
+
+    (3) assign -> NAME EQUALS operacion .
+
+    NEWLN           reduce using rule 3 (assign -> NAME EQUALS operacion .)
+    $end            reduce using rule 3 (assign -> NAME EQUALS operacion .)
+    RPAREN          reduce using rule 3 (assign -> NAME EQUALS operacion .)
+    ELSE            reduce using rule 3 (assign -> NAME EQUALS operacion .)
+
+
+state 60
+
+    (2) assign -> NAME EQUALS expNormal .
+    (16) operacion -> expNormal . PLUS expNormal
+    (17) operacion -> expNormal . MINUS expNormal
+    (18) operacion -> expNormal . TIMES expNormal
+    (19) operacion -> expNormal . DIVIDE expNormal
+    (20) operacion -> expNormal . EXPONENTE expNormal
+    (21) operacion -> expNormal . COMPARISON expNormal
+    (22) operacion -> expNormal . LOGICOS expNormal
+    (23) operacion -> expNormal . MODULO expNormal
+
+    NEWLN           reduce using rule 2 (assign -> NAME EQUALS expNormal .)
+    $end            reduce using rule 2 (assign -> NAME EQUALS expNormal .)
+    RPAREN          reduce using rule 2 (assign -> NAME EQUALS expNormal .)
+    ELSE            reduce using rule 2 (assign -> NAME EQUALS expNormal .)
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 28
+    TIMES           shift and go to state 26
+    DIVIDE          shift and go to state 25
+    EXPONENTE       shift and go to state 29
+    COMPARISON      shift and go to state 23
+    LOGICOS         shift and go to state 27
+    MODULO          shift and go to state 22
+
+
 state 61
+
+    (26) expLineal -> LPAREN expLineal RPAREN .
+
+    $end            reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
+    RPAREN          reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
+    NEWLN           reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
+    ELSE            reduce using rule 26 (expLineal -> LPAREN expLineal RPAREN .)
+
+
+state 62
+
+    (36) expBooleana -> LPAREN expBooleana . RPAREN
+    (34) expBooleana -> expBooleana . LOGICOS expBooleana
+
+    RPAREN          shift and go to state 78
+    LOGICOS         shift and go to state 67
+
+
+state 63
+
+    (33) expBooleana -> expNormal COMPARISON . expNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
+
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    expNormal                      shift and go to state 79
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+
+state 64
 
     (62) expWhile -> WHILE NAME POINTS . enterTab
     (63) expWhile -> WHILE NAME POINTS . expLineal
@@ -1447,57 +1503,31 @@ state 61
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NEWLN           shift and go to state 79
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
+    NEWLN           shift and go to state 81
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
     NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    enterTab                       shift and go to state 77
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 78
-    operacion                      shift and go to state 13
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    expLineal                      shift and go to state 82
+    assign                         shift and go to state 15
+    enterTab                       shift and go to state 80
     expNormal                      shift and go to state 34
+    boolean                        shift and go to state 3
 
-state 62
+state 65
 
-    (36) expBooleana -> LPAREN expBooleana . RPAREN
-    (34) expBooleana -> expBooleana . LOGICOS expBooleana
+    (64) expWhile -> WHILE NAME LPAREN . RPAREN POINTS enterTab
+    (65) expWhile -> WHILE NAME LPAREN . RPAREN POINTS expLineal
 
-    RPAREN          shift and go to state 80
-    LOGICOS         shift and go to state 63
+    RPAREN          shift and go to state 83
 
 
-state 63
-
-    (34) expBooleana -> expBooleana LOGICOS . expBooleana
-    (33) expBooleana -> . expNormal COMPARISON expNormal
-    (34) expBooleana -> . expBooleana LOGICOS expBooleana
-    (35) expBooleana -> . boolean
-    (36) expBooleana -> . LPAREN expBooleana RPAREN
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (25) boolean -> . CONSTANTES
-    (15) string -> . STRING
-
-    LPAREN          shift and go to state 40
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    CONSTANTES      shift and go to state 4
-    STRING          shift and go to state 17
-
-    string                         shift and go to state 3
-    expBooleana                    shift and go to state 81
-    expNormal                      shift and go to state 43
-    boolean                        shift and go to state 41
-
-state 64
+state 66
 
     (60) expWhile -> WHILE expBooleana POINTS . enterTab
     (61) expWhile -> WHILE expBooleana POINTS . expLineal
@@ -1541,76 +1571,46 @@ state 64
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NEWLN           shift and go to state 79
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
+    NEWLN           shift and go to state 81
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
     NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    enterTab                       shift and go to state 82
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    string                         shift and go to state 3
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 83
+    operacion                      shift and go to state 1
+    boolean                        shift and go to state 3
+    enterTab                       shift and go to state 84
+    expLineal                      shift and go to state 85
+    assign                         shift and go to state 15
     expNormal                      shift and go to state 34
+    string                         shift and go to state 10
 
-state 65
+state 67
 
-    (33) expBooleana -> expNormal COMPARISON . expNormal
+    (34) expBooleana -> expBooleana LOGICOS . expBooleana
+    (33) expBooleana -> . expNormal COMPARISON expNormal
+    (34) expBooleana -> . expBooleana LOGICOS expBooleana
+    (35) expBooleana -> . boolean
+    (36) expBooleana -> . LPAREN expBooleana RPAREN
     (52) expNormal -> . NUMBER
     (53) expNormal -> . string
     (54) expNormal -> . boolean
     (55) expNormal -> . NAME
-    (15) string -> . STRING
     (25) boolean -> . CONSTANTES
+    (15) string -> . STRING
 
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 45
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 49
+    CONSTANTES      shift and go to state 9
+    STRING          shift and go to state 2
 
-    string                         shift and go to state 3
-    expNormal                      shift and go to state 84
-    boolean                        shift and go to state 15
-
-state 66
-
-    (7) expLineal -> PRINT LPAREN expNormal . RPAREN
-    (9) expLineal -> PRINT LPAREN expNormal . RPAREN enterNormal
-    (11) expLineal -> PRINT LPAREN expNormal . RPAREN enterTab
-    (13) expLineal -> PRINT LPAREN expNormal . RPAREN enterTabTab
-    (16) operacion -> expNormal . PLUS expNormal
-    (17) operacion -> expNormal . MINUS expNormal
-    (18) operacion -> expNormal . TIMES expNormal
-    (19) operacion -> expNormal . DIVIDE expNormal
-    (20) operacion -> expNormal . EXPONENTE expNormal
-    (21) operacion -> expNormal . COMPARISON expNormal
-    (22) operacion -> expNormal . LOGICOS expNormal
-    (23) operacion -> expNormal . MODULO expNormal
-
-    RPAREN          shift and go to state 85
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 24
-    TIMES           shift and go to state 21
-    DIVIDE          shift and go to state 26
-    EXPONENTE       shift and go to state 23
-    COMPARISON      shift and go to state 20
-    LOGICOS         shift and go to state 27
-    MODULO          shift and go to state 22
-
-
-state 67
-
-    (8) expLineal -> PRINT LPAREN operacion . RPAREN
-    (10) expLineal -> PRINT LPAREN operacion . RPAREN enterNormal
-    (12) expLineal -> PRINT LPAREN operacion . RPAREN enterTab
-    (14) expLineal -> PRINT LPAREN operacion . RPAREN enterTabTab
-
-    RPAREN          shift and go to state 86
-
+    expNormal                      shift and go to state 37
+    string                         shift and go to state 10
+    boolean                        shift and go to state 36
+    expBooleana                    shift and go to state 86
 
 state 68
 
@@ -1622,131 +1622,21 @@ state 68
     (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
     (32) enterTab -> . NEWLN TAB BREAK
 
-    NEWLN           shift and go to state 79
+    NEWLN           shift and go to state 81
 
     enterTab                       shift and go to state 87
 
 state 69
 
-    (41) enterNormal -> NEWLN statement enterNormal .
+    (32) enterTab -> NEWLN TAB BREAK .
 
-    $end            reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
-    NEWLN           reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
-    RPAREN          reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
-    ELSE            reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
+    $end            reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
+    RPAREN          reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
+    NEWLN           reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
+    ELSE            reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
 
 
 state 70
-
-    (41) enterNormal -> NEWLN . statement enterNormal
-    (42) enterNormal -> NEWLN . statement
-    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
-    (1) statement -> . expression
-    (4) expression -> . expWhile
-    (5) expression -> . expLineal
-    (6) expression -> . expNormal
-    (24) expression -> . MINUS expression
-    (60) expWhile -> . WHILE expBooleana POINTS enterTab
-    (61) expWhile -> . WHILE expBooleana POINTS expLineal
-    (62) expWhile -> . WHILE NAME POINTS enterTab
-    (63) expWhile -> . WHILE NAME POINTS expLineal
-    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
-    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
-    (8) expLineal -> . PRINT LPAREN operacion RPAREN
-    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
-    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
-    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
-    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
-    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
-    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
-    (26) expLineal -> . LPAREN expLineal RPAREN
-    (44) expLineal -> . operacion
-    (45) expLineal -> . operacion enterNormal
-    (46) expLineal -> . operacion enterTab
-    (47) expLineal -> . operacion enterTabTab
-    (48) expLineal -> . assign
-    (49) expLineal -> . assign enterTab
-    (50) expLineal -> . assign enterTabTab
-    (51) expLineal -> . assign enterNormal
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (16) operacion -> . expNormal PLUS expNormal
-    (17) operacion -> . expNormal MINUS expNormal
-    (18) operacion -> . expNormal TIMES expNormal
-    (19) operacion -> . expNormal DIVIDE expNormal
-    (20) operacion -> . expNormal EXPONENTE expNormal
-    (21) operacion -> . expNormal COMPARISON expNormal
-    (22) operacion -> . expNormal LOGICOS expNormal
-    (23) operacion -> . expNormal MODULO expNormal
-    (2) assign -> . NAME EQUALS expNormal
-    (3) assign -> . NAME EQUALS operacion
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
-
-    ELSE            shift and go to state 56
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
-
-    statement                      shift and go to state 57
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
-
-state 71
-
-    (30) enterTab -> NEWLN TAB expWhileA .
-    (31) enterTab -> NEWLN TAB expWhileA . ELSE POINTS enterTabTab
-
-  ! shift/reduce conflict for ELSE resolved as shift
-    $end            reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
-    NEWLN           reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
-    RPAREN          reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
-    ELSE            shift and go to state 88
-
-  ! ELSE            [ reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .) ]
-
-
-state 72
-
-    (27) enterTab -> NEWLN TAB statement . enterTab
-    (28) enterTab -> NEWLN TAB statement . enterNormal
-    (29) enterTab -> NEWLN TAB statement .
-    (27) enterTab -> . NEWLN TAB statement enterTab
-    (28) enterTab -> . NEWLN TAB statement enterNormal
-    (29) enterTab -> . NEWLN TAB statement
-    (30) enterTab -> . NEWLN TAB expWhileA
-    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> . NEWLN TAB BREAK
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
-
-  ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 29 (enterTab -> NEWLN TAB statement .)
-    RPAREN          reduce using rule 29 (enterTab -> NEWLN TAB statement .)
-    ELSE            reduce using rule 29 (enterTab -> NEWLN TAB statement .)
-    NEWLN           shift and go to state 90
-
-  ! NEWLN           [ reduce using rule 29 (enterTab -> NEWLN TAB statement .) ]
-
-    enterTab                       shift and go to state 89
-    enterNormal                    shift and go to state 91
-
-state 73
 
     (37) enterTabTab -> NEWLN TAB TAB . statement enterNormal
     (38) enterTabTab -> NEWLN TAB TAB . statement enterTabTab
@@ -1797,27 +1687,27 @@ state 73
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    BREAK           shift and go to state 93
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    BREAK           shift and go to state 88
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 92
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 89
+    expression                     shift and go to state 8
 
-state 74
+state 71
 
     (56) expWhileA -> WHILE . expBooleana POINTS enterTabTab
     (57) expWhileA -> WHILE . expBooleana POINTS expLineal
@@ -1840,150 +1730,138 @@ state 74
     (25) boolean -> . CONSTANTES
     (15) string -> . STRING
 
-    NAME            shift and go to state 94
-    LPAREN          shift and go to state 40
-    NUMBER          shift and go to state 7
-    CONSTANTES      shift and go to state 4
-    STRING          shift and go to state 17
+    NAME            shift and go to state 90
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 13
+    CONSTANTES      shift and go to state 9
+    STRING          shift and go to state 2
 
-    string                         shift and go to state 3
-    boolean                        shift and go to state 41
-    expBooleana                    shift and go to state 95
-    expNormal                      shift and go to state 43
+    boolean                        shift and go to state 36
+    string                         shift and go to state 10
+    expNormal                      shift and go to state 37
+    expBooleana                    shift and go to state 91
 
-state 75
+state 72
 
-    (32) enterTab -> NEWLN TAB BREAK .
+    (30) enterTab -> NEWLN TAB expWhileA .
+    (31) enterTab -> NEWLN TAB expWhileA . ELSE POINTS enterTabTab
 
-    $end            reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
-    NEWLN           reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
-    RPAREN          reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
-    ELSE            reduce using rule 32 (enterTab -> NEWLN TAB BREAK .)
+  ! shift/reduce conflict for ELSE resolved as shift
+    $end            reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
+    RPAREN          reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
+    NEWLN           reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .)
+    ELSE            shift and go to state 92
 
-
-state 76
-
-    (64) expWhile -> WHILE NAME LPAREN RPAREN . POINTS enterTab
-    (65) expWhile -> WHILE NAME LPAREN RPAREN . POINTS expLineal
-
-    POINTS          shift and go to state 96
+  ! ELSE            [ reduce using rule 30 (enterTab -> NEWLN TAB expWhileA .) ]
 
 
-state 77
+state 73
 
-    (62) expWhile -> WHILE NAME POINTS enterTab .
-
-    $end            reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
-    NEWLN           reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
-    RPAREN          reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
-    ELSE            reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
-
-
-state 78
-
-    (63) expWhile -> WHILE NAME POINTS expLineal .
-
-    $end            reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
-    NEWLN           reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
-    RPAREN          reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
-    ELSE            reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
-
-
-state 79
-
-    (27) enterTab -> NEWLN . TAB statement enterTab
-    (28) enterTab -> NEWLN . TAB statement enterNormal
-    (29) enterTab -> NEWLN . TAB statement
-    (30) enterTab -> NEWLN . TAB expWhileA
-    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> NEWLN . TAB BREAK
-
-    TAB             shift and go to state 97
-
-
-state 80
-
-    (36) expBooleana -> LPAREN expBooleana RPAREN .
-
-    LOGICOS         reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
-    POINTS          reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
-    RPAREN          reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
-
-
-state 81
-
-    (34) expBooleana -> expBooleana LOGICOS expBooleana .
-    (34) expBooleana -> expBooleana . LOGICOS expBooleana
-
-    LOGICOS         reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
-    POINTS          reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
-    RPAREN          reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
-
-  ! LOGICOS         [ shift and go to state 63 ]
-
-
-state 82
-
-    (60) expWhile -> WHILE expBooleana POINTS enterTab .
-
-    $end            reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
-    NEWLN           reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
-    RPAREN          reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
-    ELSE            reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
-
-
-state 83
-
-    (61) expWhile -> WHILE expBooleana POINTS expLineal .
-
-    $end            reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
-    NEWLN           reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
-    RPAREN          reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
-    ELSE            reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
-
-
-state 84
-
-    (33) expBooleana -> expNormal COMPARISON expNormal .
-
-    LOGICOS         reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
-    POINTS          reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
-    RPAREN          reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
-
-
-state 85
-
-    (7) expLineal -> PRINT LPAREN expNormal RPAREN .
-    (9) expLineal -> PRINT LPAREN expNormal RPAREN . enterNormal
-    (11) expLineal -> PRINT LPAREN expNormal RPAREN . enterTab
-    (13) expLineal -> PRINT LPAREN expNormal RPAREN . enterTabTab
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
+    (27) enterTab -> NEWLN TAB statement . enterTab
+    (28) enterTab -> NEWLN TAB statement . enterNormal
+    (29) enterTab -> NEWLN TAB statement .
     (27) enterTab -> . NEWLN TAB statement enterTab
     (28) enterTab -> . NEWLN TAB statement enterNormal
     (29) enterTab -> . NEWLN TAB statement
     (30) enterTab -> . NEWLN TAB expWhileA
     (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
     (32) enterTab -> . NEWLN TAB BREAK
-    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
-    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
-    (39) enterTabTab -> . NEWLN TAB TAB statement
-    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
 
   ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
-    RPAREN          reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
-    ELSE            reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
-    NEWLN           shift and go to state 37
+    $end            reduce using rule 29 (enterTab -> NEWLN TAB statement .)
+    RPAREN          reduce using rule 29 (enterTab -> NEWLN TAB statement .)
+    ELSE            reduce using rule 29 (enterTab -> NEWLN TAB statement .)
+    NEWLN           shift and go to state 94
 
-  ! NEWLN           [ reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .) ]
+  ! NEWLN           [ reduce using rule 29 (enterTab -> NEWLN TAB statement .) ]
 
-    enterTab                       shift and go to state 98
-    enterNormal                    shift and go to state 99
-    enterTabTab                    shift and go to state 100
+    enterNormal                    shift and go to state 95
+    enterTab                       shift and go to state 93
 
-state 86
+state 74
+
+    (41) enterNormal -> NEWLN . statement enterNormal
+    (42) enterNormal -> NEWLN . statement
+    (43) enterNormal -> NEWLN . ELSE POINTS enterTab
+    (1) statement -> . expression
+    (4) expression -> . expWhile
+    (5) expression -> . expLineal
+    (6) expression -> . expNormal
+    (24) expression -> . MINUS expression
+    (60) expWhile -> . WHILE expBooleana POINTS enterTab
+    (61) expWhile -> . WHILE expBooleana POINTS expLineal
+    (62) expWhile -> . WHILE NAME POINTS enterTab
+    (63) expWhile -> . WHILE NAME POINTS expLineal
+    (64) expWhile -> . WHILE NAME LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> . WHILE NAME LPAREN RPAREN POINTS expLineal
+    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
+    (8) expLineal -> . PRINT LPAREN operacion RPAREN
+    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
+    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
+    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
+    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
+    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
+    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
+    (26) expLineal -> . LPAREN expLineal RPAREN
+    (44) expLineal -> . operacion
+    (45) expLineal -> . operacion enterNormal
+    (46) expLineal -> . operacion enterTab
+    (47) expLineal -> . operacion enterTabTab
+    (48) expLineal -> . assign
+    (49) expLineal -> . assign enterTab
+    (50) expLineal -> . assign enterTabTab
+    (51) expLineal -> . assign enterNormal
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (16) operacion -> . expNormal PLUS expNormal
+    (17) operacion -> . expNormal MINUS expNormal
+    (18) operacion -> . expNormal TIMES expNormal
+    (19) operacion -> . expNormal DIVIDE expNormal
+    (20) operacion -> . expNormal EXPONENTE expNormal
+    (21) operacion -> . expNormal COMPARISON expNormal
+    (22) operacion -> . expNormal LOGICOS expNormal
+    (23) operacion -> . expNormal MODULO expNormal
+    (2) assign -> . NAME EQUALS expNormal
+    (3) assign -> . NAME EQUALS operacion
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
+
+    ELSE            shift and go to state 45
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
+
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 47
+    expression                     shift and go to state 8
+
+state 75
+
+    (41) enterNormal -> NEWLN statement enterNormal .
+
+    $end            reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
+    RPAREN          reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
+    NEWLN           reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
+    ELSE            reduce using rule 41 (enterNormal -> NEWLN statement enterNormal .)
+
+
+state 76
 
     (8) expLineal -> PRINT LPAREN operacion RPAREN .
     (10) expLineal -> PRINT LPAREN operacion RPAREN . enterNormal
@@ -2007,42 +1885,225 @@ state 86
     $end            reduce using rule 8 (expLineal -> PRINT LPAREN operacion RPAREN .)
     RPAREN          reduce using rule 8 (expLineal -> PRINT LPAREN operacion RPAREN .)
     ELSE            reduce using rule 8 (expLineal -> PRINT LPAREN operacion RPAREN .)
-    NEWLN           shift and go to state 37
+    NEWLN           shift and go to state 18
 
   ! NEWLN           [ reduce using rule 8 (expLineal -> PRINT LPAREN operacion RPAREN .) ]
 
+    enterTab                       shift and go to state 97
+    enterTabTab                    shift and go to state 96
+    enterNormal                    shift and go to state 98
+
+state 77
+
+    (7) expLineal -> PRINT LPAREN expNormal RPAREN .
+    (9) expLineal -> PRINT LPAREN expNormal RPAREN . enterNormal
+    (11) expLineal -> PRINT LPAREN expNormal RPAREN . enterTab
+    (13) expLineal -> PRINT LPAREN expNormal RPAREN . enterTabTab
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
+    (27) enterTab -> . NEWLN TAB statement enterTab
+    (28) enterTab -> . NEWLN TAB statement enterNormal
+    (29) enterTab -> . NEWLN TAB statement
+    (30) enterTab -> . NEWLN TAB expWhileA
+    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> . NEWLN TAB BREAK
+    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
+    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
+    (39) enterTabTab -> . NEWLN TAB TAB statement
+    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+
+  ! shift/reduce conflict for NEWLN resolved as shift
+    $end            reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
+    RPAREN          reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
+    ELSE            reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .)
+    NEWLN           shift and go to state 18
+
+  ! NEWLN           [ reduce using rule 7 (expLineal -> PRINT LPAREN expNormal RPAREN .) ]
+
     enterTab                       shift and go to state 101
-    enterTabTab                    shift and go to state 103
-    enterNormal                    shift and go to state 102
+    enterTabTab                    shift and go to state 99
+    enterNormal                    shift and go to state 100
+
+state 78
+
+    (36) expBooleana -> LPAREN expBooleana RPAREN .
+
+    RPAREN          reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
+    LOGICOS         reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
+    POINTS          reduce using rule 36 (expBooleana -> LPAREN expBooleana RPAREN .)
+
+
+state 79
+
+    (33) expBooleana -> expNormal COMPARISON expNormal .
+
+    RPAREN          reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
+    LOGICOS         reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
+    POINTS          reduce using rule 33 (expBooleana -> expNormal COMPARISON expNormal .)
+
+
+state 80
+
+    (62) expWhile -> WHILE NAME POINTS enterTab .
+
+    $end            reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
+    RPAREN          reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
+    NEWLN           reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
+    ELSE            reduce using rule 62 (expWhile -> WHILE NAME POINTS enterTab .)
+
+
+state 81
+
+    (27) enterTab -> NEWLN . TAB statement enterTab
+    (28) enterTab -> NEWLN . TAB statement enterNormal
+    (29) enterTab -> NEWLN . TAB statement
+    (30) enterTab -> NEWLN . TAB expWhileA
+    (31) enterTab -> NEWLN . TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> NEWLN . TAB BREAK
+
+    TAB             shift and go to state 102
+
+
+state 82
+
+    (63) expWhile -> WHILE NAME POINTS expLineal .
+
+    $end            reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
+    RPAREN          reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
+    NEWLN           reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
+    ELSE            reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .)
+
+
+state 83
+
+    (64) expWhile -> WHILE NAME LPAREN RPAREN . POINTS enterTab
+    (65) expWhile -> WHILE NAME LPAREN RPAREN . POINTS expLineal
+
+    POINTS          shift and go to state 103
+
+
+state 84
+
+    (60) expWhile -> WHILE expBooleana POINTS enterTab .
+
+    $end            reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
+    RPAREN          reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
+    NEWLN           reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
+    ELSE            reduce using rule 60 (expWhile -> WHILE expBooleana POINTS enterTab .)
+
+
+state 85
+
+    (61) expWhile -> WHILE expBooleana POINTS expLineal .
+
+    $end            reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
+    RPAREN          reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
+    NEWLN           reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
+    ELSE            reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .)
+
+
+state 86
+
+    (34) expBooleana -> expBooleana LOGICOS expBooleana .
+    (34) expBooleana -> expBooleana . LOGICOS expBooleana
+
+    RPAREN          reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
+    LOGICOS         reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
+    POINTS          reduce using rule 34 (expBooleana -> expBooleana LOGICOS expBooleana .)
+
+  ! LOGICOS         [ shift and go to state 67 ]
+
 
 state 87
 
     (43) enterNormal -> NEWLN ELSE POINTS enterTab .
 
     $end            reduce using rule 43 (enterNormal -> NEWLN ELSE POINTS enterTab .)
-    NEWLN           reduce using rule 43 (enterNormal -> NEWLN ELSE POINTS enterTab .)
     RPAREN          reduce using rule 43 (enterNormal -> NEWLN ELSE POINTS enterTab .)
+    NEWLN           reduce using rule 43 (enterNormal -> NEWLN ELSE POINTS enterTab .)
     ELSE            reduce using rule 43 (enterNormal -> NEWLN ELSE POINTS enterTab .)
 
 
 state 88
 
-    (31) enterTab -> NEWLN TAB expWhileA ELSE . POINTS enterTabTab
+    (40) enterTabTab -> NEWLN TAB TAB BREAK .
 
-    POINTS          shift and go to state 104
+    $end            reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
+    RPAREN          reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
+    NEWLN           reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
+    ELSE            reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
 
 
 state 89
 
+    (37) enterTabTab -> NEWLN TAB TAB statement . enterNormal
+    (38) enterTabTab -> NEWLN TAB TAB statement . enterTabTab
+    (39) enterTabTab -> NEWLN TAB TAB statement .
+    (41) enterNormal -> . NEWLN statement enterNormal
+    (42) enterNormal -> . NEWLN statement
+    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
+    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
+    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
+    (39) enterTabTab -> . NEWLN TAB TAB statement
+    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+
+  ! shift/reduce conflict for NEWLN resolved as shift
+    $end            reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
+    RPAREN          reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
+    ELSE            reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
+    NEWLN           shift and go to state 105
+
+  ! NEWLN           [ reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .) ]
+
+    enterNormal                    shift and go to state 106
+    enterTabTab                    shift and go to state 104
+
+state 90
+
+    (58) expWhileA -> WHILE NAME . POINTS enterTabTab
+    (59) expWhileA -> WHILE NAME . POINTS expLineal
+    (62) expWhile -> WHILE NAME . POINTS enterTab
+    (63) expWhile -> WHILE NAME . POINTS expLineal
+    (64) expWhile -> WHILE NAME . LPAREN RPAREN POINTS enterTab
+    (65) expWhile -> WHILE NAME . LPAREN RPAREN POINTS expLineal
+    (55) expNormal -> NAME .
+
+    POINTS          shift and go to state 107
+    LPAREN          shift and go to state 65
+    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
+
+
+state 91
+
+    (56) expWhileA -> WHILE expBooleana . POINTS enterTabTab
+    (57) expWhileA -> WHILE expBooleana . POINTS expLineal
+    (60) expWhile -> WHILE expBooleana . POINTS enterTab
+    (61) expWhile -> WHILE expBooleana . POINTS expLineal
+    (34) expBooleana -> expBooleana . LOGICOS expBooleana
+
+    POINTS          shift and go to state 108
+    LOGICOS         shift and go to state 67
+
+
+state 92
+
+    (31) enterTab -> NEWLN TAB expWhileA ELSE . POINTS enterTabTab
+
+    POINTS          shift and go to state 109
+
+
+state 93
+
     (27) enterTab -> NEWLN TAB statement enterTab .
 
     $end            reduce using rule 27 (enterTab -> NEWLN TAB statement enterTab .)
-    NEWLN           reduce using rule 27 (enterTab -> NEWLN TAB statement enterTab .)
     RPAREN          reduce using rule 27 (enterTab -> NEWLN TAB statement enterTab .)
+    NEWLN           reduce using rule 27 (enterTab -> NEWLN TAB statement enterTab .)
     ELSE            reduce using rule 27 (enterTab -> NEWLN TAB statement enterTab .)
 
 
-state 90
+state 94
 
     (27) enterTab -> NEWLN . TAB statement enterTab
     (28) enterTab -> NEWLN . TAB statement enterNormal
@@ -2098,159 +2159,98 @@ state 90
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    TAB             shift and go to state 97
-    ELSE            shift and go to state 56
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    TAB             shift and go to state 102
+    ELSE            shift and go to state 45
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 57
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 47
+    expression                     shift and go to state 8
 
-state 91
+state 95
 
     (28) enterTab -> NEWLN TAB statement enterNormal .
 
     $end            reduce using rule 28 (enterTab -> NEWLN TAB statement enterNormal .)
-    NEWLN           reduce using rule 28 (enterTab -> NEWLN TAB statement enterNormal .)
     RPAREN          reduce using rule 28 (enterTab -> NEWLN TAB statement enterNormal .)
+    NEWLN           reduce using rule 28 (enterTab -> NEWLN TAB statement enterNormal .)
     ELSE            reduce using rule 28 (enterTab -> NEWLN TAB statement enterNormal .)
-
-
-state 92
-
-    (37) enterTabTab -> NEWLN TAB TAB statement . enterNormal
-    (38) enterTabTab -> NEWLN TAB TAB statement . enterTabTab
-    (39) enterTabTab -> NEWLN TAB TAB statement .
-    (41) enterNormal -> . NEWLN statement enterNormal
-    (42) enterNormal -> . NEWLN statement
-    (43) enterNormal -> . NEWLN ELSE POINTS enterTab
-    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
-    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
-    (39) enterTabTab -> . NEWLN TAB TAB statement
-    (40) enterTabTab -> . NEWLN TAB TAB BREAK
-
-  ! shift/reduce conflict for NEWLN resolved as shift
-    $end            reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
-    RPAREN          reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
-    ELSE            reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .)
-    NEWLN           shift and go to state 106
-
-  ! NEWLN           [ reduce using rule 39 (enterTabTab -> NEWLN TAB TAB statement .) ]
-
-    enterNormal                    shift and go to state 107
-    enterTabTab                    shift and go to state 105
-
-state 93
-
-    (40) enterTabTab -> NEWLN TAB TAB BREAK .
-
-    $end            reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
-    NEWLN           reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
-    RPAREN          reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
-    ELSE            reduce using rule 40 (enterTabTab -> NEWLN TAB TAB BREAK .)
-
-
-state 94
-
-    (58) expWhileA -> WHILE NAME . POINTS enterTabTab
-    (59) expWhileA -> WHILE NAME . POINTS expLineal
-    (62) expWhile -> WHILE NAME . POINTS enterTab
-    (63) expWhile -> WHILE NAME . POINTS expLineal
-    (64) expWhile -> WHILE NAME . LPAREN RPAREN POINTS enterTab
-    (65) expWhile -> WHILE NAME . LPAREN RPAREN POINTS expLineal
-    (55) expNormal -> NAME .
-
-    POINTS          shift and go to state 108
-    LPAREN          shift and go to state 60
-    COMPARISON      reduce using rule 55 (expNormal -> NAME .)
-
-
-state 95
-
-    (56) expWhileA -> WHILE expBooleana . POINTS enterTabTab
-    (57) expWhileA -> WHILE expBooleana . POINTS expLineal
-    (60) expWhile -> WHILE expBooleana . POINTS enterTab
-    (61) expWhile -> WHILE expBooleana . POINTS expLineal
-    (34) expBooleana -> expBooleana . LOGICOS expBooleana
-
-    POINTS          shift and go to state 109
-    LOGICOS         shift and go to state 63
 
 
 state 96
 
-    (64) expWhile -> WHILE NAME LPAREN RPAREN POINTS . enterTab
-    (65) expWhile -> WHILE NAME LPAREN RPAREN POINTS . expLineal
-    (27) enterTab -> . NEWLN TAB statement enterTab
-    (28) enterTab -> . NEWLN TAB statement enterNormal
-    (29) enterTab -> . NEWLN TAB statement
-    (30) enterTab -> . NEWLN TAB expWhileA
-    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
-    (32) enterTab -> . NEWLN TAB BREAK
-    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
-    (8) expLineal -> . PRINT LPAREN operacion RPAREN
-    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
-    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
-    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
-    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
-    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
-    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
-    (26) expLineal -> . LPAREN expLineal RPAREN
-    (44) expLineal -> . operacion
-    (45) expLineal -> . operacion enterNormal
-    (46) expLineal -> . operacion enterTab
-    (47) expLineal -> . operacion enterTabTab
-    (48) expLineal -> . assign
-    (49) expLineal -> . assign enterTab
-    (50) expLineal -> . assign enterTabTab
-    (51) expLineal -> . assign enterNormal
-    (16) operacion -> . expNormal PLUS expNormal
-    (17) operacion -> . expNormal MINUS expNormal
-    (18) operacion -> . expNormal TIMES expNormal
-    (19) operacion -> . expNormal DIVIDE expNormal
-    (20) operacion -> . expNormal EXPONENTE expNormal
-    (21) operacion -> . expNormal COMPARISON expNormal
-    (22) operacion -> . expNormal LOGICOS expNormal
-    (23) operacion -> . expNormal MODULO expNormal
-    (2) assign -> . NAME EQUALS expNormal
-    (3) assign -> . NAME EQUALS operacion
-    (52) expNormal -> . NUMBER
-    (53) expNormal -> . string
-    (54) expNormal -> . boolean
-    (55) expNormal -> . NAME
-    (15) string -> . STRING
-    (25) boolean -> . CONSTANTES
+    (14) expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .
 
-    NEWLN           shift and go to state 79
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    $end            reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
+    RPAREN          reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
+    NEWLN           reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
+    ELSE            reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
 
-    enterTab                       shift and go to state 110
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 111
-    operacion                      shift and go to state 13
-    expNormal                      shift and go to state 34
 
 state 97
+
+    (12) expLineal -> PRINT LPAREN operacion RPAREN enterTab .
+
+    $end            reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
+    RPAREN          reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
+    NEWLN           reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
+    ELSE            reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
+
+
+state 98
+
+    (10) expLineal -> PRINT LPAREN operacion RPAREN enterNormal .
+
+    $end            reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
+    RPAREN          reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
+    NEWLN           reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
+    ELSE            reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
+
+
+state 99
+
+    (13) expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .
+
+    $end            reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
+    RPAREN          reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
+    NEWLN           reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
+    ELSE            reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
+
+
+state 100
+
+    (9) expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .
+
+    $end            reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
+    RPAREN          reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
+    NEWLN           reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
+    ELSE            reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
+
+
+state 101
+
+    (11) expLineal -> PRINT LPAREN expNormal RPAREN enterTab .
+
+    $end            reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
+    RPAREN          reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
+    NEWLN           reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
+    ELSE            reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
+
+
+state 102
 
     (27) enterTab -> NEWLN TAB . statement enterTab
     (28) enterTab -> NEWLN TAB . statement enterNormal
@@ -2307,110 +2307,98 @@ state 97
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    BREAK           shift and go to state 75
-    WHILE           shift and go to state 74
-    MINUS           shift and go to state 5
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    BREAK           shift and go to state 69
+    WHILE           shift and go to state 71
+    MINUS           shift and go to state 16
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 72
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    expWhileA                      shift and go to state 71
-    operacion                      shift and go to state 13
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
-
-state 98
-
-    (11) expLineal -> PRINT LPAREN expNormal RPAREN enterTab .
-
-    $end            reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
-    NEWLN           reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
-    RPAREN          reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
-    ELSE            reduce using rule 11 (expLineal -> PRINT LPAREN expNormal RPAREN enterTab .)
-
-
-state 99
-
-    (9) expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .
-
-    $end            reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
-    NEWLN           reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
-    RPAREN          reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
-    ELSE            reduce using rule 9 (expLineal -> PRINT LPAREN expNormal RPAREN enterNormal .)
-
-
-state 100
-
-    (13) expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .
-
-    $end            reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
-    NEWLN           reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
-    RPAREN          reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
-    ELSE            reduce using rule 13 (expLineal -> PRINT LPAREN expNormal RPAREN enterTabTab .)
-
-
-state 101
-
-    (12) expLineal -> PRINT LPAREN operacion RPAREN enterTab .
-
-    $end            reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
-    NEWLN           reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
-    RPAREN          reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
-    ELSE            reduce using rule 12 (expLineal -> PRINT LPAREN operacion RPAREN enterTab .)
-
-
-state 102
-
-    (10) expLineal -> PRINT LPAREN operacion RPAREN enterNormal .
-
-    $end            reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
-    NEWLN           reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
-    RPAREN          reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
-    ELSE            reduce using rule 10 (expLineal -> PRINT LPAREN operacion RPAREN enterNormal .)
-
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    expWhileA                      shift and go to state 72
+    statement                      shift and go to state 73
+    expression                     shift and go to state 8
 
 state 103
 
-    (14) expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .
+    (64) expWhile -> WHILE NAME LPAREN RPAREN POINTS . enterTab
+    (65) expWhile -> WHILE NAME LPAREN RPAREN POINTS . expLineal
+    (27) enterTab -> . NEWLN TAB statement enterTab
+    (28) enterTab -> . NEWLN TAB statement enterNormal
+    (29) enterTab -> . NEWLN TAB statement
+    (30) enterTab -> . NEWLN TAB expWhileA
+    (31) enterTab -> . NEWLN TAB expWhileA ELSE POINTS enterTabTab
+    (32) enterTab -> . NEWLN TAB BREAK
+    (7) expLineal -> . PRINT LPAREN expNormal RPAREN
+    (8) expLineal -> . PRINT LPAREN operacion RPAREN
+    (9) expLineal -> . PRINT LPAREN expNormal RPAREN enterNormal
+    (10) expLineal -> . PRINT LPAREN operacion RPAREN enterNormal
+    (11) expLineal -> . PRINT LPAREN expNormal RPAREN enterTab
+    (12) expLineal -> . PRINT LPAREN operacion RPAREN enterTab
+    (13) expLineal -> . PRINT LPAREN expNormal RPAREN enterTabTab
+    (14) expLineal -> . PRINT LPAREN operacion RPAREN enterTabTab
+    (26) expLineal -> . LPAREN expLineal RPAREN
+    (44) expLineal -> . operacion
+    (45) expLineal -> . operacion enterNormal
+    (46) expLineal -> . operacion enterTab
+    (47) expLineal -> . operacion enterTabTab
+    (48) expLineal -> . assign
+    (49) expLineal -> . assign enterTab
+    (50) expLineal -> . assign enterTabTab
+    (51) expLineal -> . assign enterNormal
+    (16) operacion -> . expNormal PLUS expNormal
+    (17) operacion -> . expNormal MINUS expNormal
+    (18) operacion -> . expNormal TIMES expNormal
+    (19) operacion -> . expNormal DIVIDE expNormal
+    (20) operacion -> . expNormal EXPONENTE expNormal
+    (21) operacion -> . expNormal COMPARISON expNormal
+    (22) operacion -> . expNormal LOGICOS expNormal
+    (23) operacion -> . expNormal MODULO expNormal
+    (2) assign -> . NAME EQUALS expNormal
+    (3) assign -> . NAME EQUALS operacion
+    (52) expNormal -> . NUMBER
+    (53) expNormal -> . string
+    (54) expNormal -> . boolean
+    (55) expNormal -> . NAME
+    (15) string -> . STRING
+    (25) boolean -> . CONSTANTES
 
-    $end            reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
-    NEWLN           reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
-    RPAREN          reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
-    ELSE            reduce using rule 14 (expLineal -> PRINT LPAREN operacion RPAREN enterTabTab .)
+    NEWLN           shift and go to state 81
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    expLineal                      shift and go to state 111
+    assign                         shift and go to state 15
+    enterTab                       shift and go to state 110
+    expNormal                      shift and go to state 34
+    boolean                        shift and go to state 3
 
 state 104
-
-    (31) enterTab -> NEWLN TAB expWhileA ELSE POINTS . enterTabTab
-    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
-    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
-    (39) enterTabTab -> . NEWLN TAB TAB statement
-    (40) enterTabTab -> . NEWLN TAB TAB BREAK
-
-    NEWLN           shift and go to state 113
-
-    enterTabTab                    shift and go to state 112
-
-state 105
 
     (38) enterTabTab -> NEWLN TAB TAB statement enterTabTab .
 
     $end            reduce using rule 38 (enterTabTab -> NEWLN TAB TAB statement enterTabTab .)
-    NEWLN           reduce using rule 38 (enterTabTab -> NEWLN TAB TAB statement enterTabTab .)
     RPAREN          reduce using rule 38 (enterTabTab -> NEWLN TAB TAB statement enterTabTab .)
+    NEWLN           reduce using rule 38 (enterTabTab -> NEWLN TAB TAB statement enterTabTab .)
     ELSE            reduce using rule 38 (enterTabTab -> NEWLN TAB TAB statement enterTabTab .)
 
 
-state 106
+state 105
 
     (41) enterNormal -> NEWLN . statement enterNormal
     (42) enterNormal -> NEWLN . statement
@@ -2464,38 +2452,38 @@ state 106
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    ELSE            shift and go to state 56
-    TAB             shift and go to state 114
-    MINUS           shift and go to state 5
-    WHILE           shift and go to state 14
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    ELSE            shift and go to state 45
+    TAB             shift and go to state 112
+    MINUS           shift and go to state 16
+    WHILE           shift and go to state 11
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 57
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    operacion                      shift and go to state 13
-    expNormal                      shift and go to state 8
-    expWhile                       shift and go to state 6
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expression                     shift and go to state 12
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    statement                      shift and go to state 47
+    expression                     shift and go to state 8
 
-state 107
+state 106
 
     (37) enterTabTab -> NEWLN TAB TAB statement enterNormal .
 
     $end            reduce using rule 37 (enterTabTab -> NEWLN TAB TAB statement enterNormal .)
-    NEWLN           reduce using rule 37 (enterTabTab -> NEWLN TAB TAB statement enterNormal .)
     RPAREN          reduce using rule 37 (enterTabTab -> NEWLN TAB TAB statement enterNormal .)
+    NEWLN           reduce using rule 37 (enterTabTab -> NEWLN TAB TAB statement enterNormal .)
     ELSE            reduce using rule 37 (enterTabTab -> NEWLN TAB TAB statement enterNormal .)
 
 
-state 108
+state 107
 
     (58) expWhileA -> WHILE NAME POINTS . enterTabTab
     (59) expWhileA -> WHILE NAME POINTS . expLineal
@@ -2545,24 +2533,24 @@ state 108
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NEWLN           shift and go to state 116
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
+    NEWLN           shift and go to state 114
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
     NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    enterTab                       shift and go to state 77
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    enterTabTab                    shift and go to state 117
-    boolean                        shift and go to state 15
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
     expLineal                      shift and go to state 115
+    assign                         shift and go to state 15
+    enterTab                       shift and go to state 80
     expNormal                      shift and go to state 34
-    operacion                      shift and go to state 13
+    enterTabTab                    shift and go to state 113
+    boolean                        shift and go to state 3
 
-state 109
+state 108
 
     (56) expWhileA -> WHILE expBooleana POINTS . enterTabTab
     (57) expWhileA -> WHILE expBooleana POINTS . expLineal
@@ -2612,30 +2600,42 @@ state 109
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    NEWLN           shift and go to state 116
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
+    NEWLN           shift and go to state 114
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
     NAME            shift and go to state 32
-    NUMBER          shift and go to state 7
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    enterTab                       shift and go to state 82
-    assign                         shift and go to state 10
-    enterTabTab                    shift and go to state 119
-    operacion                      shift and go to state 13
-    string                         shift and go to state 3
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 118
+    operacion                      shift and go to state 1
+    boolean                        shift and go to state 3
+    enterTabTab                    shift and go to state 116
+    enterTab                       shift and go to state 84
+    expLineal                      shift and go to state 117
+    assign                         shift and go to state 15
     expNormal                      shift and go to state 34
+    string                         shift and go to state 10
+
+state 109
+
+    (31) enterTab -> NEWLN TAB expWhileA ELSE POINTS . enterTabTab
+    (37) enterTabTab -> . NEWLN TAB TAB statement enterNormal
+    (38) enterTabTab -> . NEWLN TAB TAB statement enterTabTab
+    (39) enterTabTab -> . NEWLN TAB TAB statement
+    (40) enterTabTab -> . NEWLN TAB TAB BREAK
+
+    NEWLN           shift and go to state 118
+
+    enterTabTab                    shift and go to state 119
 
 state 110
 
     (64) expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .
 
     $end            reduce using rule 64 (expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .)
-    NEWLN           reduce using rule 64 (expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .)
     RPAREN          reduce using rule 64 (expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .)
+    NEWLN           reduce using rule 64 (expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .)
     ELSE            reduce using rule 64 (expWhile -> WHILE NAME LPAREN RPAREN POINTS enterTab .)
 
 
@@ -2644,62 +2644,32 @@ state 111
     (65) expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .
 
     $end            reduce using rule 65 (expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .)
-    NEWLN           reduce using rule 65 (expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .)
     RPAREN          reduce using rule 65 (expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .)
+    NEWLN           reduce using rule 65 (expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .)
     ELSE            reduce using rule 65 (expWhile -> WHILE NAME LPAREN RPAREN POINTS expLineal .)
 
 
 state 112
-
-    (31) enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .
-
-    $end            reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
-    NEWLN           reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
-    RPAREN          reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
-    ELSE            reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
-
-
-state 113
-
-    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
-    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
-    (39) enterTabTab -> NEWLN . TAB TAB statement
-    (40) enterTabTab -> NEWLN . TAB TAB BREAK
-
-    TAB             shift and go to state 114
-
-
-state 114
 
     (37) enterTabTab -> NEWLN TAB . TAB statement enterNormal
     (38) enterTabTab -> NEWLN TAB . TAB statement enterTabTab
     (39) enterTabTab -> NEWLN TAB . TAB statement
     (40) enterTabTab -> NEWLN TAB . TAB BREAK
 
-    TAB             shift and go to state 73
+    TAB             shift and go to state 70
 
 
-state 115
+state 113
 
-    (59) expWhileA -> WHILE NAME POINTS expLineal .
-    (63) expWhile -> WHILE NAME POINTS expLineal .
+    (58) expWhileA -> WHILE NAME POINTS enterTabTab .
 
-  ! reduce/reduce conflict for $end resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-  ! reduce/reduce conflict for NEWLN resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-  ! reduce/reduce conflict for RPAREN resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-  ! reduce/reduce conflict for ELSE resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-    $end            reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-    NEWLN           reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-    RPAREN          reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-    ELSE            reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
-
-  ! $end            [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
-  ! NEWLN           [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
-  ! RPAREN          [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
-  ! ELSE            [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
+    $end            reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
+    RPAREN          reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
+    NEWLN           reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
+    ELSE            reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
 
 
-state 116
+state 114
 
     (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
     (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
@@ -2715,44 +2685,74 @@ state 116
     TAB             shift and go to state 120
 
 
+state 115
+
+    (59) expWhileA -> WHILE NAME POINTS expLineal .
+    (63) expWhile -> WHILE NAME POINTS expLineal .
+
+  ! reduce/reduce conflict for $end resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+  ! reduce/reduce conflict for NEWLN resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+  ! reduce/reduce conflict for ELSE resolved using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+    $end            reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+    RPAREN          reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+    NEWLN           reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+    ELSE            reduce using rule 59 (expWhileA -> WHILE NAME POINTS expLineal .)
+
+  ! $end            [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
+  ! RPAREN          [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
+  ! NEWLN           [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
+  ! ELSE            [ reduce using rule 63 (expWhile -> WHILE NAME POINTS expLineal .) ]
+
+
+state 116
+
+    (56) expWhileA -> WHILE expBooleana POINTS enterTabTab .
+
+    $end            reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
+    RPAREN          reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
+    NEWLN           reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
+    ELSE            reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
+
+
 state 117
-
-    (58) expWhileA -> WHILE NAME POINTS enterTabTab .
-
-    $end            reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
-    NEWLN           reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
-    RPAREN          reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
-    ELSE            reduce using rule 58 (expWhileA -> WHILE NAME POINTS enterTabTab .)
-
-
-state 118
 
     (57) expWhileA -> WHILE expBooleana POINTS expLineal .
     (61) expWhile -> WHILE expBooleana POINTS expLineal .
 
   ! reduce/reduce conflict for $end resolved using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
-  ! reduce/reduce conflict for NEWLN resolved using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
   ! reduce/reduce conflict for RPAREN resolved using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
+  ! reduce/reduce conflict for NEWLN resolved using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
   ! reduce/reduce conflict for ELSE resolved using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
     $end            reduce using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
-    NEWLN           reduce using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
     RPAREN          reduce using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
+    NEWLN           reduce using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
     ELSE            reduce using rule 57 (expWhileA -> WHILE expBooleana POINTS expLineal .)
 
   ! $end            [ reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .) ]
-  ! NEWLN           [ reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .) ]
   ! RPAREN          [ reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .) ]
+  ! NEWLN           [ reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .) ]
   ! ELSE            [ reduce using rule 61 (expWhile -> WHILE expBooleana POINTS expLineal .) ]
+
+
+state 118
+
+    (37) enterTabTab -> NEWLN . TAB TAB statement enterNormal
+    (38) enterTabTab -> NEWLN . TAB TAB statement enterTabTab
+    (39) enterTabTab -> NEWLN . TAB TAB statement
+    (40) enterTabTab -> NEWLN . TAB TAB BREAK
+
+    TAB             shift and go to state 112
 
 
 state 119
 
-    (56) expWhileA -> WHILE expBooleana POINTS enterTabTab .
+    (31) enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .
 
-    $end            reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
-    NEWLN           reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
-    RPAREN          reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
-    ELSE            reduce using rule 56 (expWhileA -> WHILE expBooleana POINTS enterTabTab .)
+    $end            reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
+    RPAREN          reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
+    NEWLN           reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
+    ELSE            reduce using rule 31 (enterTab -> NEWLN TAB expWhileA ELSE POINTS enterTabTab .)
 
 
 state 120
@@ -2816,39 +2816,39 @@ state 120
     (15) string -> . STRING
     (25) boolean -> . CONSTANTES
 
-    TAB             shift and go to state 73
-    BREAK           shift and go to state 75
-    WHILE           shift and go to state 74
-    MINUS           shift and go to state 5
-    PRINT           shift and go to state 16
-    LPAREN          shift and go to state 11
-    NUMBER          shift and go to state 7
-    NAME            shift and go to state 1
-    STRING          shift and go to state 17
-    CONSTANTES      shift and go to state 4
+    TAB             shift and go to state 70
+    BREAK           shift and go to state 69
+    WHILE           shift and go to state 71
+    MINUS           shift and go to state 16
+    PRINT           shift and go to state 5
+    LPAREN          shift and go to state 7
+    NUMBER          shift and go to state 13
+    NAME            shift and go to state 6
+    STRING          shift and go to state 2
+    CONSTANTES      shift and go to state 9
 
-    statement                      shift and go to state 72
-    string                         shift and go to state 3
-    assign                         shift and go to state 10
-    expression                     shift and go to state 12
-    expWhile                       shift and go to state 6
-    expWhileA                      shift and go to state 71
-    operacion                      shift and go to state 13
-    boolean                        shift and go to state 15
-    expLineal                      shift and go to state 2
-    expNormal                      shift and go to state 8
+    operacion                      shift and go to state 1
+    string                         shift and go to state 10
+    boolean                        shift and go to state 3
+    expWhile                       shift and go to state 12
+    expLineal                      shift and go to state 14
+    assign                         shift and go to state 15
+    expNormal                      shift and go to state 4
+    expWhileA                      shift and go to state 72
+    statement                      shift and go to state 73
+    expression                     shift and go to state 8
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for NEWLN in state 10 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 13 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 57 resolved as shift
-WARNING: shift/reduce conflict for ELSE in state 71 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 72 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 85 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 86 resolved as shift
-WARNING: shift/reduce conflict for NEWLN in state 92 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 1 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 15 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 47 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 72 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 73 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 76 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 77 resolved as shift
+WARNING: shift/reduce conflict for NEWLN in state 89 resolved as shift
 WARNING: reduce/reduce conflict in state 115 resolved using rule (expWhileA -> WHILE NAME POINTS expLineal)
 WARNING: rejected rule (expWhile -> WHILE NAME POINTS expLineal) in state 115
-WARNING: reduce/reduce conflict in state 118 resolved using rule (expWhileA -> WHILE expBooleana POINTS expLineal)
-WARNING: rejected rule (expWhile -> WHILE expBooleana POINTS expLineal) in state 118
+WARNING: reduce/reduce conflict in state 117 resolved using rule (expWhileA -> WHILE expBooleana POINTS expLineal)
+WARNING: rejected rule (expWhile -> WHILE expBooleana POINTS expLineal) in state 117

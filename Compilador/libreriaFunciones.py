@@ -149,10 +149,10 @@ def regularExpresion(niveles,texto):
         match = re.match(r'while True:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)\n\tbreak', texto)
         return match
     elif niveles == 4:
-        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(True|False)\nwhile [a-zA-Z_][a-zA-Z0-9_]*:(\n\t(print\("[a-zA-Z0-9_ +-/*]*"\)|[a-zA-Z_][a-zA-Z0-9_]* *= *(True|False)))*',texto)
+        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*) *= *(True|False)\nwhile [a-zA-Z_][a-zA-Z0-9_]*:(\n\t(print\("[a-zA-Z0-9_ +-/*]*"\)|[a-zA-Z_][a-zA-Z0-9_]* *= *(True|False)))*',texto)
         return match
     elif niveles == 5:
-        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*):\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
+        match = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n([a-zA-Z_][a-zA-Z0-9_]*)=(\d+)\nwhile ([a-zA-Z_][a-zA-Z0-9_]*(>|<|==|!=|>=|<=)[a-zA-Z_][a-zA-Z0-9_]*):\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)', texto)
         return match
     elif niveles == 6:
         match = re.match(r'(([a-zA-Z_][a-zA-Z0-9_]*) *= *(\d+)\n)+while ([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+( *(and|or)* *([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+|[a-zA-Z_][a-zA-Z0-9_]*)))*|[a-zA-Z_][a-zA-Z0-9_]*( *(and|or)* *([a-zA-Z_][a-zA-Z0-9_]* *(>|<|==|!=|>=|<=) *(\d+|[a-zA-Z_][a-zA-Z0-9_]*)))*))+:\n\tprint\("[a-zA-Z0-9_ +-/*]*"\)',texto)
